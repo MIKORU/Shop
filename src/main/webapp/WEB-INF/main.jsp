@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%
 String path = request.getContextPath();
 String basePath = 
@@ -144,9 +144,91 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		$scope.showDetail = function(com){
 			$("#detail").modal('show');
 			$("#detail").scope().com = com;
+			ajaModule.getCommentById(com.id,function(res){
+				$("#detail").scope().comments=res;
+				$("#detail").scope().$apply();
+			});
 			
+		};
+	});
+	
+	app.controller("detail",function($scope){
+		$scope.coments={};
+		$scope.appendComment = function(commodityID){
+			if($scope.comment){
+				ajaxModule.addComment( commodityID, $scope.comment, function(){
+					$scope.comment.push({
+						userName:"${name}",
+						comment:"$scope.comment"
+					});
+					$scope.$apply();
+				});
+			}	
 		}
-	})
+	});
+	function updateIndex(){
+		ajaxModule.getAllCom(function(res){
+			var result = util.groupByType(res);
+			$("#groups").scope().groups = result;
+			$("#groups").scope().$apply();
+		});
+	}
+	function bind(){
+		$("#search").click(function(){
+			ajaxModule.search($("#keyword").val(),function(res){
+				var result = util.groupByType(res);
+				$("#groups").scope().groups = result;
+				$("#groups").scope().$apply();
+			});
+		})
+	}
+	var util = {
+			groupByType:function(res){
+				var obj = {};
+				for(var i = 0;i<res.length;i++){
+					obj[res[i].type] = object[res[i].type] || [];
+					obj[res[i].type].push(res[i]);
+				}
+				return obj;
+			}
+	}
+	var ajaxModule = {
+			getAllCom:function(cb){
+				$.post("admin/getAllCom.do",cb);
+			},
+			addOrder:function(userId,commodityIds,cb){
+				$.post("addOrder.do",{userId:userId,commodityIds:commodityIds,
+					commodityCounts:"1"},function(res){
+						console.log("addOrder.do response is "+res);
+						if(res){
+							alert("successful");
+						}else{
+							alert("failed");
+						}
+					});
+			},
+			search:function(keyword,cb){
+				$.post("search.do",{keyword:keyword},cb);
+			},
+			getCommentById:function(id,cb){
+				$.post("admin/getCommentById.do",{commodityId:id},cb);
+			},
+			addComment:function(commodityID,comment,cb){
+				$.post("./addComment.do",{userId:'${id}',userName:'${name}',
+					commodityID:commodityID,comment:comment},function(res){
+						if(res){
+							cb&&cb();
+						}else{
+							alert("add Comment failed");
+						}
+					});
+			};
+	}
+	$(function(){
+		updateIndex();
+		bind();
+	});
+}
 </script>
 </html>
 
