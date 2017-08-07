@@ -222,13 +222,12 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 							alert("add Comment failed");
 						}
 					});
-			};
+			}
 	}
 	$(function(){
 		updateIndex();
 		bind();
 	});
-}
 </script>
 </html>
 
