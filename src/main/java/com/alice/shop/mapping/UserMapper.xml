@@ -15,13 +15,13 @@
   <sql id="Base_Column_List" >
     id, name, password, address, phone, mail, role, money, regTime
   </sql>
-  <select id="getInfo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteInfo" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -138,5 +138,7 @@
       regTime = #{regtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-   <select id="getFormAllList" Result
+  <select id="getAllList" resultMap="com.alice.shop.bean.Order">
+  	select * from order
+  </select>
 </mapper>
