@@ -138,7 +138,7 @@
       regTime = #{regtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="queryforPassword" parameterType="java.lang.String" resultType="java.util.HashMap">
+  <select id="queryforUser" parameterType="java.lang.String" resultType="java.util.HashMap">
   	select * from user 
   	where 
   	name=#{name,jdbcType=VARCHAR}

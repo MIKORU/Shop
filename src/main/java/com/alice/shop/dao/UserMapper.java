@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    List<Map<String , Object> > queryforPassword(String name);
+    List<Map<String , Object> > queryforUser(String name);
     
     
 }

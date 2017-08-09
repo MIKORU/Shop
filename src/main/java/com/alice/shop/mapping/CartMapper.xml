@@ -60,17 +60,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.alice.shop.bean.Cart" >
     update cart
     <set >
-      <if test="commodityid != null" >
-        commodityId = #{commodityid,jdbcType=INTEGER},
-      </if>
       <if test="commoditycount != null" >
         commodityCount = #{commoditycount,jdbcType=INTEGER},
       </if>
-      <if test="userid != null" >
-        userid = #{userid,jdbcType=INTEGER},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where 1=1
+    <if test="id!=null">
+    	and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="commodityid != null" >
+        and commodityId = #{commodityid,jdbcType=INTEGER}
+      </if>
+    <if test="userid != null" >
+        and userid = #{userid,jdbcType=INTEGER}
+      </if>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.alice.shop.bean.Cart" >
     update cart
@@ -79,31 +82,15 @@
       userid = #{userid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByuserId" parameterType="java.lang.Integer">
-  	update cart
-    <set >
-      <if test= "#{1} != null" >
-        commodityCount = #{0,jdbcType=INTEGER},
-      </if>
-    </set>
-    where userid=#{1,jdbcType=INTEGER} and commodityId=#{2,jdbcType=INTEGER}
-  </update>
-  <select id="queryforOrder" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+  <select id="queryforOrder" parameterType="com.alice.shop.bean.Cart" resultType="java.util.HashMap">
   	select * from cart 
-  	where 
-  	userid = #{0,jdbcType=INTEGER} 
-  	and commodityId = #{1,jdbcType=INTEGER}
-  </select>
-  <select id="queryforCommodityCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-  	select commodityCount from cart
-  	where
-  	userid = #{0,jdbcType=INTEGER} 
-  	and commodityId = #{1,jdbcType=INTEGER}
-  </select>
-  <select id="queryByuserid" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-  	select * from cart 
-  	where
-  	userid=#{userid,jdbcType=INTEGER}
+  	where 1=1 
+  	<if test="userid!=null">
+  		and userid = #{userid,jdbcType=INTEGER}
+  	</if>
+  	<if test="commodityid!=null">
+  		and commodityId = #{commodityid,jdbcType=INTEGER}
+  	</if>
   </select>
   <delete id="deleteOrderByuserId" parameterType="java.lang.Integer">
   	delete from 

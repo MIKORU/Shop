@@ -18,13 +18,7 @@ public interface CartMapper {
 
     int updateByPrimaryKey(Cart record);
     
-    int updateByuserId(int commodityCount,int userid,int commodityId);
-    
-    List<Map<String ,Object> > queryforOrder(int userid,int commodityId);
-    
-    int queryforCommodityCount(int userid,int commodityId);
-    
-    List<Map<String ,Object> > queryByuserid(int userid);
+    List<Map<String ,Object> > queryforOrder(Cart cart);
     
     int deleteOrderByuserId(int userId);
 }

@@ -20,6 +20,7 @@ import com.alice.shop.service.UserService;
 public class TestUserService {
 	@Autowired
 	private UserService userService;
+	
 	public void testQueryAllList() {
 		List<Order> orders = userService.getFormAllList();
 		System.out.println(JSON.toJSON(orders));
@@ -40,8 +41,7 @@ public class TestUserService {
 		int commodityCount=10;
 		System.out.println(userService.addOrder(userid, commodityid, commodityCount));
 	}
-	@Test
-	public void testgetList() {
+	public void testcheckLogin() {
 		int userid=23152;
 		System.out.println(userService.getOrderList(userid));
 	}
@@ -49,5 +49,10 @@ public class TestUserService {
 	public void testdelOrder() {
 		int userid=23152;
 		System.out.println(userService.delOrder(userid));
+	}
+	
+	
+	public void testgetList() {
+		System.out.println(JSON.toJSON(userService.getFormList(48435488)));
 	}
 }
