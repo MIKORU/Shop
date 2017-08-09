@@ -55,7 +55,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			</ul>
 		</div>
 		<div class="row">
-			<c:if test="${name===null }">
+			<c:if test="${name==null }">
 				<a href="login.do">登录</a>
 			</c:if>
 			<c:if test='${role==1 }'>

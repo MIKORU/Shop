@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alice.shop.service.UserService;
 
 @Controller
-@RequestMapping("/index")
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -34,8 +33,13 @@ public class UserController {
 	public boolean login(HttpServletRequest request, HttpServletResponse response) {
 		return userService.login( request.getParameter("name"), request.getParameter("password"));
 	}
-	@RequestMapping
+	@RequestMapping("/index")
 	public String initPage() {
 		return "/index";
+	}
+	
+	@RequestMapping("/user")
+	public String userPage() {
+		return "/user";
 	}
 }

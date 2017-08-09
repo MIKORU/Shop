@@ -6,13 +6,13 @@ String path = request.getContextPath();
 String basePath = 
 request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
 <!-- <link rel="stylesheet" type="text/css" href ="./bootstrap/css/bootstrap.min.css" /> -->
 <!-- 	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script> -->
 <!-- 	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
@@ -43,33 +43,31 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 </style>
 <body ng-app="app">
 	<nav class="navbar navbar-default navbar-fixed-top">
-	<div clss="container">
-		<div clss="row">
-			<ul clss="nav navbar-nav">
-				<li>
-					<c:if test="${name != null}">
-						<a href="###">
-							欢迎${name}
-						</a>
-					</c:if>
-				</li>
-				<li>
-					<a href="./index.do">首页</a>
-				</li>
-				<li>
-					<a href="./cart.do">
-						购物车
-					</a>
-				</li>
-				<li>
-					<a href="./list.do">
-						订单页
-					</a>
-				</li>
-				<li><a href="./user.do">用户信息</a></li>
-			</ul>
+		<div class="container">
+			<div class="row">
+				<ul class="nav navbar-nav">
+					<li>
+						<c:if test="${name!=null }">
+							<a href="###">
+								欢迎${name}
+							</a>
+						</c:if>
+					</li>
+					<li>
+						<a href="./index.do">首页</a>
+					</li>
+					<li>
+						<a href="./detail.do">分类页</a>
+					</li>
+					<li>
+						<a href="./list.do">列表页</a>
+					</li>
+					<li>
+						<a href="./user.do">用户信息</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
 	</nav>
 	<div clss="container">
 		<div id="index" class="row" ng-controller="index">
