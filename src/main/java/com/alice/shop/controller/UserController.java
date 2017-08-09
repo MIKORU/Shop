@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alice.shop.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/index")
 public class UserController {
 	@Autowired
 	UserService userService;
