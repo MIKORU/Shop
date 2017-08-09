@@ -1,5 +1,7 @@
 package com.alice.shop.dao;
 
+import java.util.List;
+
 import com.alice.shop.bean.Order;
 
 public interface OrderMapper {
@@ -16,4 +18,6 @@ public interface OrderMapper {
     int updateByPrimaryKeyWithBLOBs(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<Order> getAllList();
 }

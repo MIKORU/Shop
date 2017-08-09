@@ -1,6 +1,7 @@
 package com.alice.shop.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer id;
@@ -20,8 +21,10 @@ public class User {
     private Integer money;
 
     private Date regtime;
+    
+    
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

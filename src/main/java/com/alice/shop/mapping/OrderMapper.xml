@@ -130,4 +130,7 @@
       pay = #{pay,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAllList" resultMap="BaseResultMap">
+  	select * from shop.order
+  </select>
 </mapper>
