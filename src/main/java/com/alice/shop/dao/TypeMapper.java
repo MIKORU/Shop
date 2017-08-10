@@ -1,5 +1,8 @@
 package com.alice.shop.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.alice.shop.bean.Type;
 
 public interface TypeMapper {
@@ -14,4 +17,6 @@ public interface TypeMapper {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
+    
+    List<Type> queryAllType();
 }

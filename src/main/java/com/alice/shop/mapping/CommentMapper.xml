@@ -90,4 +90,11 @@
       comment = #{comment,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAllList" parameterType="com.alice.shop.bean.Comment" resultType="com.alice.shop.bean.Comment">
+  	select * form comment
+  	where 1=1
+  	<if test="commodityid!=null">
+  		and commodityid = #{commodityid,jdbcType=INTEGER}
+  	</if>>
+  </select>
 </mapper>

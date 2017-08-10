@@ -24,9 +24,6 @@ public class UserServiceImpl implements UserService{
 	private UserMapper userMapper;
 	
 	@Autowired
-	private CartMapper cartMapper;
-	
-	@Autowired
 	private OrderMapper orderMapper;
 	
 	@Override
@@ -40,7 +37,7 @@ public class UserServiceImpl implements UserService{
 		user.setPhone(defaultPhone);
 		user.setMail(mail);
 		user.setRegtime(time);
-		return userMapper.insert(user);
+		return userMapper.insertSelective(user);
 	}
 
 	@Override
@@ -53,91 +50,6 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean addOrder(int userId, int commodityId, int commodityCount) {
-		// TODO Auto-generated method stub
-		
-		Cart cart = new Cart();
-		cart.setUserid(userId);
-		cart.setCommodityid(commodityId);
-		
-		List<Map<String ,Object> > list = cartMapper.queryforOrder(cart);
-		
-		if(list.size() == 0) {
-			cart.setCommoditycount(commodityCount);
-			return 0!=cartMapper.insert(cart);
-		}else {
-			int count = (int)list.get(0).get("commodityCount");
-			if(count != 0) {
-				commodityCount += count;
-			}
-			cart.setCommoditycount(commodityCount);
-			return 0!=cartMapper.updateByPrimaryKeySelective(cart);
-		}
-	}
-
-	@Override
-	public String getOrderList(int userId) {
-		// TODO Auto-generated method stub
-		Cart cart = new Cart();
-		cart.setUserid(userId);
-		List<Map<String ,Object>> list = cartMapper.queryforOrder(cart);
-		return JSONArray.fromObject(list).toString();
-	}
-
-	@Override
-	public boolean delOrder(int userId) {
-		// TODO Auto-generated method stub
-		return 0!=cartMapper.deleteOrderByuserId(userId);
-	}
-
-	@Override
-	public boolean addForm(int userId, String address, String phone, String totalPrice, String pay, String orderlist) {
-		// TODO Auto-generated method stub
-		Order order = new Order();
-		order.setAddress(address);
-		order.setPhone(phone);
-		order.setTotalprice(new Integer(totalPrice));
-		order.setPay(new Integer(pay));
-		order.setOrderlist(orderlist);
-		return 0!=orderMapper.insert(order);
-	}
-
-	@Override
-	public List<Order> getFormList(int userId) {
-		// TODO Auto-generated method stub
-		
-		Order order = new Order();
-		order.setUserid(userId);
-		List<Order> list = orderMapper.getList(order);
-		
-		return list;
-	}
-
-	@Override
-	public List<Order> getFormAllList() {
-		// TODO Auto-generated method stub
-		Order order = new Order();
-		List<Order> orders =orderMapper.getList(order);
-		return orders;
-	}
-
-	@Override
-	public List<Order> getFormList(int userId, boolean flag) {
-		// TODO Auto-generated method stub
-		int payType =0;
-		if(flag) {
-			payType = 1;
-		}else {
-			payType =0;
-		}
-		Order order = new Order();
-		order.setUserid(userId);
-		order.setPay(payType);
-		List<Order> list = orderMapper.getList(order);
-		return list;
 	}
 
 	@Override

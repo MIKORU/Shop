@@ -10,20 +10,6 @@ public interface UserService {
     
     boolean login(String name,String password);
     
-    boolean addOrder(int userId,int commodityId,int commodityCount);
-    
-    String getOrderList(int userId);
-    
-    boolean delOrder(int userId);
-    
-    boolean addForm(int userId,String address,String phone,String totalPrice,String pay,String orderlist);
-    
-    List<Order> getFormList(int userId);
-    
-    List<Order> getFormAllList();
-    
-    List<Order> getFormList(int userId,boolean flag);
-    
     boolean setPaying(int userId,int orderid);
     
     public User getInfo( int userId );

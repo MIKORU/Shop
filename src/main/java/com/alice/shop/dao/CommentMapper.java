@@ -1,5 +1,7 @@
 package com.alice.shop.dao;
 
+import java.util.List;
+
 import com.alice.shop.bean.Comment;
 
 public interface CommentMapper {
@@ -14,4 +16,6 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+    
+    List<Comment> getAllList(Comment com);
 }

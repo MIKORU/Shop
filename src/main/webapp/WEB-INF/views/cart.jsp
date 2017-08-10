@@ -13,10 +13,10 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>购物车</title>
-<!-- <link rel="stylesheet" type="text/css" href ="./bootstrap/css/bootstrap.min.css" /> -->
-<!-- 	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script> -->
-<!-- 	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-<!-- 	<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script> -->
+<link rel="stylesheet" type="text/css" href ="./css/bootstrap.min.css" />
+	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- 新 Bootstrap 核心 CSS 文件 -->

@@ -31,7 +31,9 @@ public class UserController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean login(HttpServletRequest request, HttpServletResponse response) {
-		return userService.login( request.getParameter("name"), request.getParameter("password"));
+		String name = request.getParameter("username");
+		String password = request.getParameter("password");
+		return userService.login(name , password);
 	}
 	@RequestMapping("/index")
 	public String initPage() {

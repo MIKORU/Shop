@@ -55,4 +55,7 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryAllType" resultType="com.alice.shop.bean.Type">
+  	select * from types
+  </select>
 </mapper>

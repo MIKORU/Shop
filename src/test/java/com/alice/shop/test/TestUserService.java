@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSON;
 import com.alice.shop.bean.Order;
 import com.alice.shop.bean.User;
+import com.alice.shop.service.CartService;
+import com.alice.shop.service.OrderService;
 import com.alice.shop.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,8 +23,15 @@ public class TestUserService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CartService cartService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	
 	public void testQueryAllList() {
-		List<Order> orders = userService.getFormAllList();
+		List<Order> orders = orderService.getFormAllList();
 		System.out.println(JSON.toJSON(orders));
 	}
 	public void testgetUser() {
@@ -39,20 +48,19 @@ public class TestUserService {
 		int userid=23152;
 		int commodityid=45125632;
 		int commodityCount=10;
-		System.out.println(userService.addOrder(userid, commodityid, commodityCount));
+		System.out.println(cartService.addOrder(userid, commodityid, commodityCount));
 	}
 	public void testcheckLogin() {
 		int userid=23152;
-		System.out.println(userService.getOrderList(userid));
+		System.out.println(cartService.getOrderList(userid));
 	}
 	
 	public void testdelOrder() {
 		int userid=23152;
-		System.out.println(userService.delOrder(userid));
+		System.out.println(cartService.delOrder(userid));
 	}
 	
-	
 	public void testgetList() {
-		System.out.println(JSON.toJSON(userService.getFormList(48435488)));
+		System.out.println(JSON.toJSON(orderService.getFormList(48435488)));
 	}
 }

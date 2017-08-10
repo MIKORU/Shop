@@ -142,4 +142,38 @@
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryAllList" parameterMap="ResultMapWithBLOBs" resultMap="ResultMapWithBLOBs">
+  	selse * form commodity
+  	where 1=1
+  	<if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null" >
+        and price = #{price,jdbcType=REAL}
+      </if>
+      <if test="amount != null" >
+        and amount = #{amount,jdbcType=INTEGER}
+      </if>
+      <if test="manufacturer != null" >
+        and manufacturer = #{manufacturer,jdbcType=VARCHAR}
+      </if>
+      <if test="img != null" >
+        and img = #{img,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="depict != null" >
+        and depict = #{depict,jdbcType=LONGVARCHAR}
+      </if>
+  </select>
+  <select id="serach" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select * from commodity
+  	where 
+  	name like '%"+#{keyword,jdbcType=VARCHAR}+"%'
+  	union
+  	(select * from commodity 
+  	where
+  	dipict like '%"+#{keyword,jdbcType=VARCHAR}+"%')
+  </select>
 </mapper>
