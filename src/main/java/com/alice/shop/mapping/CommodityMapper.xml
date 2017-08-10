@@ -142,8 +142,8 @@
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="queryAllList" parameterMap="ResultMapWithBLOBs" resultMap="ResultMapWithBLOBs">
-  	selse * form commodity
+  <select id="queryAllList" parameterType="com.alice.shop.bean.Commodity" resultType="com.alice.shop.bean.Commodity">
+  	select * from commodity
   	where 1=1
   	<if test="name != null" >
         and name = #{name,jdbcType=VARCHAR}
@@ -167,7 +167,7 @@
         and depict = #{depict,jdbcType=LONGVARCHAR}
       </if>
   </select>
-  <select id="serach" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="serach" parameterType="java.lang.String" resultType="com.alice.shop.bean.Commodity">
   	select * from commodity
   	where 
   	name like '%"+#{keyword,jdbcType=VARCHAR}+"%'

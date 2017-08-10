@@ -41,25 +41,25 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					</c:if>
 				</li>
 				<li>
-					<a href="./index.do">首页</a>
+					<a href="./index.html">首页</a>
 				</li>
 				<li>
-					<a href="./detail.do">类型页</a>
+					<a href="./detail.html">类型页</a>
 				</li>
 				<li>
-					<a href="./cart.do">购物车</a>
+					<a href="./cart.html">购物车</a>
 				</li>
 				<li>
-					<a href="./list.do">订单页</a>
+					<a href="./list.html">订单页</a>
 				</li>
 			</ul>
 		</div>
 		<div class="row">
 			<c:if test="${name==null }">
-				<a href="login.do">登录</a>
+				<a href="login.html">登录</a>
 			</c:if>
 			<c:if test='${role==1 }'>
-				<a class="btn btn-default" hre="admin/admin.do">进入管理界面</a>
+				<a class="btn btn-default" hre="/admin.html">进入管理界面</a>
 			</c:if>
 		</div>
 		<br/>
@@ -127,7 +127,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		});
 		
 		$("#submit").click(function(ev){
-			$.post("updateInfo.do",$.extend({},$("#user").scope().user,{userId:userId}),
+			$.post("/updateInfo.html",$.extend({},$("#user").scope().user,{userId:userId}),
 					function(res){
 						if(res){
 							alert("Update Successful!");
@@ -138,7 +138,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		});
 		$(function(){
 			if(userId){
-				$.post("getInfo.do",{userId:userId},function(res){
+				$.post("/getInfo.html",{userId:userId},function(res){
 					var scope = $("#user").scope();
 					scope.user = res;
 					$("#user").scope().$apply();

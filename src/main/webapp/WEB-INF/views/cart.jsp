@@ -49,16 +49,16 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 						</c:if>
 					</li>
 					<li>
-						<a href="./index.do">首页</a>
+						<a href="./index.html">首页</a>
 					</li>
 					<li>
-						<a href="./detail.do">分类页</a>
+						<a href="./detail.html">分类页</a>
 					</li>
 					<li>
-						<a href="./list.do">列表页</a>
+						<a href="./list.html">列表页</a>
 					</li>
 					<li>
-						<a href="./user.do">用户信息</a>
+						<a href="./user.html">用户信息</a>
 					</li>
 				</ul>
 			</div>
@@ -118,7 +118,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 				restrict:"EA",
 				scope:true,
 				link:function($scope,$el,$iattrs){
-					$.post("./getComById.do",{id:$iattrs.id},function(res){
+					$.post("./getComById.html",{id:$iattrs.id},function(res){
 						$scope.res=res[0];
 						$scope.$apply();
 					});
@@ -154,7 +154,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			}
 		}
 		if(userId){
-			$.post("./getOrderList.do",{userId:userId},function(res){
+			$.post("./getOrderList.html",{userId:userId},function(res){
 				$("#cart").scope().list = JSON.prase(res);
 				setInterval(function(){
 					$("#cart").scope().upDateSum();
@@ -163,7 +163,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			});
 		}
 		$("#submit").click(function(){
-			$.post("./addForm.do",{
+			$.post("./addForm.html",{
 				userId:$("#userId").varl(),
 				address:$("#address").val(),
 				phone:$("#phone").val(),
@@ -171,7 +171,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 				orderList:JSON.stringify($("#cart").scope().list)
 			},function(res){
 				if(res === true){
-					location.href="list.do";
+					location.href="list.html";
 				}else{
 					alert("Buy Failed");
 				}

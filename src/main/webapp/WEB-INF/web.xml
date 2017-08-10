@@ -50,7 +50,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
 	<!-- 配置session超时时间，单位分钟 -->

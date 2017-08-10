@@ -27,14 +27,7 @@ public class UserController {
 		userService.reg(name, password, defaultAddress, defaultPhone, mail);
 		return false;
 	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter("username");
-		String password = request.getParameter("password");
-		return userService.login(name , password);
-	}
+
 	@RequestMapping("/index")
 	public String initPage() {
 		return "/index";

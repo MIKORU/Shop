@@ -30,6 +30,6 @@ public class TypeServiceImpl implements TypeService {
 	@Override
 	public boolean delType(String id) {
 		// TODO Auto-generated method stub
-		return 0!=typeMapper.deleteByPrimaryKey(new Integer(id));
+		return 0!=typeMapper.deleteByPrimaryKey(Integer.parseInt(id));
 	}
 }

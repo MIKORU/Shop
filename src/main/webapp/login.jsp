@@ -7,11 +7,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
   <head>
-    <title>登录页</title>
+    <title>登录</title>
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" /> 
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" /> 
     <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -45,12 +45,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
   	<script>
 		$("#submit").click(function() {
-			$.post("login.do", {
+			$.post("login.html", {
 				username : $("#user").val(),
 				password : $("#password").val()
 			}, function(res) {
-				if (res === "true") {
-					location.href = "index.do";
+				if (res === "true" ) {
+					location.href = "index.html";
 				} else {
 					alert("登陆失败");
 				}

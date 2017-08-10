@@ -49,16 +49,16 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 						</c:if>
 					</li>
 					<li>
-						<a href="./index.do">首页</a>
+						<a href="./index.html">首页</a>
 					</li>
 					<li>
-						<a href="./detail.do">分类页</a>
+						<a href="./detail.html">分类页</a>
 					</li>
 					<li>
-						<a href="./list.do">列表页</a>
+						<a href="./list.html">列表页</a>
 					</li>
 					<li>
-						<a href="./user.do">用户信息</a>
+						<a href="./user.html">用户信息</a>
 					</li>
 				</ul>
 			</div>
@@ -176,13 +176,13 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		});
 		var ajaxModule={
 				getFormList:function(userId,cb){
-					$.post("getFormList.do",{userId:uesrId},cb);
+					$.post("/getFormList.html",{userId:uesrId},cb);
 				},
 				pay:function(userId,orderformId,cb){
-					$.post("pay.do",{userId:userId,orderformId:orderformId},cb);
+					$.post("/pay.html",{userId:userId,orderformId:orderformId},cb);
 				},
 				getComById:function(id,cb){
-					$.post("./getComById.do",{id:id},cb);
+					$.post("./getComById.html",{id:id},cb);
 				}
 		}
 		if(userid){

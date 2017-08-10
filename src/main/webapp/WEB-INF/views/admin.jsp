@@ -45,7 +45,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 	<div class="container" ng-app="app">
 		<div class="row">
 			<h2>
-				<a href="../index.do">首页</a>
+				<a href="./index.html">首页</a>
 			</h2>
 		</div>
 		<div class="row">
@@ -228,7 +228,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 				restrict:"EA",
 				scope:true,
 				link:function($scope,$el,$iattrs){
-					$.post("../getComById.do",{id:$iattrs.id},function(res){
+					$.post("./getComById.html",{id:$iattrs.id},function(res){
 						$scope.res=res[0];
 						$scope.$apply();
 					});
@@ -296,12 +296,12 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		});
 		$("#submit").click(function(){
 			ajaxModule.addPro({
-				name:$("#name").val();
-				depict:$("#depict").val();
-				amount:$("amount").val();
-				manufacturer:$("manufacturer").val();
-				img:$("#img").val();
-				type:$("select").val();
+				name:$("#name").val(),
+				depict:$("#depict").val(),
+				amount:$("amount").val(),
+				manufacturer:$("manufacturer").val(),
+				img:$("#img").val(),
+				type:$("select").val()
 			},function(res){
 				if(res === true){
 					$("#myModal").modal('hide');
@@ -328,7 +328,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			formData = new FormData();
 			formData.append("name",ev.target.files[0]);
 			var oReq = new XMLHttpRequest();
-			oReq.open("POST","../upload.do");
+			oReq.open("POST","./upload.html");
 			oReq.onreadystatechange = function(){
 				if(oReq.readyState === 4){
 					$("#img").val(oReq.responseText);
@@ -344,57 +344,57 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		var ajaxModule = function(){
 			return {
 				getFormAllList:function(el){
-					$.post("../getFormAllList.do",function(res){
+					$.post("./getFormAllList.html",function(res){
 						$(el).scope().orderforms = res;
 						$(el).scope().$apply();
 						
 					});
 				},
 				getTypes:function(el){
-					$.post("getTypes.do",function(res)){
-						${el}.scope().type=res;
-						${el}.scope().$apply();
-					}
+					$.post("/getTypes.html",function(res)){
+						$(el).scope().type=res;
+						$(el).scope().$apply();
+					});
 				},
 				addTypes:function(el){
-					$.post("getTypes.do",function(res){
+					$.post("/getTypes.html",function(res){
 						$(el).scope().types=res;
 						$(el).scope().$apply();
 					});
 				},
 				addType:function(type,callback){
-					$.post("addType.do",{type:type},function(res){
+					$.post("/addType.html",{type:type},function(res){
 						callback(res);
 					});
 				},
 				delType:function(id,callback){
-					$.post("delType.do",{id:id},function(res){
+					$.post("/delType.html",{id:id},function(res){
 						callback(res);
 					});
 				},
 				getAllCom:function(el){
-					$.post("./getAllCom.do",function(res){
+					$.post("./getAllCom.html",function(res){
 						$(el).scope().coms = res;
 						$(el).scope().$apply();
 					});
 				},
 				delPro:function(id,callback){
-					$.post("./delPro.do",{id:id},function(res){
+					$.post("./delPro.html",{id:id},function(res){
 						callback(res);
 					});
 				},
 				addPro:function(json,callback){
-					$.post("./addPro.do",json,function(res){
+					$.post("./addPro.html",json,function(res){
 						callback(res);
 					});
 				},
 				getComments:function(callback){
-					$.post("./getComments.do",function(res){
+					$.post("./getComments.html",function(res){
 						callback(res);
 					});
 				},
 				getCommentById:function(id,callback){
-					$.post("./getCommentById.do",{commodityId:id},callback);
+					$.post("./getCommentById.html",{commodityId:id},callback);
 				}
 			}
 		}();

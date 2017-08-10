@@ -52,18 +52,18 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					</c:if>
 				</li>
 				<li>
-					<a href="./index.do">首页</a>
+					<a href="./index.html">首页</a>
 					</li>
 				<li>
-					<a href="./detail.do">分类页</a>
+					<a href="./detail.html">分类页</a>
 					</li>
 				<li>
-					<a href="./cart.do">购物车</a>
+					<a href="./cart.html">购物车</a>
 					</li>
 				<li>
-					<a href="./list.do">列表页</a>
+					<a href="./list.html">列表页</a>
 					</li>
-				<li><a href="./user.do">用户</a></li>
+				<li><a href="./user.html">用户</a></li>
 			</ul>
 		</div>
 	</div>
@@ -101,7 +101,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			</div>
 		</div>
 		<div class="row">
-			<a href="./car.do" class="btn btn-default" role="button">结账</a>
+			<a href="./car.html" class="btn btn-default" role="button">结账</a>
 		</div>
 	</div>
 	<!-- Modal --start -->
@@ -204,12 +204,12 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 	}
 	var ajaxModule = {
 			getAllCom:function(cb){
-				$.post("admin/getAllCom.do",cb);
+				$.post("admin/getAllCom.html",cb);
 			},
 			addOrder:function(userId,commodityIds,cb){
-				$.post("addOrder.do",{userId:userId,commodityIds:commodityIds,
+				$.post("addOrder.html",{userId:userId,commodityIds:commodityIds,
 					commodityCounts:"1"},function(res){
-						console.log("addOrder.do response is "+res);
+						console.log("addOrder.html response is "+res);
 						if(res){
 							alert("successful");
 						}else{
@@ -218,13 +218,13 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					});
 			},
 			search:function(keyword,cb){
-				$.post("search.do",{keyword:keyword},cb);
+				$.post("search.html",{keyword:keyword},cb);
 			},
 			getCommentById:function(id,cb){
-				$.post("admin/getCommentById.do",{commodityId:id},cb);
+				$.post("/getCommentById.html",{commodityId:id},cb);
 			},
 			addComment:function(commodityID,comment,cb){
-				$.post("./addComment.do",{userId:'${id}',userName:'${name}',
+				$.post("./addComment.html",{userId:'${id}',userName:'${name}',
 					commodityID:commodityID,comment:comment},function(res){
 						if(res){
 							cb&&cb();

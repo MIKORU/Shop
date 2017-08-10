@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 		List<Map<String,Object> > list = userMapper.queryforUser(name);
 		for(Map<String ,Object> k : list) {
 			if(name.equals(k.get("name"))) {
-				return password.equals((String)k.get("password"));
+				return password.equals(String.valueOf(k.get("password")));
 			}
 		}
 		return false;
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService{
 			String mail) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setId(new Integer(userId));
+		user.setId(Integer.parseInt(userId));
 		user.setName(name);
 		user.setAddress(defaultAddress);
 		user.setPassword(password);
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService{
 		List<Map<String,Object> > list = userMapper.queryforUser(username);
 		for(Map<String ,Object> k : list) {
 			if(username.equals(k.get("name"))) {
-				return (String)k.get("password");
+				return String.valueOf(k.get("password"));
 			}
 		}
 		return "";
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService{
 		List<Map<String,Object> > list = userMapper.queryforUser(username);
 		for(Map<String ,Object> k : list) {
 			if(username.equals(k.get("name"))) {
-				return (String)k.get("id");
+				return String.valueOf(k.get("id"));
 			}
 		}
 		return "";

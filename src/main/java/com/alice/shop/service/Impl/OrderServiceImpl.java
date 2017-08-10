@@ -20,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
 		Order order = new Order();
 		order.setAddress(address);
 		order.setPhone(phone);
-		order.setTotalprice(new Integer(totalPrice));
-		order.setPay(new Integer(pay));
+		order.setTotalprice(Integer.parseInt(totalPrice));
+		order.setPay(Integer.parseInt(pay));
 		order.setOrderlist(orderlist);
 		return 0!=orderMapper.insert(order);
 	}

@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/list")
+
 public class ListController {
 	
-	@RequestMapping
+	@RequestMapping("/list")
 	public String initPage() {
 		return "/list";
 	}

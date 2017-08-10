@@ -12,19 +12,14 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href ="./bootstrap/css/bootstrap.min.css" />
-	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<title>主页</title>
+<!-- 	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script> -->
+<!-- 	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
@@ -54,16 +49,19 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 						</c:if>
 					</li>
 					<li>
-						<a href="./index.do">首页</a>
+						<a href="./index.html">首页</a>
 					</li>
 					<li>
-						<a href="./detail.do">分类页</a>
+						<a href="./detail.html">分类页</a>
 					</li>
 					<li>
-						<a href="./list.do">列表页</a>
+						<a href="./cart.html">购物车</a>
 					</li>
 					<li>
-						<a href="./user.do">用户信息</a>
+						<a href="./list.html">订单页</a>
+					</li>
+					<li>
+						<a href="./user.html">用户信息</a>
 					</li>
 				</ul>
 			</div>
@@ -73,7 +71,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		<div id="index" class="row" ng-controller="index">
 			<div class="panel panel-default">
 				<div clss="panel-body">
-					<div class="thumbnail pull-left com" ng-repeat="com in coms">
+					<div class="thumbnail pull-left com" ng-repeat="com in coms track by $index">
 						<img ng-src="{{com.img}}" width="40" height="40">
 						<div class="caption">
 							<h3>{{com.name}}</h3>
@@ -93,7 +91,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			</div>
 		</div>
 			<div class="row">
-				<a href="./cart.do" class="btn btn-default" role="button">去购物</a>
+				<a href="./cart.html" class="btn btn-default" role="button">购物车</a>
 			</div>
 	</div>
 	<div clss="modal fade" id="detail" tabindex="-1" role="dialog" 
@@ -136,8 +134,8 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 				</div>
 			</div>
 		</div>
-		</div>
-	<script>
+	</div>
+	<script type="text/javascript">
 		var userId="${id}";
 		var app = angular.module("app",[]);
 		
@@ -154,6 +152,15 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					$("#detail").scope().$apply();
 				});
 			}
+			$scope.$watch("coms",function(){  
+			      console.log($scope.coms);
+			      console.log($scope.coms[10])
+			});
+			ajaxModule.getAllCom(function(res){
+				$("#index").scope().coms = res;
+  				$("#index").scope().$apply();
+			});
+			console.log($("#index").scope().coms);
 		});
 		app.controller("detail",function($scope){
 			$scope.comments = [];
@@ -172,12 +179,12 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		
 		var ajaxModule = {
 			getAllCom:function(cb){
-				$.post("admin/getAllCom.do",cb);
+				$.post("./getAllCom.html",cb);
 			},
 			addOrder:function(userId,commodityIds,cb){
-				$.post("addOrder.do",{userId:userId,commodityIds:commodityIds,
+				$.post("./addOrder.html",{userId:userId,commodityIds:commodityIds,
 					commodityCounts:"1"},function(res){
-						console.log("addOrder.do response is "+res);
+						console.log("addOrder.html response is "+res);
 						if(res){
 							alert("successful");
 						}else{
@@ -186,10 +193,10 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					});
 			},
 			getCommentById:function(id,cb){
-				$.post("admin/getCommentById.do",{commodityId:id},cb);
+				$.post("./getCommentById.html",{commodityId:id},cb);
 			},
 			addComment:function(commodityID,comment,cb){
-				$.post("./addComment.do",{userId:'${id}',userName:'${name}',
+				$.post("./addComment.html",{userId:'${id}',userName:'${name}',
 					commodityID:commodityID,comment:comment},function(res){
 						if(res){
 							cb&&cb();
@@ -200,10 +207,14 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			}
 		}
 		function index(){
-			ajaxModule.getAllCom(function(res){
-				$("#index").scope().coms = res;
-				$("#index").scope().$apply();
-			});
+// 			ajaxModule.getAllCom(function(res){
+// 				var scope = angular.element('#index').scope();
+// 				scope.coms = res;
+// 				console.log(scope.coms)
+// 				scope.$apply();
+// // 				$("#index").scope().coms = res;
+// //   				$("#index").scope().$apply();
+// 			});
 		}
 		
 		$(function(){
