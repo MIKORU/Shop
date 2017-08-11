@@ -1,19 +1,17 @@
 /**
  * 
  */
-var userId = "${id}";
 var app = angular.module("app", []);
 
 app.controller("index", function($scope) {
 	$scope.coms = [];
-	$scope.addToCart = function(comId) {
+	$scope.addToCart = function(userId, comId) {
 		ajaxModule.addOrder(userId, comId);
 	}
 	$scope.showDetail = function(com) {
 		$("#detail").modal('show');
 		$("#detail").scope().com = com;
 		ajaxModule.getCommentById(com.id, function(res) {
-			
 			$("#detail").scope().comments = JSON.parse(res);
 			$("#detail").scope().$apply();
 		});
@@ -22,16 +20,16 @@ app.controller("index", function($scope) {
 });
 app.controller("detail", function($scope) {
 	$scope.comments = [];
-	$scope.appendComment = function(id,names,commodityID) {
+	$scope.appendComment = function(id, names, commodityID) {
 		if ($scope.comment) {
-			ajaxModule.addComment(id,names,commodityID, $scope.comment, function() {
-				console.log(names);
-				$scope.comments.push({
-					username : names , //无法同步更新
-					comment : $scope.comment
-				});
-				$scope.$apply();
-			});
+			ajaxModule.addComment(id, names, commodityID, $scope.comment,
+					function() {
+						$scope.comments.push({
+							username : names,
+							comment : $scope.comment
+						});
+						$scope.$apply();
+					});
 		}
 	}
 });
@@ -48,9 +46,9 @@ var ajaxModule = {
 		}, function(res) {
 			console.log("addOrder.html response is " + res);
 			if (res) {
-				alert("successful");
+				alert("添加商品成功！");
 			} else {
-				alert("failed");
+				alert("添加商品失败QAQ");
 			}
 		});
 	},
@@ -59,14 +57,14 @@ var ajaxModule = {
 			commodityId : id
 		}, cb);
 	},
-	addComment : function(id, names , commodityID, comment, cb) {
+	addComment : function(id, names, commodityID, comment, cb) {
 		$.post("./addComment.html", {
 			userId : id,
 			userName : names,
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {
-			if (res =="true" ) {
+			if (res == "true") {
 				cb && cb();
 			} else {
 				alert("评论添加失败");

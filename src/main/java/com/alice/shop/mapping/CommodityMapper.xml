@@ -170,10 +170,10 @@
   <select id="serach" parameterType="java.lang.String" resultType="com.alice.shop.bean.Commodity">
   	select * from commodity
   	where 
-  	name like '%"+#{keyword,jdbcType=VARCHAR}+"%'
+  	name like concat('%',#{keyword,jdbcType=LONGVARCHAR},'%') 
   	union
   	(select * from commodity 
-  	where
-  	dipict like '%"+#{keyword,jdbcType=VARCHAR}+"%')
+  	where 
+  	depict like concat('%',#{keyword,jdbcType=LONGVARCHAR},'%'))
   </select>
 </mapper>

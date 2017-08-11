@@ -25,4 +25,12 @@ public class CommodityController {
 		JSONArray ja = JSONArray.fromObject(commodityService.getAllCom());
 		return ja;
 	}
+	@RequestMapping(value="search", method=RequestMethod.POST) 
+	@ResponseBody
+	public JSONArray search(HttpServletRequest request, HttpServletResponse response){
+		String keyword = request.getParameter("keyword");
+		return JSONArray.fromObject( commodityService.search(keyword) );
+	}
+	
+	
 }
