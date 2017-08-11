@@ -154,13 +154,11 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			}
 			$scope.$watch("coms",function(){  
 			      console.log($scope.coms);
-			      console.log($scope.coms[10])
 			});
-			ajaxModule.getAllCom(function(res){
+			$ajaxModule.getAllCom(function(res){
 				$("#index").scope().coms = res;
   				$("#index").scope().$apply();
 			});
-			console.log($("#index").scope().coms);
 		});
 		app.controller("detail",function($scope){
 			$scope.comments = [];

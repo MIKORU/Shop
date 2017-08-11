@@ -43,19 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</form>
   		</div>
   	</div>
-  	<script>
-		$("#submit").click(function() {
-			$.post("login.html", {
-				username : $("#user").val(),
-				password : $("#password").val()
-			}, function(res) {
-				if (res === "true" ) {
-					location.href = "index.html";
-				} else {
-					alert("登陆失败");
-				}
-			});
-		});
-  	</script>
+  	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/login.js"></script>
   </body>
 </html>
