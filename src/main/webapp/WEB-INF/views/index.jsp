@@ -152,13 +152,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					$("#detail").scope().$apply();
 				});
 			}
-			$scope.$watch("coms",function(){  
-			      console.log($scope.coms);
-			});
-			$ajaxModule.getAllCom(function(res){
-				$("#index").scope().coms = res;
-  				$("#index").scope().$apply();
-			});
+			
 		});
 		app.controller("detail",function($scope){
 			$scope.comments = [];
@@ -176,43 +170,39 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		});
 		
 		var ajaxModule = {
-			getAllCom:function(cb){
-				$.post("./getAllCom.html",cb);
-			},
-			addOrder:function(userId,commodityIds,cb){
-				$.post("./addOrder.html",{userId:userId,commodityIds:commodityIds,
-					commodityCounts:"1"},function(res){
-						console.log("addOrder.html response is "+res);
-						if(res){
-							alert("successful");
-						}else{
-							alert("failed");
-						}
-					});
-			},
-			getCommentById:function(id,cb){
-				$.post("./getCommentById.html",{commodityId:id},cb);
-			},
-			addComment:function(commodityID,comment,cb){
-				$.post("./addComment.html",{userId:'${id}',userName:'${name}',
-					commodityID:commodityID,comment:comment},function(res){
-						if(res){
-							cb&&cb();
-						}else{
-							alert("add Comment failed");
-						}
-					});
+				getAllCom:function(cb){
+					$.post("./getAllCom.html",cb);
+				},
+				addOrder:function(userId,commodityIds,cb){
+					$.post("./addOrder.html",{userId:userId,commodityIds:commodityIds,
+						commodityCounts:"1"},function(res){
+							console.log("addOrder.html response is "+res);
+							if(res){
+								alert("successful");
+							}else{
+								alert("failed");
+							}
+						});
+				},
+				getCommentById:function(id,cb){
+					$.post("./getCommentById.html",{commodityId:id},cb);
+				},
+				addComment:function(commodityID,comment,cb){
+					$.post("./addComment.html",{userId:'${id}',userName:'${name}',
+						commodityID:commodityID,comment:comment},function(res){
+							if(res){
+								cb&&cb();
+							}else{
+								alert("add Comment failed");
+							}
+						});
+				}
 			}
-		}
 		function index(){
-// 			ajaxModule.getAllCom(function(res){
-// 				var scope = angular.element('#index').scope();
-// 				scope.coms = res;
-// 				console.log(scope.coms)
-// 				scope.$apply();
-// // 				$("#index").scope().coms = res;
-// //   				$("#index").scope().$apply();
-// 			});
+			ajaxModule.getAllCom(function(res){
+				$("#index").scope().coms = JSON.parse(res); //!!
+  				$("#index").scope().$apply();
+			});
 		}
 		
 		$(function(){

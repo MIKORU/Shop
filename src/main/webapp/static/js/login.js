@@ -14,7 +14,7 @@ function login(){
 				username : $("#user").val(),
 				password : $("#password").val()
 			},
-			contentType : "application/x-www-form-urlencoded"
+			contentType : "application/x-www-form-urlencoded"//!!!!
 			
 		}).done(function(res){
 			if(res=="true"){
