@@ -3,6 +3,7 @@ package com.alice.shop.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,9 @@ public class CommentController {
 	@ResponseBody
 	public JSONArray getCommentById(HttpServletRequest request, HttpServletResponse response) {
 		String commodityId = request.getParameter("commodityId");
-		return JSONArray.fromObject(comService.getCommentById(Integer.parseInt(commodityId)));
+		if(!StringUtils.isBlank(commodityId)) {
+			return JSONArray.fromObject(comService.getCommentById(Integer.parseInt(commodityId)));
+		}else return null;
 	}
 	
 	@RequestMapping(value="getComments", method=RequestMethod.POST)

@@ -67,147 +67,76 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 			</div>
 		</div>
 	</nav>
-	<div clss="container">
-		<div id="index" class="row" ng-controller="index">
+	<div class="container">
+  		<div id="index" class="row" ng-controller="index">
 			<div class="panel panel-default">
-				<div clss="panel-body">
-					<div class="thumbnail pull-left com" ng-repeat="com in coms track by $index">
-						<img ng-src="{{com.img}}" width="40" height="40">
-						<div class="caption">
+			  <div class="panel-body">
+			    <div class="thumbnail pull-left com" ng-repeat="com in coms track by $index">
+			      <img ng-src="{{com.img}}"  width="40" height="40">
+			      		<div class="caption">
 							<h3>{{com.name}}</h3>
 							<p>{{com.depict}}</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button" 
-									ng-click="addToCart(com.id)">添加商品</a>
-							</p>
-							<p>
-								<button class="btn btn-default" ng-click="showDetail(com)">
-									查看详细
-								</button>
-							</p>
-						</div>
-					</div>
-				</div>
+			        	<a href="#" class="btn btn-primary" role="button" 
+			        		ng-click="addToCart(com.id)">添加商品</a>
+			        </p>
+			        <p>
+				        <button class="btn btn-default" ng-click="showDetail(com)">
+	       					查看详细
+	       				</button>
+       				</p>
+			      </div>
+			    </div>
+			  </div>
 			</div>
-		</div>
-			<div class="row">
-				<a href="./cart.html" class="btn btn-default" role="button">购物车</a>
-			</div>
-	</div>
-	<div clss="modal fade" id="detail" tabindex="-1" role="dialog" 
-		aria-labelledby="myModalLabel" ng-controller="detail">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">
-							&times;
-						</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
+		  </div>
+	  		<div class="row">
+	  			<a href="./cart.html" class="btn btn-default" role="button">购物车</a>
+	  		</div>
+  		</div>
+  	</div>
+	<div class="modal fade" id="detail" tabindex="-1" role="dialog" 
+			aria-labelledby="myModalLabel" ng-controller="detail">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" 
+	        	aria-label="Close">
+	        	<span aria-hidden="true">
+	        			&times;
+	        	</span>
+	        </button>
+	        <h4 class="modal-title" id="myModalLabel">
 						产品信息
-					</h4>
+			</h4>
 				</div>
 				<div class="modal-body">
-					<p>产品名字{{com.name}}</p>
-					<p>产品描述{{com.depict}}</p>
-					<p>产品公司{{com.manufacturer}}</p>
-					<p>产品金额{{com.price}}</p>
-					<p>产品缩略图<img ng-src={{com.img}} width=50 height=50 /></p>
-					<div class="commentBody">
-						<div ng-repeat="c in comments">
-							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-							{{c.userName}}
-							<div class="alert" role="alert">
-								{{c.comment}}
-							</div>
+					<p>产品名字：{{com.name}}</p>
+					<p>产品描述：{{com.depict}}</p>
+					<p>产品公司：{{com.manufacturer}}</p>
+					<p>产品金额：{{com.price}}</p>
+					<p>产品缩略图：<img ng-src={{com.img}} width=50 height=50 /></p>
+				<div class="commentBody">
+					<div ng-repeat="c in comments">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						{{c.username}}
+						<div class="alert" role="alert">
+							{{c.comment}}
 						</div>
-						<form>
-							<label for="text"></label>
-							<input type="text" name="text" id="text" placehoder="评论内容"
-								ng-model="comment" />
-								<button id="submit" class="btn btn-success"
-									ng-click="appendComment(com.id)">评论</button>
-						</form>
 					</div>
+					<form>
+						<label for="text"></label>
+						<input type="text" name="text" id="text" placehoder="评论内容" ng-model="comment"/>
+						<button id="submit" class="btn btn-success" ng-click="appendComment(com.id)">
+							评论
+						</button>
+					</form>
 				</div>
-			</div>
-		</div>
+	      </div>
+	    </div>
+	  </div>
 	</div>
-	<script type="text/javascript">
-		var userId="${id}";
-		var app = angular.module("app",[]);
-		
-		app.controller("index",function($scope){
-			$scope.coms=[];
-			$scope.addToCart = function(comId){
-				ajaxModule.addOrder(userId,comId);
-			}
-			$scope.showDetail = function(com){
-				$("#detail").modal('show');
-				$("#detail").scope().com = com;
-				ajaxModule.getCommentById(com.id,function(res){
-					$("#detail").scope().comments = res;
-					$("#detail").scope().$apply();
-				});
-			}
-			
-		});
-		app.controller("detail",function($scope){
-			$scope.comments = [];
-			$scope.appendComment=function(commodityID){
-				if($scope.comment){
-					ajaxModule.addComment(commodityID,$scope.comment,function(){
-						$scope.comments.push({
-							userName:"${name}",
-							comment:$scope.comment
-						});
-						$scope.$apply();
-					});
-				}
-			}
-		});
-		
-		var ajaxModule = {
-				getAllCom:function(cb){
-					$.post("./getAllCom.html",cb);
-				},
-				addOrder:function(userId,commodityIds,cb){
-					$.post("./addOrder.html",{userId:userId,commodityIds:commodityIds,
-						commodityCounts:"1"},function(res){
-							console.log("addOrder.html response is "+res);
-							if(res){
-								alert("successful");
-							}else{
-								alert("failed");
-							}
-						});
-				},
-				getCommentById:function(id,cb){
-					$.post("./getCommentById.html",{commodityId:id},cb);
-				},
-				addComment:function(commodityID,comment,cb){
-					$.post("./addComment.html",{userId:'${id}',userName:'${name}',
-						commodityID:commodityID,comment:comment},function(res){
-							if(res){
-								cb&&cb();
-							}else{
-								alert("add Comment failed");
-							}
-						});
-				}
-			}
-		function index(){
-			ajaxModule.getAllCom(function(res){
-				$("#index").scope().coms = JSON.parse(res); //!!
-  				$("#index").scope().$apply();
-			});
-		}
-		
-		$(function(){
-			index();
-		});
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/index.js">
 	</script>
 </body>
 </html>
