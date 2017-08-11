@@ -44,7 +44,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					<li>
 						<c:if test="${name!=null }">
 							<a href="###">
-								欢迎${name}
+								欢迎   【${name}】
 							</a>
 						</c:if>
 					</li>
@@ -127,7 +127,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 					<form>
 						<label for="text"></label>
 						<input type="text" name="text" id="text" placehoder="评论内容" ng-model="comment"/>
-						<button id="submit" class="btn btn-success" ng-click="appendComment(com.id)">
+						<button id="submit" class="btn btn-success" ng-click="appendComment(${id},'${name}',com.id)">
 							评论
 						</button>
 					</form>
@@ -137,6 +137,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 	  </div>
 	</div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/index.js">
+		
 	</script>
 </body>
 </html>

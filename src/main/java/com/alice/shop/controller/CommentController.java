@@ -33,4 +33,16 @@ public class CommentController {
 	public JSONArray getComments(HttpServletRequest request, HttpServletResponse response) {
 		return JSONArray.fromObject( comService.getComments( ) );
 	}
+	
+	@RequestMapping(value="addComment",method=RequestMethod.POST)
+	@ResponseBody
+	public boolean addComment(HttpServletRequest request,HttpServletResponse response) {
+		String userId = request.getParameter("userId");
+		String userName = request.getParameter("userName");
+		String commodityID = request.getParameter("commodityID");
+		String comment = request.getParameter("comment");
+		if(StringUtils.isBlank(userId)&& StringUtils.isBlank(commodityID)) return false;
+		return comService.addComment(Integer.parseInt(userId), userName, Integer.parseInt(commodityID), comment);
+	}
+	
 }

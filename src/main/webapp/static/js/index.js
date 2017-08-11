@@ -22,11 +22,12 @@ app.controller("index", function($scope) {
 });
 app.controller("detail", function($scope) {
 	$scope.comments = [];
-	$scope.appendComment = function(commodityID) {
+	$scope.appendComment = function(id,names,commodityID) {
 		if ($scope.comment) {
-			ajaxModule.addComment(commodityID, $scope.comment, function() {
+			ajaxModule.addComment(id,names,commodityID, $scope.comment, function() {
+				console.log(names);
 				$scope.comments.push({
-					userName : "${name}",
+					username : names , //无法同步更新
 					comment : $scope.comment
 				});
 				$scope.$apply();
@@ -58,17 +59,17 @@ var ajaxModule = {
 			commodityId : id
 		}, cb);
 	},
-	addComment : function(commodityID, comment, cb) {
+	addComment : function(id, names , commodityID, comment, cb) {
 		$.post("./addComment.html", {
-			userId : '${id}',
-			userName : '${name}',
+			userId : id,
+			userName : names,
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {
-			if (res) {
+			if (res =="true" ) {
 				cb && cb();
 			} else {
-				alert("add Comment failed");
+				alert("评论添加失败");
 			}
 		});
 	}

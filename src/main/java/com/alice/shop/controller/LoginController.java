@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alice.shop.service.UserService;
 
 @Controller
-public class loginController {
+public class LoginController {
 	
 	@Autowired
 	private UserService userService;
@@ -32,6 +32,7 @@ public class loginController {
 		String password = request.getParameter("password");
 		
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(30*60);
 		String correctPassword = userService.getPassword(name);
 		if(correctPassword.equals(password)) {
 			session.setAttribute("name",name);
