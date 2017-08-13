@@ -32,5 +32,11 @@ public class CommodityController {
 		return JSONArray.fromObject( commodityService.search(keyword) );
 	}
 	
+	@RequestMapping(value="getComById", method=RequestMethod.POST)
+	@ResponseBody
+	public JSONArray getComById(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt( request.getParameter("id") );
+		return JSONArray.fromObject( commodityService.getComById( id ) );
+	}
 	
 }

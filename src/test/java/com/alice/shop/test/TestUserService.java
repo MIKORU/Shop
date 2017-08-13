@@ -38,12 +38,13 @@ public class TestUserService {
 		User user = userService.getInfo(23152);
 		System.out.println(JSON.toJSON(user));
 	}
+	@Test
 	public void testgetPassword() {
-		String password = "555666";
-		String name="mikoru";
+		String password = "123";
+		String name="admin";
 		System.out.println(userService.login(name, password));
 	}
-	@Test
+	
 	public void testaddOrder() {
 		int userid=23152;
 		int commodityid=45125632;

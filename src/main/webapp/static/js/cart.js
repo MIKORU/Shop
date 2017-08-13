@@ -1,6 +1,8 @@
 /**
  * 
  */
+var userId = 0;
+var userName = null;
 var app = angular.module("app", []);
 app.directive("commodityDirective", function() {
 	return {
@@ -8,9 +10,10 @@ app.directive("commodityDirective", function() {
 		scope : true,
 		link : function($scope, $el, $iattrs) {
 			$.post("./getComById.html", {
-				id : $iattrs.id
+				id : userId
 			}, function(res) {
-				$scope.res = res[0];
+				console.log("aaaaa");
+				$scope.res = JSON.pares(res[0]);
 				$scope.$apply();
 			});
 		}
@@ -36,40 +39,58 @@ app.controller("cart", function($scope) {
 	}
 });
 var util = {
-	canlcSum : function(list) {
+	calcSum : function(list) {
 		var sum = 0;
+		list = JSON.parse(list);
 		$.each(list, function(i, e) {
 			sum += (e.commodityCount * e.price);
 		});
 		return sum;
 	}
 }
-function init(){
-	$.post("./getOrderList.html", {
-		userId : userId
-	}, function(res) {
-		$("#cart").scope().list = JSON.prase(res);
-		setInterval(function() {
-			$("#cart").scope().upDateSum();
-			$("#cart").scope().$apply();
-		}, 1000);
+function init() {
+	$.ajax({
+		url : "./getcontext.html",
+		type : "POST",
+		data : {},
+		async:false
+	}).done(function(res) {
+		res = JSON.parse(res);
+		userId = res[0].id;
+		userName = res[0].name;
+	});
+
+}
+function getlist() {
+	if(userId){
+		$.post("./getOrderList.html", {
+			userId : userId
+		}, function(res) {
+			$("#cart").scope().list = JSON.parse(res);
+			setInterval(function() {
+				$("#cart").scope().upDateSum();
+				$("#cart").scope().$apply();
+			}, 1000);
+		});
+	}
+	$("#submit").on("click", function() {
+		$.post("./addForm.html", {
+			userId : $("#userId").varl(),
+			address : $("#address").val(),
+			phone : $("#phone").val(),
+			totalPrice : ("#cart").scope().sum,
+			orderList : JSON.stringify($("#cart").scope().list)
+		}, function(res) {
+			if (res === true) {
+				location.href = "list.html";
+			} else {
+				alert("Buy Failed");
+			}
+		});
 	});
 }
-$("#submit").on("click",function() {
-	$.post("./addForm.html", {
-		userId : $("#userId").varl(),
-		address : $("#address").val(),
-		phone : $("#phone").val(),
-		totalPrice : ("#cart").scope().sum,
-		orderList : JSON.stringify($("#cart").scope().list)
-	}, function(res) {
-		if (res === true) {
-			location.href = "list.html";
-		} else {
-			alert("Buy Failed");
-		}
-	});
-});
-$(function(){
+
+$(function() {
 	init();
+	getlist();
 });

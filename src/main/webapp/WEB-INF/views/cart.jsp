@@ -56,12 +56,12 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
+  	<div class="container">
   		<div id="cart" class="row" ng-controller="cart">
   			<ul class="list-group">
-  				<li class="list-group-item pull-left commodity" ng-repeat="order in list">
+  				<li class="list-group-item pull-left commodity" ng-repeat="order in list track by $index">
  					<p>商品</p>
-        			<div commodity-directive id="{{order.commodityId}}">
+        			<div commodity-directive id="{{order.commodityid}}">
         				<p>商品名：{{res.name}}</p>
         				<p>商品描述：{{res.depict}}</p>
         				<p>商品厂商：{{res.manufacturer}}</p>

@@ -8,7 +8,7 @@ $(function(){
 function login(){
 	$("#submit").on("click",function() {
 		$.ajax({
-			url:"login.html",
+			url:"./logins.html",
 			type:"POST",
 			data:{
 				username : $("#user").val(),

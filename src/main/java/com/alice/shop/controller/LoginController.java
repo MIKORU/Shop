@@ -19,10 +19,14 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping("/login")
+	public String tologin() {
+		return "/login";
+	}
+	
 //	@Autowired  
 //	HttpServletRequest request;
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping(value = "logins", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean login(
 //			@RequestParam(value="user",required=true)String name,
