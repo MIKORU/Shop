@@ -9,7 +9,7 @@ app.directive("commodityDirective", function() {
 	return {
 		restrict : "EA",
 		scope : true,
-		link : function($scope, $el, $attrs) {
+		link : function($scope, $el, $iattrs) {
 			ajaxModule.getComById($iattrs.id, function(res) {
 				$scope.res = res[0];
 				$scope.$apply();
@@ -21,7 +21,7 @@ app.directive("parse", function() {
 	return {
 		restrict : "EA",
 		scope : true,
-		link : function($scope, $el, $attrs) {
+		link : function($scope, $el, $iattrs) {
 			$scope.orderlist = JSON.parse($iattrs.id);
 		}
 	}
@@ -40,6 +40,7 @@ app.controller("form", function($scope) {
 });
 var ajaxModule = {
 	getFormList : function(userId, cb) {
+		console.log(userId);
 		$.post("./getFormList.html", {
 			userId : userId
 		}, cb);
@@ -70,13 +71,11 @@ function init() {
 
 }
 function getformlist() {
+
 	if (userId) {
-		$(function() {
-			ajaxModule.getFormList(userId, function(res) {
-				console.log(res);
-				$("#form").scope().items = JSON.parse(res);
-				$("#form").scope().$apply();
-			});
+		ajaxModule.getFormList(userId, function(res) {
+			$("#form").scope().items = JSON.parse(res);
+			$("#form").scope().$apply();
 		});
 	}
 }

@@ -1,5 +1,6 @@
 package com.alice.shop.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alice.shop.bean.Cart;
+import com.alice.shop.bean.Order;
 import com.alice.shop.dao.CartMapper;
 import com.alice.shop.service.CartService;
 
@@ -41,12 +43,10 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public String getOrderList(int userId) {
+	public List<Order> getOrderList(int userId) {
 		// TODO Auto-generated method stub
-		Cart cart = new Cart();
-		cart.setUserid(userId);
-		List<Map<String ,Object>> list = cartMapper.queryforOrder(cart);
-		return JSONArray.fromObject(list).toString();
+		List<Order> list = cartMapper.queryForOrder(userId);
+		return list;
 	}
 
 	@Override

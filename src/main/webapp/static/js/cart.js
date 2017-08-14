@@ -10,50 +10,53 @@ app.directive("commodityDirective", function() {
 		scope : true,
 		link : function($scope, $el, $iattrs) {
 			$.post("./getComById.html", {
-				id : userId
+				id : $iattrs.id
 			}, function(res) {
-				console.log("aaaaa");
-				$scope.res = JSON.pares(res[0]);
-				$scope.$apply();
+				if ($iattrs.id) {
+					$scope.res = JSON.parse(res);
+					$scope.$apply();
+				}
 			});
 		}
 	}
 });
 app.controller("cart", function($scope) {
-	var list = [];
+	var list = [];// [{"id":1,"userId":19,"commodityId":1,"commodityCount":1},{"id":2,"userId":19,"commodityId":2,"commodityCount":5},{"id":3,"userId":19,"commodityId":3,"commodityCount":2},{"id":4,"userId":19,"commodityId":5,"commodityCount":4},{"id":5,"userId":19,"commodityId":4,"commodityCount":3}]
 	$scope.list = list;
 	$scope.scope = 0;
+
 	$scope.comCount = function(constant, commodityId) {
 		$.each($scope.list, function(i, e) {
-			if (e.commodityId === commodityId) {
+			if (e.commodityId == commodityId) {
 				$scope.list[i].commodityCount += constant;
 			}
+			;
 			if (e.commodityCount <= 0) {
 				e.commodityCount = 0;
 			}
+			;
 		});
 		$scope.upDateSum();
-	}
+	};
 	$scope.upDateSum = function() {
 		$scope.sum = util.calcSum($scope.list);
-	}
+	};
 });
 var util = {
 	calcSum : function(list) {
 		var sum = 0;
-		list = JSON.parse(list);
 		$.each(list, function(i, e) {
 			sum += (e.commodityCount * e.price);
 		});
 		return sum;
 	}
-}
+};
 function init() {
 	$.ajax({
 		url : "./getcontext.html",
 		type : "POST",
 		data : {},
-		async:false
+		async : false
 	}).done(function(res) {
 		res = JSON.parse(res);
 		userId = res[0].id;
@@ -62,7 +65,7 @@ function init() {
 
 }
 function getlist() {
-	if(userId){
+	if (userId) {
 		$.post("./getOrderList.html", {
 			userId : userId
 		}, function(res) {
@@ -82,13 +85,13 @@ function getlist() {
 			orderList : JSON.stringify($("#cart").scope().list)
 		}, function(res) {
 			if (res === true) {
-				location.href = "list.html";
+				location.href = "./list.html";
 			} else {
 				alert("Buy Failed");
 			}
 		});
 	});
-}
+};
 
 $(function() {
 	init();

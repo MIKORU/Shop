@@ -126,7 +126,6 @@ $("#upload").change(function(ev) {
 	oReq.send(formData);
 
 });
-
 $(function() {
 	$("#tab0").click();
 });
@@ -135,13 +134,13 @@ var ajaxModule = function() {
 	return {
 		getFormAllList : function(el) {
 			$.post("./getFormAllList.html", function(res) {
-				$(el).scope().orderforms = res;
+				$(el).scope().orderforms = JSON.parse(res);
 				$(el).scope().$apply();
 			})
 		},
 		getTypes : function(el) {
 			$.post("./getTypes.html", function(res) {
-				$(el).scope().types = res;
+				$(el).scope().types = JSON.parse(res);
 				$(el).scope().$apply();
 			})
 		},
@@ -184,7 +183,7 @@ var ajaxModule = function() {
 			});
 		},
 		getCommentById : function(id, callback) {
-			$.post("./getCommentById.do", {
+			$.post("./getCommentById.html", {
 				commodityId : id
 			}, callback);
 		}

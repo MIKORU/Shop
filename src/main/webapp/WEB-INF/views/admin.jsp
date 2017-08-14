@@ -84,7 +84,7 @@
 								<tr ng-repeat="item in orderforms">
 									<th scope="row">{{item.id}}</th>
 									<td>{{item.address}}</td>
-									<td>{{item.totalPrice}}</td>
+									<td>{{item.totalprice}}</td>
 									<td>{{item.phone}}</td>
 									<th><a ng-click="showInfo(item.orderlist)" href="###">
 											查看订单详细信息 </a></th>
@@ -94,7 +94,7 @@
 						</table>
 						<div class="row">
 							<ul class="list-group">
-								<li class="list-group-item" ng-repeat="com in commoditys">
+								<li class="list-group-item" ng-repeat="com in commoditys track by $index">
 									<p>第{{$index+1}}条: 商品id为{{com.commodityId}},
 										的总数是为{{com.commodityCount}}</p>
 									<div commodity-directive id="{{com.commodityId}}">

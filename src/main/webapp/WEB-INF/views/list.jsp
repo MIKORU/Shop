@@ -59,7 +59,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 		<div class="row">
 			<h1>未支付列表</h1>
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="item in items track by $index" ng-if="item.pay==0">
+				<li class="list-group-item" ng-repeat="item in items" ng-if="item.pay==0">
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
 							收货人地址{{item.address}}
@@ -70,7 +70,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							商品总价格{{item.totalPrice}}
+							商品总价格{{item.totalprice}}
 						</p>
 						<div parse id={{item.orderlist}}>
 							<div class="list pull-left" ng-repeat="order in  orderlist track by $index">
@@ -107,7 +107,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							商品总价格{{item.totalPrice}}
+							商品总价格{{item.totalprice}}
 						</p>
 						<div parse id={{item.orderlist}}>
 							<div class="list pull-left" ng-repeat="order in  orderlist track by $index">

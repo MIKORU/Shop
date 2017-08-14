@@ -38,5 +38,10 @@ public class OrderController {
 		int orderformId = Integer.parseInt( request.getParameter("orderformId") );
 		return userService.setPaying(userId , orderformId);
 	}
+	@RequestMapping(value="getFormAllList", method=RequestMethod.POST)
+	@ResponseBody
+	public JSONArray getFormAllList(HttpServletRequest request) {
+		return JSONArray.fromObject( orderService.getFormAllList() );
+	}
 	
 }

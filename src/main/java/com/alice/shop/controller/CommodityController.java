@@ -38,5 +38,27 @@ public class CommodityController {
 		int id = Integer.parseInt( request.getParameter("id") );
 		return JSONArray.fromObject( commodityService.getComById( id ) );
 	}
+	@RequestMapping(value="addPro", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean addPro(HttpServletRequest request, HttpServletResponse response) {
+		//String name, String depict, int price, int amount, String manufacturer, String img, String type
+		String name = request.getParameter("name");
+		String depict = request.getParameter("depict");
+		int price = Integer.parseInt( request.getParameter("price") );
+		int amount = Integer.parseInt( request.getParameter("amount") );
+		String manufacturerString = request.getParameter("manufacturer");
+		String img = request.getParameter("img");
+		String type = request.getParameter("type");
+		
+		return commodityService.addPro( name,  depict,  price,  amount,  manufacturerString,  img,  type);
+	}
+	
+	@RequestMapping(value="delPro", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean delPro(HttpServletRequest request, HttpServletResponse response) {
+		//String name, String depict, int price, int amount, String manufacturer, String img, String type
+		int id = Integer.parseInt(request.getParameter("id") );
+		return commodityService.delPro( id );
+	}
 	
 }

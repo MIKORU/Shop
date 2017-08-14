@@ -1,6 +1,8 @@
 package com.alice.shop.service.Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,6 @@ public class OrderServiceImpl implements OrderService {
 		Order order = new Order();
 		order.setUserid(userId);
 		List<Order> list = orderMapper.getList(order);
-		
 		return list;
 	}
 

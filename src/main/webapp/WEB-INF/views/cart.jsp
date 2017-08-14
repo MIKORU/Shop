@@ -59,14 +59,14 @@
   	<div class="container">
   		<div id="cart" class="row" ng-controller="cart">
   			<ul class="list-group">
-  				<li class="list-group-item pull-left commodity" ng-repeat="order in list track by $index">
+  				<li class="list-group-item pull-left commodity" ng-repeat="order in list">
  					<p>商品</p>
         			<div commodity-directive id="{{order.commodityid}}">
         				<p>商品名：{{res.name}}</p>
         				<p>商品描述：{{res.depict}}</p>
         				<p>商品厂商：{{res.manufacturer}}</p>
         				<p>商品价格：{{res.price}}</p>
-        				<p>商品logoï：<img ng-src={{res.img}}  width=50 height=50/></p>
+        				<p>商品logol：<img ng-src={{res.img}}  width=50 height=50/></p>
 	        			<p>
 	        				购买商品个数
 		        			<span class="badge">

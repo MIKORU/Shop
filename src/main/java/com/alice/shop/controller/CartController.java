@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.alice.shop.service.CartService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class CartController {
@@ -33,8 +38,9 @@ public class CartController {
 	
 	@RequestMapping(value="getOrderList", method = RequestMethod.POST)
 	@ResponseBody
-	public String getOrderList( HttpServletRequest request, HttpServletResponse response) {
+	public JSONArray getOrderList( HttpServletRequest request, HttpServletResponse response) {
 		int userId = Integer.parseInt( request.getParameter("userId") );
-		return cartService.getOrderList(userId);
+		return JSONArray.fromObject(cartService.getOrderList(userId));
 	}
+	
 }

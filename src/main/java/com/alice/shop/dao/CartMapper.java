@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alice.shop.bean.Cart;
+import com.alice.shop.bean.Order;
 
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
@@ -19,6 +20,8 @@ public interface CartMapper {
     int updateByPrimaryKey(Cart record);
     
     List<Map<String ,Object> > queryforOrder(Cart cart);
+    
+    List<Order> queryForOrder(int userId);
     
     int deleteOrderByuserId(int userId);
 }
