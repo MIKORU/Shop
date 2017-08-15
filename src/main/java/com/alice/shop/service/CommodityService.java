@@ -6,7 +6,7 @@ import com.alice.shop.bean.Commodity;
 
 public interface CommodityService {
 	
-	public boolean addPro(String name,String depict,int price,int amount,String manufacturer,String img,String type);
+	public boolean addPro(String name,String depict,float price,int amount,String manufacturer,String img,String type);
 	
 	public boolean delPro(int id);
 	

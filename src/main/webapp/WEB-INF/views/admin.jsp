@@ -95,15 +95,15 @@
 						<div class="row">
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="com in commoditys track by $index">
-									<p>第{{$index+1}}条: 商品id为{{com.commodityId}},
-										的总数是为{{com.commodityCount}}</p>
-									<div commodity-directive id="{{com.commodityId}}">
-										<p>商品名字{{res.name}}</p>
-										<p>商品描述{{res.depict}}</p>
-										<p>商品厂商{{res.manufacturer}}</p>
-										<p>商品价格{{res.price}}</p>
+									<p>第{{$index+1}}条: 商品id为【{{com.commodityid}}】
+										的总数是为{{com.commoditycount}}</p>
+									<div commodity-directive id="{{com.commodityid}}">
+										<p>商品名字：{{res.name}}</p>
+										<p>商品描述：{{res.depict}}</p>
+										<p>商品厂商：{{res.manufacturer}}</p>
+										<p>商品价格：{{res.price}}</p>
 										<p>
-											商品logo<img ng-src={{res.img}} width=50 height=50 />
+											商品logo：<img ng-src={{res.img}} width=50 height=50 />
 										</p>
 									</div>
 								</li>
@@ -159,12 +159,12 @@
 						<ul class="list-group">
 							<li class="list-group-item" ng-repeat="comment in comments track by $index">
 								<p>评论列表</p>
-								<div commodity-directive id="{{comment.commodityId}}">
+								<div commodity-directive id="{{comment.commodityid}}">
 									<p>商品名字：{{res.name}}</p>
 									<p>商品描述：{{res.depict}}</p>
 								</div>
 								<div>
-									<strong>{{comment.userName}} <b>说</b></strong> <span>{{comment.comment}}</span>
+									<strong>{{comment.username}} <b>说</b></strong> <span>{{comment.comment}}</span>
 								</div>
 							</li>
 						</ul>
@@ -189,30 +189,30 @@
 					<div class="modal-body">
 						<form>
 							<div class="form-group">
-								<label for="name">name</label> <input type=text
-									class="form-control" id="name" placeholder="商品名">
+								<label for="name">商品名字</label> <input type=text
+									class="form-control" id="name" placeholder="name">
 							</div>
 							<div class="form-group">
-								<label for="depict">depict</label> <input type=text
-									class="form-control" id="depict" placeholder="商品描述">
+								<label for="depict">商品描述</label> <input type=text
+									class="form-control" id="depict" placeholder="depict">
 							</div>
 							<div class="form-group">
-								<label for="price">price</label> <input type=text
-									class="form-control" id="price" placeholder="商品价格">
+								<label for="price">商品价格</label> <input type=text
+									class="form-control" id="price" placeholder="price">
 							</div>
 							<div class="form-group">
-								<label for="amount">amount</label> <input type="text"
-									class="form-control" id="amount" placeholder="商品个数">
+								<label for="amount">商品个数</label> <input type="text"
+									class="form-control" id="amount" placeholder="amount">
 							</div>
 							<div class="form-group">
-								<label for="manufacturer">manufacturer</label> <input
+								<label for="manufacturer">商品厂商</label> <input
 									type="text" class="form-control" id="manufacturer"
-									" placeholder="商品厂商">
+									" placeholder="manufacturer">
 							</div>
 							<div class="form-group">
-								<label for="img">img</label> <input type="text"
+								<label for="img">图片</label> <input type="text"
 									class="form-control" id="img" readonly=true placeholder="图片路径">
-								<input type="file" value=上传文件 id="upload">
+								<input type="file" name="fileField" value=上传文件 id="upload">
 							</div>
 							<select id="select" ng-controller="select">
 								<option ng-repeat="type in types" value="{{type.name}}">
@@ -222,9 +222,8 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button id="submit" type="button" class="btn btn-primary">Save
-							changes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="submit" type="button" class="btn btn-primary">保存修改</button>
 					</div>
 				</div>
 			</div>

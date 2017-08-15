@@ -10,7 +10,7 @@ app.directive("commodityDirective", function() {
 			$.post("./getComById.html", {
 				id : $iattrs.id
 			}, function(res) {
-				$scope.res = res[0];
+				$scope.res = JSON.parse(res)[0];
 				$scope.$apply();
 			});
 		}
@@ -36,7 +36,7 @@ app.controller("types", function($scope) {
 	$scope.new_type = "";
 	$scope.delType = function(id) {
 		ajaxModule.delType(id, function(res) {
-			if (res === true) {
+			if (res === "true") {
 				$("#tab1").click();
 			} else {
 				alert("删除失败");
@@ -46,7 +46,7 @@ app.controller("types", function($scope) {
 	};
 	$scope.new_type_fn = function() {
 		ajaxModule.addType($scope.new_type, function(res) {
-			if (res === true) {
+			if (res === "true") {
 				$("#tab1").click();
 			} else {
 				alert("创建失败");
@@ -68,7 +68,6 @@ app.controller("pros", function($scope) {
 			} else {
 				alert("删除成功");
 			}
-			;
 		});
 	};
 });
@@ -121,10 +120,9 @@ $("#upload").change(function(ev) {
 		if (oReq.readyState === 4) {
 			$("#img").val(oReq.responseText);
 		}
-		;
 	};
+	console.log(ev.target.files[0]);
 	oReq.send(formData);
-
 });
 $(function() {
 	$("#tab0").click();

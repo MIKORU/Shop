@@ -43,7 +43,7 @@ public class CommodityController {
 		//String name, String depict, int price, int amount, String manufacturer, String img, String type
 		String name = request.getParameter("name");
 		String depict = request.getParameter("depict");
-		int price = Integer.parseInt( request.getParameter("price") );
+		float price = Float.parseFloat( request.getParameter("price") );
 		int amount = Integer.parseInt( request.getParameter("amount") );
 		String manufacturerString = request.getParameter("manufacturer");
 		String img = request.getParameter("img");

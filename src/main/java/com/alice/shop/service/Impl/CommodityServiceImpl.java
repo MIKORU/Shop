@@ -16,7 +16,7 @@ public class CommodityServiceImpl implements CommodityService {
 	private CommodityMapper comMapper;
 	
 	@Override
-	public boolean addPro(String name, String depict, int price, int amount, String manufacturer, String img,
+	public boolean addPro(String name, String depict, float price, int amount, String manufacturer, String img,
 			String type) {
 		// TODO Auto-generated method stub
 		Commodity com = new Commodity();
