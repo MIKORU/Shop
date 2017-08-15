@@ -12,10 +12,8 @@ app.directive("commodityDirective", function() {
 			$.post("./getComById.html", {
 				id : $iattrs.id
 			}, function(res) {
-				if ($iattrs.id) {
-					$scope.res = JSON.parse(res);
-					$scope.$apply();
-				}
+				$scope.res = JSON.parse(res)[0];
+				$scope.$apply();
 			});
 		}
 	}
@@ -23,18 +21,18 @@ app.directive("commodityDirective", function() {
 app.controller("cart", function($scope) {
 	var list = [];// [{"id":1,"userId":19,"commodityId":1,"commodityCount":1},{"id":2,"userId":19,"commodityId":2,"commodityCount":5},{"id":3,"userId":19,"commodityId":3,"commodityCount":2},{"id":4,"userId":19,"commodityId":5,"commodityCount":4},{"id":5,"userId":19,"commodityId":4,"commodityCount":3}]
 	$scope.list = list;
+	
 	$scope.scope = 0;
 
 	$scope.comCount = function(constant, commodityId) {
+		console.log($scope.list);
 		$.each($scope.list, function(i, e) {
-			if (e.commodityId == commodityId) {
-				$scope.list[i].commodityCount += constant;
+			if (e.commodityid == commodityId) {
+				$scope.list[i].commoditycount += constant;
 			}
-			;
-			if (e.commodityCount <= 0) {
-				e.commodityCount = 0;
+			if (e.commoditycount <= 0) {
+				e.commoditycount = 0;
 			}
-			;
 		});
 		$scope.upDateSum();
 	};
@@ -46,7 +44,9 @@ var util = {
 	calcSum : function(list) {
 		var sum = 0;
 		$.each(list, function(i, e) {
-			sum += (e.commodityCount * e.price);
+			if(e.price){
+				sum += (e.commoditycount * e.price);
+			}
 		});
 		return sum;
 	}
@@ -78,18 +78,25 @@ function getlist() {
 	}
 	$("#submit").on("click", function() {
 		$.post("./addForm.html", {
-			userId : $("#userId").varl(),
+			userId : $("#userId").val(),
 			address : $("#address").val(),
 			phone : $("#phone").val(),
-			totalPrice : ("#cart").scope().sum,
+			totalPrice : $("#cart").scope().sum,
 			orderList : JSON.stringify($("#cart").scope().list)
 		}, function(res) {
-			if (res === true) {
+			if (res == "true") {
 				location.href = "./list.html";
 			} else {
-				alert("Buy Failed");
+				alert("购买失败");
 			}
 		});
+//		$.each($("#cart").scope().list,function(i,e){
+//			$.post("./updateCart.html",{
+//				
+//			},function(res){
+//				
+//			});
+//		});
 	});
 };
 

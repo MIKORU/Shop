@@ -47,7 +47,7 @@
 	<div class="container" ng-app="app">
 		<div class="row">
 			<h2>
-				<a href="./index.html">首页</a>
+				<button  id="index"  class="btn btn-default" onclick="location='./index.html'">首页</button>
 			</h2>
 		</div>
 		<div class="row">

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService{
 		User user = userMapper.selectByPrimaryKey(userId);
 		Order order = orderMapper.selectByPrimaryKey(orderid);
 		int userMoney = user.getMoney();
-		int orderMoney = order.getTotalprice();
+		float orderMoney = order.getTotalprice();
 		
 		if(userMoney - orderMoney >=0 ) {
 			userMoney -= orderMoney;

@@ -42,5 +42,10 @@ public class CartController {
 		int userId = Integer.parseInt( request.getParameter("userId") );
 		return JSONArray.fromObject(cartService.getOrderList(userId));
 	}
-	
+//	
+//	@RequestMapping(value="updateCart", method = RequestMethod.POST)
+//	@ResponseBody
+//	public boolean updateCart(HttpServletRequest request, HttpServletResponse response) {
+//		
+//	}
 }

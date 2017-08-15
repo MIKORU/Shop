@@ -17,8 +17,6 @@
 <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
-
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -29,6 +27,7 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
 </head>
 <style>
 .commodity {
@@ -50,8 +49,9 @@
 						</c:if></li>
 					<li><a href="./index.html">首页</a></li>
 					<li><a href="./detail.html">分类页</a></li>
-					<li><a href="./list.html"> 列表页 </a></li>
-					<li><a href="./user.html"> 用户信息 </a></li>
+					<li><a href="./cart.html">购物车</a></li>
+					<li><a href="./list.html">订单页</a></li>
+					<li><a href="./user.html">用户信息</a></li>
 				</ul>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
   	<div class="container">
   		<div id="cart" class="row" ng-controller="cart">
   			<ul class="list-group">
-  				<li class="list-group-item pull-left commodity" ng-repeat="order in list">
+  				<li class="list-group-item pull-left commodity" ng-repeat="order in list track by $index">
  					<p>商品</p>
         			<div commodity-directive id="{{order.commodityid}}">
         				<p>商品名：{{res.name}}</p>
@@ -70,18 +70,18 @@
 	        			<p>
 	        				购买商品个数
 		        			<span class="badge">
-		        				{{order.commodityCount}}
+		        				{{order.commoditycount}}
 							</span>
 
 							<p style="display:none">{{order.price=res.price}}</p>
 	        			</p>
-	        			<button class="btn btn-danger" ng-click="comCount(-1, order.commodityId)">少买一个</button>
-	        			<button class="btn btn-warning"  ng-click="comCount(1, order.commodityId)">再来一个</button>
+	        			<button class="btn btn-danger" ng-click="comCount(-1, order.commodityid)">少买一个</button>
+	        			<button class="btn btn-warning"  ng-click="comCount(1, order.commodityid)">再来一个</button>
         			</div>
   				</li>
   			</ul>
   			<div class="clearfix">
-				<p>总金额{{sum}}</p>
+				<p>总金额：{{sum}}</p>
   			</div>
   			<input type="hidden" value="${id}" class="form-control" id="userId">
   			<br>

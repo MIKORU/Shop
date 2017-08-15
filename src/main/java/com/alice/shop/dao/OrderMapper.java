@@ -21,5 +21,4 @@ public interface OrderMapper {
     
     List<Order> getList(Order order);
     
-    
 }

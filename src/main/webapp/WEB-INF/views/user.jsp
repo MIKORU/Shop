@@ -46,19 +46,19 @@
 							<a href="###"> 欢迎【${name}】 </a>
 						</c:if></li>
 					<li><a href="./index.html">首页</a></li>
-					<li><a href="./detail.html">类型页</a></li>
-					<li><a href="./cart.html"> 购物车 </a></li>
-					<li><a href="./list.html"> 订单页 </a></li>
+					<li><a href="./detail.html">分类页</a></li>
+					<li><a href="./cart.html">购物车</a></li>
+					<li><a href="./list.html">列表页</a></li>
+					<li><a href="./user.html">用户信息</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
 		<div id="admin">
-
 			<div class="row">
 				<c:if test="${name==null}">
-					<button  id="login"  class="btn btn-default" onclick="location='./login.html'"><a href="./login.html">登录</a></button>
+					<button  id="login"  class="btn btn-default" onclick="location='./login.html'">登录</button>
 				</c:if>
 				<c:if test='${role==1}'>
 					<a class="btn btn-default" href="./admin.html">进入管理界面</a>

@@ -11,7 +11,7 @@ app.directive("commodityDirective", function() {
 		scope : true,
 		link : function($scope, $el, $iattrs) {
 			ajaxModule.getComById($iattrs.id, function(res) {
-				$scope.res = res[0];
+				$scope.res = JSON.parse(res)[0];
 				$scope.$apply();
 			});
 		}
@@ -28,9 +28,10 @@ app.directive("parse", function() {
 });
 app.controller("form", function($scope) {
 	$scope.items = [];
-	$scope.pay = function(orderformId) {
-		ajaxModule.pay(userId, orderformId, function(res) {
+	$scope.pay = function(orderId) {
+		ajaxModule.pay(userId, orderId, function(res) {
 			if (res == "true") {
+				alert("支付成功");
 				location.reload();
 			} else {
 				alert("支付失败");
@@ -40,15 +41,14 @@ app.controller("form", function($scope) {
 });
 var ajaxModule = {
 	getFormList : function(userId, cb) {
-		console.log(userId);
 		$.post("./getFormList.html", {
 			userId : userId
 		}, cb);
 	},
-	pay : function(userId, orderformId, cb) {
+	pay : function(userId, orderId, cb) {
 		$.post("./pay.html", {
 			userId : userId,
-			orderformId : orderformId
+			orderId : orderId
 		}, cb);
 	},
 	getComById : function(id, cb) {
@@ -71,7 +71,6 @@ function init() {
 
 }
 function getformlist() {
-
 	if (userId) {
 		ajaxModule.getFormList(userId, function(res) {
 			$("#form").scope().items = JSON.parse(res);

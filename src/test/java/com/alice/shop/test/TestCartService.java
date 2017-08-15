@@ -17,9 +17,12 @@ public class TestCartService {
 	@Autowired
 	private CartService cartService;
 	
-	@Test
 	public void TestgetOrderList() {
 		System.out.println(JSON.toJSON(cartService.getOrderList(123456)));
 	}
 	
+	@Test
+	public void testdelOrder() {
+		System.out.println(cartService.delOrder(23152));
+	}
 }

@@ -17,15 +17,16 @@ public class OrderServiceImpl implements OrderService {
 	private OrderMapper orderMapper;
 
 	@Override
-	public boolean addForm(int userId, String address, String phone, String totalPrice, String pay, String orderlist) {
+	public boolean addForm(int userId, String address, String phone, float totalPrice, String pay, String orderlist) {
 		// TODO Auto-generated method stub
 		Order order = new Order();
+		order.setUserid(userId);
 		order.setAddress(address);
 		order.setPhone(phone);
-		order.setTotalprice(Integer.parseInt(totalPrice));
+		order.setTotalprice(totalPrice);
 		order.setPay(Integer.parseInt(pay));
 		order.setOrderlist(orderlist);
-		return 0!=orderMapper.insert(order);
+		return 0!=orderMapper.insertSelective(order);
 	}
 
 	@Override

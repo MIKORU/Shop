@@ -9,7 +9,7 @@ public class Order {
 
     private String phone;
 
-    private Integer totalprice;
+    private Float totalprice;
 
     private Integer pay;
 
@@ -47,11 +47,11 @@ public class Order {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Integer getTotalprice() {
+    public Float getTotalprice() {
         return totalprice;
     }
 
-    public void setTotalprice(Integer totalprice) {
+    public void setTotalprice(Float totalprice) {
         this.totalprice = totalprice;
     }
 

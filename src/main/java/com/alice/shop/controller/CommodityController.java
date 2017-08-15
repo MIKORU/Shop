@@ -22,8 +22,7 @@ public class CommodityController {
 	@RequestMapping(value="getAllCom",method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getAllCom(HttpServletRequest request,HttpServletResponse response) {
-		JSONArray ja = JSONArray.fromObject(commodityService.getAllCom());
-		return ja;
+		return JSONArray.fromObject(commodityService.getAllCom());
 	}
 	@RequestMapping(value="search", method=RequestMethod.POST) 
 	@ResponseBody
