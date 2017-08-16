@@ -38,6 +38,16 @@ app.controller("form", function($scope) {
 			}
 		});
 	}
+	$scope.del = function(orderId){
+		ajaxModule.delOrder(orderId,function(res){
+			if(res == "true"){
+				alert("取消订单成功");
+				window.location.reload();
+			}else{
+				alert("取消订单失败");
+			}
+		});
+	}
 });
 var ajaxModule = {
 	getFormList : function(userId, cb) {
@@ -54,6 +64,11 @@ var ajaxModule = {
 	getComById : function(id, cb) {
 		$.post("./getComById.html", {
 			id : id
+		}, cb);
+	},
+	delOrder:function(id,cb){
+		$.post("./delOrder.html",{
+			userId:id
 		}, cb);
 	}
 }

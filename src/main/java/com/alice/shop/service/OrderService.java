@@ -6,11 +6,13 @@ import com.alice.shop.bean.Order;
 
 public interface OrderService {
 	
-	boolean addForm(int userId,String address,String phone,float totalPrice,String pay,String orderlist);
+	boolean addForm(String userId,String address,String phone,float totalPrice,String pay,String orderlist);
     
-    List<Order> getFormList(int userId);
+    List<Order> getFormList(String userId);
     
     List<Order> getFormAllList();
     
-    List<Order> getFormList(int userId,boolean flag);
+    List<Order> getFormList(String userId,boolean flag);
+    
+    boolean delForm(String userId);
 }

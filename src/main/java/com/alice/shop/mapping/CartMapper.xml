@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.alice.shop.dao.CartMapper" >
-  <resultMap id="BaseResultMap" type="com.alice.shop.bean.Cart" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="commodityId" property="commodityid" jdbcType="INTEGER" />
-    <result column="commodityCount" property="commoditycount" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
+  <resultMap id="BaseResultMap" type="com.alice.shop.bean.Cart">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="commodityid" jdbcType="VARCHAR" property="commodityid" />
+    <result column="commoditycount" jdbcType="INTEGER" property="commoditycount" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, commodityId, commodityCount, userid
+    id, commodityid, commoditycount, userid
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from cart
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from cart
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Shop.cart
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.alice.shop.bean.Cart" >
-    insert into cart (id, commodityId, commodityCount, 
+    insert into cart (id, commodityid, commoditycount, 
       userid)
-    values (#{id,jdbcType=INTEGER}, #{commodityid,jdbcType=INTEGER}, #{commoditycount,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER})
+    values (#{id,jdbcType=VARCHAR}, #{commodityid,jdbcType=VARCHAR}, #{commoditycount,jdbcType=INTEGER}, 
+      #{userid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.alice.shop.bean.Cart" >
     insert into cart
@@ -33,10 +33,10 @@
         id,
       </if>
       <if test="commodityid != null" >
-        commodityId,
+        commodityid,
       </if>
       <if test="commoditycount != null" >
-        commodityCount,
+        commoditycount,
       </if>
       <if test="userid != null" >
         userid,
@@ -44,16 +44,16 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="commodityid != null" >
-        #{commodityid,jdbcType=INTEGER},
+        #{commodityid,jdbcType=VARCHAR},
       </if>
       <if test="commoditycount != null" >
         #{commoditycount,jdbcType=INTEGER},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+        #{userid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -61,44 +61,48 @@
     update cart
     <set >
       <if test="commoditycount != null" >
-        commodityCount = #{commoditycount,jdbcType=INTEGER},
+        commoditycount = #{commoditycount,jdbcType=INTEGER},
       </if>
     </set>
     where 1=1
     <if test="id!=null">
-    	and id = #{id,jdbcType=INTEGER}
+    	and id = #{id,jdbcType=VARCHAR}
     </if>
     <if test="commodityid != null" >
-        and commodityId = #{commodityid,jdbcType=INTEGER}
+        and commodityid = #{commodityid,jdbcType=VARCHAR}
       </if>
     <if test="userid != null" >
-        and userid = #{userid,jdbcType=INTEGER}
+        and userid = #{userid,jdbcType=VARCHAR}
       </if>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.alice.shop.bean.Cart" >
     update cart
-    set commodityId = #{commodityid,jdbcType=INTEGER},
-      commodityCount = #{commoditycount,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set commodityid = #{commodityid,jdbcType=VARCHAR},
+      commoditycount = #{commoditycount,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="queryforOrder" parameterType="com.alice.shop.bean.Cart" resultType="java.util.HashMap">
   	select * from cart 
   	where 1=1 
   	<if test="userid!=null">
-  		and userid = #{userid,jdbcType=INTEGER}
+  		and userid = #{userid,jdbcType=VARCHAR}
   	</if>
   	<if test="commodityid!=null">
-  		and commodityId = #{commodityid,jdbcType=INTEGER}
+  		and commodityid = #{commodityid,jdbcType=VARCHAR}
   	</if>
   </select>
-  <delete id="deleteOrderByuserId" parameterType="java.lang.Integer">
+  <delete id="deleteOrderByuserId" parameterType="java.lang.String">
   	delete from 
   	cart
-  	where userid=#{userid,jdbcType=INTEGER}
+  	where userid=#{userid,jdbcType=VARCHAR}
   </delete>
-  <select id="queryForOrder" parameterType="java.lang.Integer" resultType="com.alice.shop.bean.Cart">
+  <select id="queryForOrder" parameterType="java.lang.String" resultType="com.alice.shop.bean.Cart">
   	select * from cart 
-  	where userid=#{userId,jdbcType=INTEGER}
+  	where userid=#{userid,jdbcType=VARCHAR}
   </select>
+  <delete id="delOrderbyComId" parameterType="java.lang.String">
+  	delete from cart
+  	where commodityid = #{commodityId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

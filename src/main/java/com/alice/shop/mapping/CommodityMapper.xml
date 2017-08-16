@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.alice.shop.dao.CommodityMapper" >
-  <resultMap id="BaseResultMap" type="com.alice.shop.bean.Commodity" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="REAL" />
-    <result column="amount" property="amount" jdbcType="INTEGER" />
-    <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="com.alice.shop.bean.Commodity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.alice.shop.bean.Commodity" extends="BaseResultMap" >
-    <result column="depict" property="depict" jdbcType="LONGVARCHAR" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.alice.shop.bean.Commodity">
+    <result column="depict" jdbcType="LONGVARCHAR" property="depict" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, price, amount, manufacturer, img, type
@@ -19,23 +19,23 @@
   <sql id="Blob_Column_List" >
     depict
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from commodity
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from commodity
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.alice.shop.bean.Commodity" >
     insert into commodity (id, name, price, 
       amount, manufacturer, img, 
       type, depict)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
       #{amount,jdbcType=INTEGER}, #{manufacturer,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{depict,jdbcType=LONGVARCHAR})
   </insert>
@@ -69,7 +69,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -119,7 +119,7 @@
         depict = #{depict,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.alice.shop.bean.Commodity" >
     update commodity
@@ -130,7 +130,7 @@
       img = #{img,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       depict = #{depict,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.alice.shop.bean.Commodity" >
     update commodity
@@ -140,7 +140,7 @@
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="queryAllList" parameterType="com.alice.shop.bean.Commodity" resultType="com.alice.shop.bean.Commodity">
   	select * from commodity
@@ -170,10 +170,14 @@
   <select id="serach" parameterType="java.lang.String" resultType="com.alice.shop.bean.Commodity">
   	select * from commodity
   	where 
-  	name like concat('%',#{keyword,jdbcType=LONGVARCHAR},'%') 
+  	name like concat('%',#{keyword,jdbcType=VARCHAR},'%') 
   	union
   	(select * from commodity 
   	where 
-  	depict like concat('%',#{keyword,jdbcType=LONGVARCHAR},'%'))
+  	depict like concat('%',#{keyword,jdbcType=VARCHAR},'%'))
+  	union
+  	(select * from commodity 
+  	where 
+  	manufacturer like concat('%',#{keyword,jdbcType=VARCHAR},'%'))
   </select>
 </mapper>

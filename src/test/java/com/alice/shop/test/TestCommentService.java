@@ -18,7 +18,7 @@ public class TestCommentService {
 	
 	@Test
 	public void testGetAllList() {
-		System.out.println(JSON.toJSON(commentService.getCommentById(124522)));
+		System.out.println(JSON.toJSON(commentService.getCommentById("124522")));
 	}
 	
 }

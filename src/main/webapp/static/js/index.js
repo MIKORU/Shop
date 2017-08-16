@@ -5,8 +5,8 @@ var app = angular.module("app", []);
 
 app.controller("index", function($scope) {
 	$scope.coms = [];
-	$scope.addToCart = function(userId, comId) {
-		ajaxModule.addOrder(userId, comId);
+	$scope.addToCart = function(comId) {
+		ajaxModule.addOrder(comId);
 	}
 	$scope.showDetail = function(com) {
 		$("#detail").modal('show');
@@ -16,13 +16,12 @@ app.controller("index", function($scope) {
 			$("#detail").scope().$apply();
 		});
 	}
-
 });
 app.controller("detail", function($scope) {
 	$scope.comments = [];
-	$scope.appendComment = function(id, names, commodityID) {
+	$scope.appendComment = function(names,commodityID) {
 		if ($scope.comment) {
-			ajaxModule.addComment(id, names, commodityID, $scope.comment,
+			ajaxModule.addComment(commodityID, $scope.comment,
 					function() {
 						$scope.comments.push({
 							username : names,
@@ -38,14 +37,13 @@ var ajaxModule = {
 	getAllCom : function(cb) {
 		$.post("./getAllCom.html", cb);
 	},
-	addOrder : function(userId, commodityIds, cb) {
+	addOrder : function(commodityIds, cb) {
 		$.post("./addOrder.html", {
-			userId : userId,
 			commodityIds : commodityIds,
 			commodityCounts : "1"
 		}, function(res) {
 			console.log("addOrder.html response is " + res);
-			if (res) {
+			if (res === "true") {
 				alert("添加商品成功！");
 			} else {
 				alert("添加商品失败QAQ");
@@ -57,10 +55,8 @@ var ajaxModule = {
 			commodityId : id
 		}, cb);
 	},
-	addComment : function(id, names, commodityID, comment, cb) {
+	addComment : function(commodityID, comment, cb) {
 		$.post("./addComment.html", {
-			userId : id,
-			userName : names,
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {

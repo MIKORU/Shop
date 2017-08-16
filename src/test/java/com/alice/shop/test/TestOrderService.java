@@ -22,7 +22,7 @@ public class TestOrderService {
 	UserService userService;
 	
 	public void testInsert() {
-		int userId = 23152;
+		String userId = "23152";
 		String address = "广东省深圳市龙华新区盛世江南";
 		float totalPrice = 128;
 		String phone = "13682635486";
@@ -30,11 +30,14 @@ public class TestOrderService {
 		String orderlist = "";
 		System.out.println(orderService.addForm(userId, address, phone, totalPrice, pay, orderlist));
 	}
-	@Test
+	
 	public void testSetPaying(){
-		System.out.println(userService.setPaying(23152,451274));
+		System.out.println(userService.setPaying("23152","451274"));
 	}
 
-	
+	@Test
+	public void testdelOrder() {
+		System.out.println(orderService.delForm("5171c18c75d049e2827fdfef54bfc3d4"));
+	}
 	
 }

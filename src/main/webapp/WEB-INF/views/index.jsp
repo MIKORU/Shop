@@ -13,9 +13,6 @@
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>主页</title>
-<!-- 	<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script> -->
-<!-- 	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script
 	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
@@ -69,7 +66,7 @@
 							<p>{{com.depict}}</p>
 							<p>
 								<a href="#" class="btn btn-primary" role="button"
-									ng-click="addToCart(${id} ,com.id)">添加商品</a>
+									ng-click="addToCart(com.id)">添加商品</a>
 							</p>
 							<p>
 								<button class="btn btn-default" ng-click="showDetail(com)">
@@ -101,11 +98,12 @@
 					<p>产品描述：{{com.depict}}</p>
 					<p>产品公司：{{com.manufacturer}}</p>
 					<p>产品金额：{{com.price}}</p>
+					<p>产品数量：{{com.amount}}</p>
 					<p>
 						产品缩略图：<img ng-src={{com.img}} width=50 height=50 />
 					</p>
 					<div class="commentBody">
-						<div ng-repeat="c in comments">
+						<div ng-repeat="c in comments track by $index">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 							{{c.username}}
 							<div class="alert" role="alert">{{c.comment}}</div>
@@ -114,7 +112,7 @@
 							<label for="text"></label> <input type="text" name="text"
 								id="text" placehoder="评论内容" ng-model="comment" />
 							<button id="submit" class="btn btn-success"
-								ng-click="appendComment(${id},'${name}',com.id)">评论</button>
+								ng-click="appendComment('${name}',com.id)">评论</button>
 						</form>
 					</div>
 				</div>
@@ -123,7 +121,6 @@
 	</div>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/static/js/index.js">
-		
 	</script>
 </body>
 </html>

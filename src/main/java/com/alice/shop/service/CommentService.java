@@ -6,10 +6,10 @@ import com.alice.shop.bean.Comment;
 
 public interface CommentService {
 	
-	public boolean addComment(int userId,String userName,int commodityID,String comment);
+	public boolean addComment(String userId,String userName,String commodityID,String comment);
 	
 	public List<Comment> getComments();
 	
-	public List<Comment> getCommentById(int commodityId);
+	public List<Comment> getCommentById(String commodityId);
 	
 }

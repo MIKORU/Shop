@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.alice.shop.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.alice.shop.bean.Order" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="totalPrice" property="totalprice" jdbcType="FLOAT" />
-    <result column="pay" property="pay" jdbcType="INTEGER" />
+  <resultMap id="BaseResultMap" type="com.alice.shop.bean.Order">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="totalprice" jdbcType="REAL" property="totalprice" />
+    <result column="pay" jdbcType="INTEGER" property="pay" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.alice.shop.bean.Order" extends="BaseResultMap" >
-    <result column="orderlist" property="orderlist" jdbcType="LONGVARCHAR" />
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.alice.shop.bean.Order">
+    <result column="orderlist" jdbcType="LONGVARCHAR" property="orderlist" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, userid, address, phone, totalPrice, pay
@@ -18,23 +18,23 @@
   <sql id="Blob_Column_List" >
     orderlist
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from Shop.order
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from Shop.order
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.alice.shop.bean.Order" >
-    insert into order (id, userid, address, 
+    insert into Shop.order (id, userid, address, 
       phone, totalPrice, pay, 
       orderlist)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{totalprice,jdbcType=FLOAT}, #{pay,jdbcType=INTEGER}, 
       #{orderlist,jdbcType=LONGVARCHAR})
   </insert>
@@ -65,10 +65,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+        #{userid,jdbcType=VARCHAR},
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
@@ -91,7 +91,7 @@
     update Shop.order
     <set >
       <if test="userid != null" >
-        userid = #{userid,jdbcType=INTEGER},
+        userid = #{userid,jdbcType=VARCHAR},
       </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
@@ -109,33 +109,33 @@
         orderlist = #{orderlist,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.alice.shop.bean.Order" >
-    update order
-    set userid = #{userid,jdbcType=INTEGER},
+    update Shop.order
+    set userid = #{userid,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       totalPrice = #{totalprice,jdbcType=FLOAT},
       pay = #{pay,jdbcType=INTEGER},
       orderlist = #{orderlist,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.alice.shop.bean.Order" >
-    update order
-    set userid = #{userid,jdbcType=INTEGER},
+    update Shop.order
+    set userid = #{userid,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       totalPrice = #{totalprice,jdbcType=FLOAT},
       pay = #{pay,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="getList" parameterType="com.alice.shop.bean.Order" resultType="com.alice.shop.bean.Order">
   	select *
   	from shop.order
   	where 1=1 
   	<if test="userid!=null">
-  		and userid = #{userid,jdbcType=INTEGER}
+  		and userid = #{userid,jdbcType=VARCHAR}
   	</if>
   	<if test="address!=null">
   		and address = #{address,jdbcType=VARCHAR}

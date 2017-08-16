@@ -1,28 +1,28 @@
 package com.alice.shop.bean;
 
 public class Cart {
-    private Integer id;
+    private String id;
 
-    private Integer commodityid;
+    private String commodityid;
 
     private Integer commoditycount;
 
-    private Integer userid;
+    private String userid;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
-    public Integer getCommodityid() {
+    public String getCommodityid() {
         return commodityid;
     }
 
-    public void setCommodityid(Integer commodityid) {
-        this.commodityid = commodityid;
+    public void setCommodityid(String commodityid) {
+        this.commodityid = commodityid == null ? null : commodityid.trim();
     }
 
     public Integer getCommoditycount() {
@@ -33,11 +33,11 @@ public class Cart {
         this.commoditycount = commoditycount;
     }
 
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
     }
 }

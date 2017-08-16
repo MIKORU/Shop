@@ -83,7 +83,6 @@
   			<div class="clearfix">
 				<p>总金额：{{sum}}</p>
   			</div>
-  			<input type="hidden" value="${id}" class="form-control" id="userId">
   			<br>
   			<label  class="clearfix">
   				输入用户地址

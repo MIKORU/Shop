@@ -51,7 +51,6 @@ app.controller("types", function($scope) {
 			} else {
 				alert("创建失败");
 			}
-			;
 		});
 	};
 });
@@ -63,13 +62,17 @@ app.controller("pros", function($scope) {
 	$scope.coms = [];
 	$scope.removePro = function(id) {
 		ajaxModule.delPro(id, function(res) {
-			if (res) {
+			if (res == "true") {
 				$("#tab2").click();
 			} else {
-				alert("删除成功");
+				alert("删除失败");
 			}
 		});
 	};
+	$scope.editPro = function(id){
+		$("#myLabel").modal('show');
+//		$("#myLabel").scope().commodity
+	}
 });
 app.controller("select", function($scope) {
 	$scope.types = [];
@@ -90,14 +93,34 @@ $("#submit").click(function() {
 		img : $("#img").val(),
 		type : $("#select").val()
 	}, function(res) {
-		if (res) {
+		if (res == "true") {
 			$('#myModal').modal('hide');
+			window.location.reload();
 			$("#tab2").click();
 		} else {
-			alert("添加成功");
+			alert("添加失败");
 			$('#myModal').modal('hide')
 		}
-		;
+	});
+});
+$("#edit").click(function() {
+	ajaxModule.editPro({
+		name : $("#name").val(),
+		depict : $("#depict").val(),
+		price : $("#price").val(),
+		amount : $("#amount").val(),
+		manufacturer : $("#manufacturer").val(),
+		img : $("#img").val(),
+		type : $("#select").val()
+	}, function(res) {
+		if (res == "true") {
+			$('#myModal').modal('hide');
+			window.location.reload();
+			$("#tab2").click();
+		} else {
+			alert("修改失败");
+			$('#myModal').modal('hide')
+		}
 	});
 });
 
@@ -184,6 +207,9 @@ var ajaxModule = function() {
 			$.post("./getCommentById.html", {
 				commodityId : id
 			}, callback);
+		},
+		editPro : function(json,callback){
+			$.post("./editPro.html", json, callback);
 		}
 	};
 }();

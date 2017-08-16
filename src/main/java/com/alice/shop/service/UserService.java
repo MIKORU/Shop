@@ -10,9 +10,9 @@ public interface UserService {
     
     boolean login(String name,String password);
     
-    boolean setPaying(int userId,int orderid);
+    boolean setPaying(String userId,String orderid);
     
-    public User getInfo( int userId );
+    public User getInfo( String userId );
     
     public boolean updateInfo(String userId, String name,String  password, String defaultAddress, String defaultPhone, String mail);
     

@@ -5,8 +5,8 @@
 var app = angular.module("app", []);
 app.controller("groups", function($scope) {
 	$scope.groups = {};
-	$scope.addToCart = function(userId,comId) {
-		ajaxModule.addOrder(userId, comId);
+	$scope.addToCart = function(comId) {
+		ajaxModule.addOrder(comId);
 	};
 	$scope.showDetail = function(com) {
 		$("#detail").modal('show');
@@ -21,9 +21,9 @@ app.controller("groups", function($scope) {
 
 app.controller("detail", function($scope) {
 	$scope.coments = {};
-	$scope.appendComment = function(id,names,commodityID) {
+	$scope.appendComment = function(names,commodityID) {
 		if ($scope.comment) {
-			ajaxModule.addComment(id,names,commodityID, $scope.comment, function() {
+			ajaxModule.addComment(names,commodityID, $scope.comment, function() {
 				$scope.comments.push({
 					username : names,
 					comment : $scope.comment
@@ -43,9 +43,11 @@ function updateIndex() {
 function bind() {
 	$("#search").on("click",function() {
 		ajaxModule.search($("#keyword").val(), function(res) {
-			var result = util.groupByType(res);
-			$("#groups").scope().groups = result;
-			$("#groups").scope().$apply();
+			if(res){
+				var result = util.groupByType(res);
+				$("#groups").scope().groups = result;
+				$("#groups").scope().$apply();
+			}
 		});
 	});
 }
@@ -64,14 +66,13 @@ var ajaxModule = {
 	getAllCom : function(cb) {
 		$.post("./getAllCom.html", cb);
 	},
-	addOrder : function(userId, commodityIds, cb) {
+	addOrder : function(commodityIds, cb) {
 		$.post("./addOrder.html", {
-			userId : userId,
 			commodityIds : commodityIds,
 			commodityCounts : "1"
 		}, function(res) {
 			console.log("addOrder.html response is " + res);
-			if (res) {
+			if (res == "true") {
 				alert("添加成功");
 			} else {
 				alert("添加失败QAQ");
@@ -88,9 +89,8 @@ var ajaxModule = {
 			commodityId : id
 		}, cb);
 	},
-	addComment : function(id,names,commodityID, comment, cb) {
+	addComment : function(names,commodityID, comment, cb) {
 		$.post("./addComment.html", {
-			userId : id,
 			userName : names,
 			commodityID : commodityID,
 			comment : comment

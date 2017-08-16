@@ -1,13 +1,13 @@
 package com.alice.shop.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.alice.shop.service.CartService;
 import com.alice.shop.service.OrderService;
@@ -31,16 +31,15 @@ public class OrderController {
 	@RequestMapping(value="getFormList", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFormList(HttpServletRequest request) {
-		int userid = Integer.parseInt(request.getParameter("userId"));
+		String userid = request.getParameter("userId");
 		return JSONArray.fromObject( orderService.getFormList(userid )) ;
 	}
 	
 	@RequestMapping(value="pay", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean setPaying(HttpServletRequest request) {
-		int userId = Integer.parseInt( request.getParameter("userId") );
-		String orderID = request.getParameter("orderId");
-		int orderId = Integer.parseInt( request.getParameter("orderId") );
+		String userId = request.getParameter("userId") ;
+		String orderId = request.getParameter("orderId");
 		return userService.setPaying(userId , orderId);
 	}
 	
@@ -53,7 +52,7 @@ public class OrderController {
 	@RequestMapping(value="addForm",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean addForm(HttpServletRequest request) {
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		String userId = (String)request.getSession().getAttribute("id");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		
@@ -66,6 +65,12 @@ public class OrderController {
 		}else {
 			return false;
 		}
+	}
+	@RequestMapping(value="delOrder",method=RequestMethod.POST)
+	@ResponseBody
+	public boolean delOrder(HttpServletRequest request) {
+		String userId = request.getParameter("userId");
+		return orderService.delForm(userId);
 	}
 	
 }

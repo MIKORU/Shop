@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.alice.shop.bean.Comment;
 import com.alice.shop.dao.CommentMapper;
 import com.alice.shop.service.CommentService;
+import com.alice.shop.util.utilUUID;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService{
@@ -16,9 +17,11 @@ public class CommentServiceImpl implements CommentService{
 	private CommentMapper comMapper;
 	
 	@Override
-	public boolean addComment(int userId, String userName, int commodityID, String comment) {
+	public boolean addComment(String userId, String userName, String commodityID, String comment) {
 		// TODO Auto-generated method stub
 		Comment com = new Comment();
+		String id = utilUUID.getUUID();
+		com.setId(id);
 		com.setComment(comment);
 		com.setCommodityid(commodityID);
 		com.setUserid(userId);
@@ -34,11 +37,12 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public List<Comment> getCommentById(int commodityId) {
+	public List<Comment> getCommentById(String commodityId) {
 		// TODO Auto-generated method stub
 		Comment com = new Comment();
 		com.setCommodityid(commodityId);
 		return comMapper.getAllList(com);
 	}
+
 
 }

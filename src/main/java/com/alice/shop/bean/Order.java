@@ -1,9 +1,9 @@
 package com.alice.shop.bean;
 
 public class Order {
-    private Integer id;
+    private String id;
 
-    private Integer userid;
+    private String userid;
 
     private String address;
 
@@ -15,20 +15,20 @@ public class Order {
 
     private String orderlist;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
     }
 
     public String getAddress() {

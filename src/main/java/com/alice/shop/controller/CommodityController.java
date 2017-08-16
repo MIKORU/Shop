@@ -34,7 +34,7 @@ public class CommodityController {
 	@RequestMapping(value="getComById", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getComById(HttpServletRequest request, HttpServletResponse response) {
-		int id = Integer.parseInt( request.getParameter("id") );
+		String id = request.getParameter("id") ;
 		return JSONArray.fromObject( commodityService.getComById( id ) );
 	}
 	@RequestMapping(value="addPro", method=RequestMethod.POST)
@@ -45,19 +45,39 @@ public class CommodityController {
 		String depict = request.getParameter("depict");
 		float price = Float.parseFloat( request.getParameter("price") );
 		int amount = Integer.parseInt( request.getParameter("amount") );
-		String manufacturerString = request.getParameter("manufacturer");
+		String manufacturer= request.getParameter("manufacturer");
 		String img = request.getParameter("img");
 		String type = request.getParameter("type");
 		
-		return commodityService.addPro( name,  depict,  price,  amount,  manufacturerString,  img,  type);
+		return commodityService.addPro( name,  depict,  price,  amount,  manufacturer,  img,  type);
 	}
 	
 	@RequestMapping(value="delPro", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean delPro(HttpServletRequest request, HttpServletResponse response) {
 		//String name, String depict, int price, int amount, String manufacturer, String img, String type
-		int id = Integer.parseInt(request.getParameter("id") );
+		String id = request.getParameter("id");
 		return commodityService.delPro( id );
+	}
+	@RequestMapping(value="getComCount", method=RequestMethod.POST)
+	@ResponseBody
+	public int getComCount(HttpServletRequest request) {
+		String commodityId = request.getParameter("commodityId");
+		return commodityService.getComCount(commodityId);
+	}
+	@RequestMapping(value="editPro", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean editPro(HttpServletRequest request, HttpServletResponse response) {
+		//String name, String depict, int price, int amount, String manufacturer, String img, String type
+		String id = request.getParameter("commodityId");
+		String name = request.getParameter("name");
+		String depict = request.getParameter("depict");
+		float price = Float.parseFloat( request.getParameter("price") );
+		int amount = Integer.parseInt( request.getParameter("amount") );
+		String manufacturer = request.getParameter("manufacturer");
+		String img = request.getParameter("img");
+		String type = request.getParameter("type");
+		return commodityService.editPro(id, name, depict, price, amount, manufacturer, img, type);
 	}
 	
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import com.alice.shop.bean.Commodity;
 
 public interface CommodityMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Commodity record);
 
     int insertSelective(Commodity record);
 
-    Commodity selectByPrimaryKey(Integer id);
+    Commodity selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Commodity record);
 

@@ -7,13 +7,13 @@ import com.alice.shop.bean.Cart;
 import com.alice.shop.bean.Order;
 
 public interface CartMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Cart record);
 
     int insertSelective(Cart record);
 
-    Cart selectByPrimaryKey(Integer id);
+    Cart selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Cart record);
 
@@ -21,7 +21,9 @@ public interface CartMapper {
     
     List<Map<String ,Object> > queryforOrder(Cart cart);
     
-    List<Order> queryForOrder(int userId);
+    List<Order> queryForOrder(String userId);
     
-    int deleteOrderByuserId(int userId);
+    int deleteOrderByuserId(String userId);
+    
+    int delOrderbyComId(String commodityId);
 }

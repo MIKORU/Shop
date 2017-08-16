@@ -18,11 +18,11 @@ public class TestCartService {
 	private CartService cartService;
 	
 	public void TestgetOrderList() {
-		System.out.println(JSON.toJSON(cartService.getOrderList(123456)));
+		System.out.println(JSON.toJSON(cartService.getOrderList("123456")));
 	}
 	
 	@Test
 	public void testdelOrder() {
-		System.out.println(cartService.delOrder(23152));
+		System.out.println(cartService.delOrder("23152"));
 	}
 }

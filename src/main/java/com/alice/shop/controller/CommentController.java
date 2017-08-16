@@ -23,9 +23,7 @@ public class CommentController {
 	@ResponseBody
 	public JSONArray getCommentById(HttpServletRequest request, HttpServletResponse response) {
 		String commodityId = request.getParameter("commodityId");
-		if(!StringUtils.isBlank(commodityId)) {
-			return JSONArray.fromObject(comService.getCommentById(Integer.parseInt(commodityId)));
-		}else return null;
+		return JSONArray.fromObject(comService.getCommentById(commodityId));
 	}
 	
 	@RequestMapping(value="getComments", method=RequestMethod.POST)
@@ -33,16 +31,24 @@ public class CommentController {
 	public JSONArray getComments(HttpServletRequest request, HttpServletResponse response) {
 		return JSONArray.fromObject( comService.getComments( ) );
 	}
-	
+	/**
+	 * 
+	 * @Title: addComment   
+	 * @Description: 增加评论功能
+	 * @param: @param request
+	 * @param: @param response
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="addComment",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean addComment(HttpServletRequest request,HttpServletResponse response) {
-		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
+		String userId = (String) request.getSession().getAttribute("id");
+		String userName = (String) request.getSession().getAttribute("name");
 		String commodityID = request.getParameter("commodityID");
 		String comment = request.getParameter("comment");
-		if(StringUtils.isBlank(userId)&& StringUtils.isBlank(commodityID)) return false;
-		return comService.addComment(Integer.parseInt(userId), userName, Integer.parseInt(commodityID), comment);
+		return comService.addComment(userId, userName, commodityID, comment);
 	}
 	
 }

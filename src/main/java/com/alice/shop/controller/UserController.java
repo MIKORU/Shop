@@ -48,7 +48,7 @@ public class UserController {
 	@RequestMapping(value="getInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONObject getInfo(HttpServletRequest request) {
-		int userId = Integer.parseInt( request.getParameter("userId") );
+		String userId = request.getParameter("userId");
 		return JSONObject.fromObject( userService.getInfo( userId ) );
 	}
 	

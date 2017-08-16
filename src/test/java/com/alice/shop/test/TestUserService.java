@@ -29,16 +29,17 @@ public class TestUserService {
 	@Autowired
 	private OrderService orderService;
 	
-	
+	@Test
 	public void testQueryAllList() {
 		List<Order> orders = orderService.getFormAllList();
 		System.out.println(JSON.toJSON(orders));
 	}
+	
 	public void testgetUser() {
-		User user = userService.getInfo(23152);
+		User user = userService.getInfo("4569b51234de41479c61131908acb5ee");
 		System.out.println(JSON.toJSON(user));
 	}
-	@Test
+	
 	public void testgetPassword() {
 		String password = "123";
 		String name="admin";
@@ -46,22 +47,22 @@ public class TestUserService {
 	}
 	
 	public void testaddOrder() {
-		int userid=23152;
-		int commodityid=45125632;
+		String userid="23152";
+		String commodityid="45125632";
 		int commodityCount=10;
 		System.out.println(cartService.addOrder(userid, commodityid, commodityCount));
 	}
 	public void testcheckLogin() {
-		int userid=23152;
+		String userid="23152";
 		System.out.println(cartService.getOrderList(userid));
 	}
 	
 	public void testdelOrder() {
-		int userid=23152;
+		String userid="23152";
 		System.out.println(cartService.delOrder(userid));
 	}
 	
 	public void testgetList() {
-		System.out.println(JSON.toJSON(orderService.getFormList(48435488)));
+		System.out.println(JSON.toJSON(orderService.getFormList("48435488")));
 	}
 }

@@ -21,7 +21,7 @@ $("#submit").click(function(ev) {
 	}), function(res) {
 		if (res == "true") {
 			alert("更新成功");
-			location.reload();
+			window.location.reload();
 		} else {
 			alert("更新失败");
 		}

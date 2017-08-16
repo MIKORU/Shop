@@ -14,6 +14,7 @@ import com.alice.shop.dao.CartMapper;
 import com.alice.shop.dao.OrderMapper;
 import com.alice.shop.dao.UserMapper;
 import com.alice.shop.service.UserService;
+import com.alice.shop.util.utilUUID;
 
 import net.sf.json.JSONArray;
 
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		User user = new User();
+		String id = utilUUID.getUUID();
+		user.setId(id);
 		user.setName(name);
 		user.setAddress(defaultAddress);
 		user.setPassword(password);
@@ -53,7 +56,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean setPaying(int userId, int orderid) {
+	public boolean setPaying(String userId, String orderid) {
 		// TODO Auto-generated method stub
 		User user = userMapper.selectByPrimaryKey(userId);
 		Order order = orderMapper.selectByPrimaryKey(orderid);
@@ -73,7 +76,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getInfo(int userId) {
+	public User getInfo(String userId) {
 		// TODO Auto-generated method stub
 		User user = userMapper.selectByPrimaryKey(userId);
 		return user;
@@ -84,7 +87,7 @@ public class UserServiceImpl implements UserService{
 			String mail) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setId(Integer.parseInt(userId));
+		user.setId(userId);
 		user.setName(name);
 		user.setAddress(defaultAddress);
 		user.setPassword(password);

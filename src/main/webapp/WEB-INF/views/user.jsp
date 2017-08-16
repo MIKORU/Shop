@@ -77,6 +77,7 @@
 					<p>默认收货地址:{{user.address}}</p>
 					<p>默认手机:{{user.phone}}</p>
 					<p>用户邮箱:{{user.mail}}</p>
+					<p>金额: {{user.money}}RMB</p>
 				</div>
 				<div ng-show="edit">
 					<form>

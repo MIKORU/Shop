@@ -5,13 +5,13 @@ import java.util.List;
 import com.alice.shop.bean.Comment;
 
 public interface CommentMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Comment record);
 
     int insertSelective(Comment record);
 
-    Comment selectByPrimaryKey(Integer id);
+    Comment selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Comment record);
 

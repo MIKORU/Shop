@@ -6,10 +6,12 @@ import com.alice.shop.bean.Order;
 
 public interface CartService {
 	
-	boolean addOrder(int userId,int commodityId,int commodityCount);
+	boolean addOrder(String userId,String commodityId,int commodityCount);
 	
-	List<Order> getOrderList(int userId);
+	List<Order> getOrderList(String userId);
 	
-	boolean delOrder(int userId);
+	boolean delOrder(String userId);
+	
+	boolean delOrderbyComId(String commodityId);
 	
 }

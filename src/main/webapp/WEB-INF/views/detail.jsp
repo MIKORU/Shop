@@ -88,7 +88,7 @@
 						<p>
 							产品图片：<img ng-src={{com.img}} width=50 height=50 />
 						</p>
-						<button class="btn btn-default" ng-click="addToCart(${id},com.id)">
+						<button class="btn btn-default" ng-click="addToCart(com.id)">
 							添加到购物车</button>
 						<button class="btn btn-default" ng-click="showDetail(com)">
 							查看详细</button>
@@ -117,7 +117,8 @@
 					<p>产品名字:{{com.name}}</p>
 					<p>产品描述:{{com.depict}}</p>
 					<p>产品公司:{{com.manufacturer}}</p>
-					<p>æ产品金额:{{com.price}}</p>
+					<p>产品金额:{{com.price}}</p>
+					<p>产品数量：{{com.amount}}</p>
 					<p>
 						产品缩略图:<img ng-src={{com.img}} width=50 height=50 />
 					</p>
@@ -132,7 +133,7 @@
 							<input type="text" name="text"
 								id="text" placehoder="评论内容" ng-model="comment" />
 							<button id="submit" class="btn btn-success"
-								ng-click="appendComment(${id},${name},com.id)">评论</button>
+								ng-click="appendComment('${name}',com.id)">评论</button>
 						</form>
 					</div>
 				</div>
