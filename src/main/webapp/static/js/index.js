@@ -14,6 +14,7 @@ app.controller("index", function($scope) {
 		ajaxModule.getCommentById(com.id, function(res) {
 			$("#detail").scope().comments = JSON.parse(res);
 			$("#detail").scope().$apply();
+			
 		});
 	}
 });
@@ -27,12 +28,15 @@ app.controller("detail", function($scope) {
 							username : names,
 							comment : $scope.comment
 						});
+						clear();
 						$scope.$apply();
 					});
 		}
 	}
 });
-
+function clear(){
+	$("#text").val("");
+}
 var ajaxModule = {
 	getAllCom : function(cb) {
 		$.post("./getAllCom.html", cb);

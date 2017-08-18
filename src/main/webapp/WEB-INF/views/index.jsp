@@ -25,7 +25,6 @@
 <style>
 .com {
 	margin: 20px;
-	height: 240px;
 	overflow: hidden;
 }
 
@@ -35,6 +34,9 @@
 
 #index {
 	margin-top: 100px;
+}
+.caption{
+	width: 220px;
 }
 </style>
 <body ng-app="app">
@@ -60,8 +62,8 @@
 				<div class="panel-body">
 					<div class="thumbnail pull-left com"
 						ng-repeat="com in coms track by $index">
-						<img ng-src="{{com.img}}" width="40" height="40">
-						<div class="caption">
+						<img ng-src="{{com.img}}" width="140" height="40">
+						<div class="caption" >
 							<h3>{{com.name}}</h3>
 							<p>{{com.depict}}</p>
 							<p>
@@ -100,7 +102,7 @@
 					<p>产品金额：{{com.price}}</p>
 					<p>产品数量：{{com.amount}}</p>
 					<p>
-						产品缩略图：<img ng-src={{com.img}} width=50 height=50 />
+						产品缩略图：<img ng-src={{com.img}} width=300 height=250 />
 					</p>
 					<div class="commentBody">
 						<div ng-repeat="c in comments track by $index">
@@ -109,7 +111,8 @@
 							<div class="alert" role="alert">{{c.comment}}</div>
 						</div>
 						<form>
-							<label for="text"></label> <input type="text" name="text"
+							<label for="text"></label> 
+							<input type="text" name="text"
 								id="text" placehoder="评论内容" ng-model="comment" />
 							<button id="submit" class="btn btn-success"
 								ng-click="appendComment('${name}',com.id)">评论</button>

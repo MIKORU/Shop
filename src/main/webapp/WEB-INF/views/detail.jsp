@@ -42,6 +42,9 @@
 .commentBody {
 	max-heiht: 200px;
 }
+#com_panel{
+	width: 260px;
+}
 </style>
 </head>
 <body ng-app="app">
@@ -76,7 +79,7 @@
 					<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <span
 						class="label label-default"> {{coms[0].type}} </span>
 				</h3>
-				<div class="panel panel-default pull-left commodity"
+				<div class="panel panel-default pull-left commodity" id="com_panel"
 					ng-repeat="com in coms track by $index">
 					<div class="panel-heading panel-primary">
 						<p>{{com.name}}</p>

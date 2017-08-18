@@ -32,6 +32,7 @@
 <style>
 .commodity {
 	margin: 10px;
+	width: 260px;
 }
 
 #cart {

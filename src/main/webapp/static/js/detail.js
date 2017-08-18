@@ -28,11 +28,15 @@ app.controller("detail", function($scope) {
 					username : names,
 					comment : $scope.comment
 				});
+				clear();
 				$scope.$apply();
 			});
 		}
 	}
 });
+function clear(){
+	$("#text").val("");
+}
 function updateIndex() {
 	ajaxModule.getAllCom(function(res) {
 		var result = util.groupByType(res);
