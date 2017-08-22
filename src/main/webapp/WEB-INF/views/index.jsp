@@ -52,7 +52,6 @@
 			<a href="./cart" class="btn btn-default" role="button">购物车</a>
 		</div>
 	</div>
-	</div>
 	<div class="modal fade" id="detail" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" ng-controller="detail">
 		<div class="modal-dialog" role="document">
