@@ -8,7 +8,7 @@ $(function(){
 function login(){
 	$("#submit").on("click",function() {
 		$.ajax({
-			url:"./logins.html",
+			url:"./checkin",
 			type:"POST",
 			data:{
 				username : $("#user").val(),
@@ -18,7 +18,7 @@ function login(){
 			
 		}).done(function(res){
 			if(res=="true"){
-				location.href="index.html"
+				location.href="index"
 			}else{
 				alert("登陆失败");
 			}

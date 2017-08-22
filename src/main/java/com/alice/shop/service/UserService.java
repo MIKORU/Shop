@@ -22,4 +22,6 @@ public interface UserService {
     
     public int getRole(String username);
     
+    public User getUserbyName(String username);
+    
 }

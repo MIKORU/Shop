@@ -14,6 +14,7 @@ app.controller("index", function($scope) {
 		ajaxModule.getCommentById(com.id, function(res) {
 			$("#detail").scope().comments = JSON.parse(res);
 			$("#detail").scope().$apply();
+			
 		});
 	}
 });
@@ -27,22 +28,25 @@ app.controller("detail", function($scope) {
 							username : names,
 							comment : $scope.comment
 						});
+						clear();
 						$scope.$apply();
 					});
 		}
 	}
 });
-
+function clear(){
+	$("#text").val("");
+}
 var ajaxModule = {
 	getAllCom : function(cb) {
-		$.post("./getAllCom.html", cb);
+		$.post("./getAllCom", cb);
 	},
 	addOrder : function(commodityIds, cb) {
-		$.post("./addOrder.html", {
+		$.post("./addOrder", {
 			commodityIds : commodityIds,
 			commodityCounts : "1"
 		}, function(res) {
-			console.log("addOrder.html response is " + res);
+			console.log("addOrder response is " + res);
 			if (res === "true") {
 				alert("添加商品成功！");
 			} else {
@@ -51,12 +55,12 @@ var ajaxModule = {
 		});
 	},
 	getCommentById : function(id, cb) {
-		$.post("./getCommentById.html", {
+		$.post("./getCommentById", {
 			commodityId : id
 		}, cb);
 	},
 	addComment : function(commodityID, comment, cb) {
-		$.post("./addComment.html", {
+		$.post("./addComment", {
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {

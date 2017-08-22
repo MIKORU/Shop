@@ -28,11 +28,15 @@ app.controller("detail", function($scope) {
 					username : names,
 					comment : $scope.comment
 				});
+				clear();
 				$scope.$apply();
 			});
 		}
 	}
 });
+function clear(){
+	$("#text").val("");
+}
 function updateIndex() {
 	ajaxModule.getAllCom(function(res) {
 		var result = util.groupByType(res);
@@ -64,14 +68,14 @@ var util = {
 }
 var ajaxModule = {
 	getAllCom : function(cb) {
-		$.post("./getAllCom.html", cb);
+		$.post("./getAllCom", cb);
 	},
 	addOrder : function(commodityIds, cb) {
-		$.post("./addOrder.html", {
+		$.post("./addOrder", {
 			commodityIds : commodityIds,
 			commodityCounts : "1"
 		}, function(res) {
-			console.log("addOrder.html response is " + res);
+			console.log("addOrder response is " + res);
 			if (res == "true") {
 				alert("添加成功");
 			} else {
@@ -80,17 +84,17 @@ var ajaxModule = {
 		});
 	},
 	search : function(keyword, cb) {
-		$.post("./search.html", {
+		$.post("./search", {
 			keyword : keyword
 		}, cb);
 	},
 	getCommentById : function(id, cb) {
-		$.post("./getCommentById.html", {
+		$.post("./getCommentById", {
 			commodityId : id
 		}, cb);
 	},
 	addComment : function(names,commodityID, comment, cb) {
-		$.post("./addComment.html", {
+		$.post("./addComment", {
 			userName : names,
 			commodityID : commodityID,
 			comment : comment

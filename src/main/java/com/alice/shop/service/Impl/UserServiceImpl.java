@@ -131,4 +131,16 @@ public class UserServiceImpl implements UserService{
 		}
 		return 0;
 	}
+
+	@Override
+	public User getUserbyName(String username) {
+		// TODO Auto-generated method stub
+		List<Map<String , Object> > users = userMapper.queryforUser(username);
+		for(Map<String,Object> k:users) {
+			if(username.equals(k.get("name"))) {
+				return userMapper.selectByPrimaryKey((String)k.get("id"));
+			}
+		}
+		return null;
+	}
 }

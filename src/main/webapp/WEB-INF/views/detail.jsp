@@ -1,35 +1,8 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>分类页</title>
-<link rel="stylesheet" type="text/css"
-	href="./bootstrap/css/bootstrap.min.css" />
-<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
-
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<tags:template>
+<jsp:attribute name="header">
 <style>
 .commodity {
 	margin: 10px;
@@ -42,26 +15,16 @@
 .commentBody {
 	max-heiht: 200px;
 }
+#com_panel{
+	width: 260px;
+}
 </style>
 </head>
-<body ng-app="app">
-
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="row">
-				<ul class="nav navbar-nav">
-					<li><c:if test="${name!=null}">
-							<a href="###"> 欢迎【${name}】 </a>
-						</c:if></li>
-					<li><a href="./index.html">首页</a></li>
-					<li><a href="./detail.html">分类页</a></li>
-					<li><a href="./cart.html">购物车</a></li>
-					<li><a href="./list.html">列表页</a></li>
-					<li><a href="./user.html">用户信息</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+</jsp:attribute>
+<jsp:attribute name="footer">
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/detail.js"></script>
+</jsp:attribute>
+<jsp:body >
 	<div class="container content">
 		<div class="row">
 			<p>
@@ -76,7 +39,7 @@
 					<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <span
 						class="label label-default"> {{coms[0].type}} </span>
 				</h3>
-				<div class="panel panel-default pull-left commodity"
+				<div class="panel panel-default pull-left commodity" id="com_panel"
 					ng-repeat="com in coms track by $index">
 					<div class="panel-heading panel-primary">
 						<p>{{com.name}}</p>
@@ -98,7 +61,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<a href="./cart.html" class="btn btn-default" role="button">结账</a>
+			<a href="./cart" class="btn btn-default" role="button">结账</a>
 		</div>
 	</div>
 
@@ -140,29 +103,5 @@
 			</div>
 		</div>
 	</div>
-</body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/detail.js"></script>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</jsp:body>
+</tags:template>
