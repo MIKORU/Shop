@@ -1,27 +1,8 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>主页</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-</head>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<tags:template>
+<jsp:attribute name="header">
 <style>
 .com {
 	margin: 20px;
@@ -39,23 +20,11 @@
 	width: 220px;
 }
 </style>
-<body ng-app="app">
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="row">
-				<ul class="nav navbar-nav">
-					<li><c:if test="${name!=null }">
-							<a href="###"> 欢迎 【${name}】 </a>
-						</c:if></li>
-					<li><a href="./index.html">首页</a></li>
-					<li><a href="./detail.html">分类页</a></li>
-					<li><a href="./cart.html">购物车</a></li>
-					<li><a href="./list.html">订单页</a></li>
-					<li><a href="./user.html">用户信息</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+</jsp:attribute>
+<jsp:attribute name="footer">
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/index.js"></script>
+</jsp:attribute>
+<jsp:body >
 	<div class="container">
 		<div id="index" class="row" ng-controller="index">
 			<div class="panel panel-default">
@@ -80,7 +49,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<a href="./cart.html" class="btn btn-default" role="button">购物车</a>
+			<a href="./cart" class="btn btn-default" role="button">购物车</a>
 		</div>
 	</div>
 	</div>
@@ -122,8 +91,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/js/index.js">
-	</script>
-</body>
-</html>
+</jsp:body>
+</tags:template>

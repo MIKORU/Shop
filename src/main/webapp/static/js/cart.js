@@ -7,7 +7,7 @@ app.directive("commodityDirective", function() {
 		restrict : "EA",
 		scope : true,
 		link : function($scope, $el, $iattrs) {
-			$.post("./getComById.html", {
+			$.post("./getComById", {
 				id : $iattrs.id
 			}, function(res) {
 				$scope.res = JSON.parse(res)[0];
@@ -27,10 +27,9 @@ app.controller("cart", function($scope) {
 				if (e.commoditycount <= 0) {
 					e.commoditycount = 0;
 					util.delCart(e.commodityid);
-					
 				}else{
 					util.changeCart(e.commodityid,constant,function(res) {
-						console.log("addOrder.html response is " + res);
+						console.log("addOrder response is " + res);
 						if(res == "true"){
 							$scope.list[i].commoditycount += constant;
 						}else{
@@ -57,21 +56,20 @@ var util = {
 		return sum;
 	},
 	changeCart : function(commodityIds,count,cb) {
-			$.post("./addOrder.html", {
+			$.post("./addOrder", {
 				commodityIds : commodityIds,
 				commodityCounts : count
 			}, cb);
 	},
 	delCart : function(commodityIds,cb){
-		console.log("sdaaaaaa");
 		$.ajax({
-			url:"./delCart.html", 
+			url:"./delCart", 
 			type:"POST",
 			data:{
 				commodityIds : commodityIds
 			}
 		}).done(function(res){
-			console.log("delOrder.html response is " + res);
+			console.log("delCart response is " + res);
 			if(res == "true"){
 				window.location.reload();
 			}else{
@@ -82,7 +80,7 @@ var util = {
 };
 function getlist() {
 
-	$.post("./getOrderList.html", {
+	$.post("./getOrderList", {
 
 	}, function(res) {
 		$("#cart").scope().list = JSON.parse(res);
@@ -92,14 +90,14 @@ function getlist() {
 		}, 1000);
 	});
 	$("#submit").on("click", function() {
-		$.post("./addForm.html", {
+		$.post("./addForm", {
 			address : $("#address").val(),
 			phone : $("#phone").val(),
 			totalPrice : $("#cart").scope().sum,
 			orderList : JSON.stringify($("#cart").scope().list)
 		}, function(res) {
 			if (res == "true") {
-				location.href = "./list.html";
+				location.href = "./list";
 			} else {
 				alert("购买失败");
 			}

@@ -21,16 +21,18 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login.html" />
-		<property name="successUrl" value="/WEB-INF/views/index.jsp" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/403" />
 		<property name="filterChainDefinitions">
 			<value>
-				/index.html = authc
-				/checkLogin.do = anon
-				/login.do = anon
-				/logout.html = anon
-				/** = authc
+				/admin = authc
+				/cart = authc
+				/list = authc
+				/addComment = authc
+				/addOrder = authc
+				/user = authc
+				/** = anon
 			</value>
 		</property>
 	</bean>

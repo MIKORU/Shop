@@ -51,30 +51,30 @@ app.controller("form", function($scope) {
 });
 var ajaxModule = {
 	getFormList : function(userId, cb) {
-		$.post("./getFormList.html", {
+		$.post("./getFormList", {
 			userId : userId
 		}, cb);
 	},
 	pay : function(userId, orderId, cb) {
-		$.post("./pay.html", {
+		$.post("./pay", {
 			userId : userId,
 			orderId : orderId
 		}, cb);
 	},
 	getComById : function(id, cb) {
-		$.post("./getComById.html", {
+		$.post("./getComById", {
 			id : id
 		}, cb);
 	},
 	delOrder:function(id,cb){
-		$.post("./delOrder.html",{
+		$.post("./delOrder",{
 			userId:id
 		}, cb);
 	}
 }
 function init() {
 	$.ajax({
-		url : "./getcontext.html",
+		url : "./getcontext",
 		type : "POST",
 		data : {},
 		async : false

@@ -16,7 +16,7 @@ app.controller("user", function($scope) {
 });
 
 $("#submit").click(function(ev) {
-	$.post("./updateInfo.html", $.extend({}, $("#user").scope().user, {
+	$.post("./updateInfo", $.extend({}, $("#user").scope().user, {
 		userId : userId
 	}), function(res) {
 		if (res == "true") {
@@ -29,7 +29,7 @@ $("#submit").click(function(ev) {
 });
 function init() {
 	$.ajax({
-		url : "./getcontext.html",
+		url : "./getcontext",
 		type : "POST",
 		data : {},
 		async:false
@@ -43,7 +43,7 @@ function init() {
 $(function() {
 	init();
 	if (userId) {
-		$.post("./getInfo.html", {
+		$.post("./getInfo", {
 			userId : userId
 		}, function(res) {
 			var scope = $("#user").scope();

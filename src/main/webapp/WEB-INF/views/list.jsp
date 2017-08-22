@@ -1,32 +1,8 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>订单页</title>
-<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
-<script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
-
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<tags:template>
+<jsp:attribute name="header">
 <style>
 .list {
 	margin: 20px;
@@ -36,22 +12,11 @@
 	margin-top: 80px;
 }
 </style>
-</head>
-<body ng-app="app">
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<ul class="nav navbar-nav">
-				<li><c:if test="${name!=null}">
-						<a href="###"> 欢迎【${name}】 </a>
-					</c:if></li>
-				<li><a href="./index.html">首页</a></li>
-				<li><a href="./detail.html">分类页</a></li>
-				<li><a href="./cart.html">购物车</a></li>
-				<li><a href="./list.html">订单页</a></li>
-				<li><a href="./user.html">用户信息</a></li>
-			</ul>
-		</div>
-	</nav>
+</jsp:attribute>
+<jsp:attribute name="footer">
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/list.js"></script>
+</jsp:attribute>
+<jsp:body >
 	<div id="form" class="container margin80" ng-controller="form">
 		<div class="row">
 			<h1>未支付列表</h1>
@@ -139,7 +104,5 @@
 			</ul>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/static/js/list.js"></script>
-</body>
-</html>
+</jsp:body>
+</tags:template>

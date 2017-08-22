@@ -17,7 +17,7 @@
   </head>
   
   <body>
-		<form action="./upload.html" method="post" enctype="multipart/form-data">
+		<form action="./upload" method="post" enctype="multipart/form-data">
 			<input type="file" name="files" vlaue="上传文件"/>
 			<input name="file1" id="file1" size="40" type="file"/>  
 			文件2：<input name="file2" id="file2" size="40" type="file"/>  

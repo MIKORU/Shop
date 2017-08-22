@@ -1,5 +1,7 @@
 package com.alice.shop.realm;
 
+import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -34,15 +36,10 @@ public class ShiroUserRealm extends AuthorizingRealm{
 		
 		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
 		
-		List<Role> roleList = userService.getRole(currentUsername);
+		int roles = userService.getRole(currentUsername);
 		
-		if(roleList != null && roleList.size() > 0) {
-			for(Role role:roleList) {
-				if(role.getRole() != null) {
-					simpleAuthorInfo.addRole(role.getRole());
-				}
-			}
-		}
+		simpleAuthorInfo.addRole(String.valueOf(roles));
+
 		
 		return simpleAuthorInfo;
 	}
@@ -54,10 +51,9 @@ public class ShiroUserRealm extends AuthorizingRealm{
 		UsernamePasswordToken usertoken = (UsernamePasswordToken) token;
 		
 		User user = userService.getUserbyName(usertoken.getUsername());
-		CipherUtil cipher= new CipherUtil();
 		if(user!=null) {
 			return new SimpleAuthenticationInfo(user.getName(),
-					cipher.generatePassword(user.getPassword()),
+					user.getPassword(),
 					getName());
 		}else {
 			throw new AuthenticationException();

@@ -7,7 +7,7 @@ app.directive("commodityDirective", function() {
 		restrict : "EA",
 		scope : true,
 		link : function($scope, $el, $iattrs) {
-			$.post("./getComById.html", {
+			$.post("./getComById", {
 				id : $iattrs.id
 			}, function(res) {
 				$scope.res = JSON.parse(res)[0];
@@ -71,9 +71,15 @@ app.controller("pros", function($scope) {
 	};
 	$scope.editPro = function(id){
 		$("#myLabel").modal('show');
-//		$("#myLabel").scope().commodity
+		$.post("./getComById", {
+			id : id
+		}, function(res) {
+			$scope.edit_commodity = JSON.parse(res)[0];
+			$scope.$apply();
+		});
 	}
 });
+
 app.controller("select", function($scope) {
 	$scope.types = [];
 })
@@ -104,7 +110,9 @@ $("#submit").click(function() {
 	});
 });
 $("#edit").click(function() {
+	console.log($("#comid").val());
 	ajaxModule.editPro({
+		commodityId: $("#comid").val(),
 		name : $("#name").val(),
 		depict : $("#depict").val(),
 		price : $("#price").val(),
@@ -138,7 +146,7 @@ $("#upload").change(function(ev) {
 	formData = new FormData();
 	formData.append("name", ev.target.files[0]);
 	var oReq = new XMLHttpRequest();
-	oReq.open("POST", "./upload.html");
+	oReq.open("POST", "./upload");
 	oReq.onreadystatechange = function() {
 		if (oReq.readyState === 4) {
 			$("#img").val(oReq.responseText);
@@ -154,39 +162,39 @@ $(function() {
 var ajaxModule = function() {
 	return {
 		getFormAllList : function(el) {
-			$.post("./getFormAllList.html", function(res) {
+			$.post("./getFormAllList", function(res) {
 				$(el).scope().orderforms = JSON.parse(res);
 				$(el).scope().$apply();
 			})
 		},
 		getTypes : function(el) {
-			$.post("./getTypes.html", function(res) {
+			$.post("./getTypes", function(res) {
 				$(el).scope().types = JSON.parse(res);
 				$(el).scope().$apply();
 			})
 		},
 		addType : function(type, callback) {
-			$.post("./addType.html", {
+			$.post("./addType", {
 				type : type
 			}, function(res) {
 				callback(res);
 			});
 		},
 		delType : function(id, callback) {
-			$.post("./delType.html", {
+			$.post("./delType", {
 				id : id
 			}, function(res) {
 				callback(res);
 			});
 		},
 		getAllCom : function(el) {
-			$.post("./getAllCom.html", function(res) {
+			$.post("./getAllCom", function(res) {
 				$(el).scope().coms = JSON.parse(res);
 				$(el).scope().$apply();
 			});
 		},
 		delPro : function(id, callback) {
-			$.post("./delPro.html", {
+			$.post("./delPro", {
 				id : id
 			}, function(res) {
 				callback(res);
@@ -194,22 +202,22 @@ var ajaxModule = function() {
 
 		},
 		addPro : function(json, callback) {
-			$.post("./addPro.html", json, function(res) {
+			$.post("./addPro", json, function(res) {
 				callback(res);
 			});
 		},
 		getComments : function(callback) {
-			$.post("./getComments.html", function(res) {
+			$.post("./getComments", function(res) {
 				callback(res);
 			});
 		},
 		getCommentById : function(id, callback) {
-			$.post("./getCommentById.html", {
+			$.post("./getCommentById", {
 				commodityId : id
 			}, callback);
 		},
 		editPro : function(json,callback){
-			$.post("./editPro.html", json, callback);
+			$.post("./editPro", json, callback);
 		}
 	};
 }();
