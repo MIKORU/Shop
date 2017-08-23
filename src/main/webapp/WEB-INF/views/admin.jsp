@@ -17,7 +17,7 @@
 }
 
 #myTabs {
-	margin-top: 100px;
+	margin-top: 20px;
 }
 </style>
 </jsp:attribute>
@@ -67,7 +67,7 @@
 											查看订单详细信息 </a></th>
 								</tr>
 								<tr>
-							
+								
 								</tbody>
 						</table>
 						<div class="row">
@@ -115,7 +115,7 @@
 						<br>
 						<p>
 							<button type="button" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#myModal">创建新商品</button>
+									data-toggle="modal" ng-click="addPro(com.id)">创建新商品</button>
 						</p>
 						<ul class="list-group">
 							<li class="list-group-item" ng-repeat="com in coms">
@@ -137,8 +137,8 @@
 								</p>
 							</li>
 						</ul>
-						<div class="modal fade" id="myLabel" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel" ng-modal="edit_commodity">
+						<div class="modal fade" id="editLabel" tabindex="-1" role="dialog"
+								aria-labelledby="editModalLabel" ng-modal="edit_commodity">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -146,7 +146,7 @@
 												aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">修改商品</h4>
+										<h4 class="modal-title" id="editModalLabel">修改商品</h4>
 									</div>
 									<div class="modal-body">
 										<form autocomplete="off">
@@ -184,9 +184,10 @@
 												<input type="file" name="fileField" value="上传文件" id="upload">
 											</div>
 											<select id="select" ng-controller="select">
-												<option ng-repeat="type in types" value="{{type.name}}">
-			  		{{edit_commodity.type}}
-			  	</option>
+												<option ng-repeat="type in types"
+														value="{{type.name}}">
+													{{type.name}}
+			  									</option>
 											</select>
 										</form>
 									</div>
@@ -198,6 +199,7 @@
 								</div>
 							</div>
 						</div>
+					
 					</div>
 					<div role="tabpanel" class="comments tab-pane fade" id="about"
 							aria-labelledby="about-tab" ng-controller="comments">
@@ -214,66 +216,77 @@
 								</div>
 							</li>
 						</ul>
+						<nav>
+							<ul class="pagination">
+								<li>
+									<a ng-click="Previous()"><span>上一页</span></a>
+								</li>
+								<li ng-repeat="page in pageList"
+										ng-class="{active: isActivePage(page)}">
+									<a ng-click="selectPage(page)">{{ page }}</a>
+								</li>
+								<li><a ng-click="Next()"><span>下一页</span></a></li>
+							</ul>
+						</nav>
 					</div>
+					
 				</div>
 			</div>
 		</div>
-
-
-		<!-- Modal start -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">创建商品</h4>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="form-group">
-								<label for="name">商品名字</label> <input type=text
-										class="form-control" id="name" placeholder="name">
-							</div>
-							<div class="form-group">
-								<label for="depict">商品描述</label> <input type=text
-										class="form-control" id="depict" placeholder="depict">
-							</div>
-							<div class="form-group">
-								<label for="price">商品价格</label> <input type=text
-										class="form-control" id="price" placeholder="price">
-							</div>
-							<div class="form-group">
-								<label for="amount">商品个数</label> <input type="text"
-										class="form-control" id="amount" placeholder="amount">
-							</div>
-							<div class="form-group">
-								<label for="manufacturer">商品厂商</label> <input type="text"
-										class="form-control" id="manufacturer"
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel">创建商品</h4>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-group">
+											<label for="name">商品名字</label> <input type=text
+										class="form-control" id="com_name" placeholder="name">
+										</div>
+										<div class="form-group">
+											<label for="depict">商品描述</label> <input type=text
+										class="form-control" id="com_depict" placeholder="depict">
+										</div>
+										<div class="form-group">
+											<label for="price">商品价格</label> <input type=text
+										class="form-control" id="com_price" placeholder="price">
+										</div>
+										<div class="form-group">
+											<label for="amount">商品个数</label> <input type="text"
+										class="form-control" id="com_amount" placeholder="amount">
+										</div>
+										<div class="form-group">
+											<label for="manufacturer">商品厂商</label> <input type="text"
+										class="form-control" id="com_manufacturer"
 										" placeholder="manufacturer">
+										</div>
+										<div class="form-group">
+											<label for="img">图片</label> <input type="text"
+										class="form-control" id="com_img" readonly=true placeholder="图片路径">
+											<input type="file" name="fileField" value=上传文件 id="uploads">
+										</div>
+										<select id="selects" ng-controller="select">
+											<option ng-repeat="type in types" value="{{type.name}}">
+			  						{{type.name}}
+			  					</option>
+										</select>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+									<button id="submit" type="button" class="btn btn-primary">保存</button>
+								</div>
 							</div>
-							<div class="form-group">
-								<label for="img">图片</label> <input type="text"
-										class="form-control" id="img" readonly=true placeholder="图片路径">
-								<input type="file" name="fileField" value=上传文件 id="upload">
-							</div>
-							<select id="select" ng-controller="select">
-								<option ng-repeat="type in types" value="{{type.name}}">
-			  		{{type.name}}
-			  	</option>
-							</select>
-						</form>
+						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button id="submit" type="button" class="btn btn-primary">保存</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </jsp:body>
 </tags:template>

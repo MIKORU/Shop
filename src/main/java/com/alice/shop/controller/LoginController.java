@@ -27,6 +27,14 @@ public class LoginController {
 	public String tologin() {
 		return "/login";
 	}
+	@RequestMapping(value="logout",method=RequestMethod.POST)
+	@ResponseBody
+	public boolean logout(HttpServletRequest request) {
+		SecurityUtils.getSubject().logout();
+		request.getSession().removeAttribute("id");
+		request.getSession().removeAttribute("name");
+		return true;
+	}
 	
 //	@Autowired  
 //	HttpServletRequest request;

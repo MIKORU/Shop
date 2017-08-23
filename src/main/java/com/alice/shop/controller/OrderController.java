@@ -31,14 +31,14 @@ public class OrderController {
 	@RequestMapping(value="getFormList", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFormList(HttpServletRequest request) {
-		String userid = request.getParameter("userId");
+		String userid = (String) request.getSession().getAttribute("id");
 		return JSONArray.fromObject( orderService.getFormList(userid )) ;
 	}
 	
 	@RequestMapping(value="pay", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean setPaying(HttpServletRequest request) {
-		String userId = request.getParameter("userId") ;
+		String userId = (String) request.getSession().getAttribute("id");
 		String orderId = request.getParameter("orderId");
 		return userService.setPaying(userId , orderId);
 	}

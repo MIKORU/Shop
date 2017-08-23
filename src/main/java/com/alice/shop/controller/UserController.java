@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alice.shop.service.UserService;
+import com.alice.shop.util.CipherUtil;
 
 import net.sf.json.JSONObject;
 
@@ -48,16 +49,16 @@ public class UserController {
 	@RequestMapping(value="getInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONObject getInfo(HttpServletRequest request) {
-		String userId = request.getParameter("userId");
+		String userId = (String) request.getSession().getAttribute("id");
 		return JSONObject.fromObject( userService.getInfo( userId ) );
 	}
 	
 	@RequestMapping(value = "updateInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean updateInfo( HttpServletRequest request ) {
-		String userId = request.getParameter("userId");
+		String userId = (String) request.getSession().getAttribute("id");
 		String name = request.getParameter("name");
-		String password = request.getParameter("password");
+		String password = CipherUtil.generatePassword(request.getParameter("password"));
 		String defaultAddress = request.getParameter("defaultAddress");
 		String defaultPhone = request.getParameter("defaultPhone");
 		String mail = request.getParameter("mail");

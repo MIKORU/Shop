@@ -1,9 +1,6 @@
 /**
  * 
  */
-var userId = 0;
-var username = null
-
 var app = angular.module("app", []);
 app.directive("commodityDirective", function() {
 	return {
@@ -29,7 +26,7 @@ app.directive("parse", function() {
 app.controller("form", function($scope) {
 	$scope.items = [];
 	$scope.pay = function(orderId) {
-		ajaxModule.pay(userId, orderId, function(res) {
+		ajaxModule.pay(orderId, function(res) {
 			if (res == "true") {
 				alert("支付成功");
 				location.reload();
@@ -50,14 +47,11 @@ app.controller("form", function($scope) {
 	}
 });
 var ajaxModule = {
-	getFormList : function(userId, cb) {
-		$.post("./getFormList", {
-			userId : userId
-		}, cb);
+	getFormList : function(cb) {
+		$.post("./getFormList", {}, cb);
 	},
-	pay : function(userId, orderId, cb) {
+	pay : function(orderId, cb) {
 		$.post("./pay", {
-			userId : userId,
 			orderId : orderId
 		}, cb);
 	},
@@ -72,28 +66,12 @@ var ajaxModule = {
 		}, cb);
 	}
 }
-function init() {
-	$.ajax({
-		url : "./getcontext",
-		type : "POST",
-		data : {},
-		async : false
-	}).done(function(res) {
-		res = JSON.parse(res);
-		userId = res[0].id;
-		username = res[0].name;
-	});
-
-}
 function getformlist() {
-	if (userId) {
-		ajaxModule.getFormList(userId, function(res) {
-			$("#form").scope().items = JSON.parse(res);
-			$("#form").scope().$apply();
-		});
-	}
+	ajaxModule.getFormList(function(res) {
+		$("#form").scope().items = JSON.parse(res);
+		$("#form").scope().$apply();
+	});
 }
 $(function() {
-	init();
 	getformlist();
 });
