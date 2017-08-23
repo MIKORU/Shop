@@ -10,6 +10,8 @@ import com.alice.shop.bean.Commodity;
 import com.alice.shop.dao.CommodityMapper;
 import com.alice.shop.service.CommodityService;
 import com.alice.shop.util.utilUUID;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service("commodityService")
 public class CommodityServiceImpl implements CommodityService {
@@ -46,6 +48,13 @@ public class CommodityServiceImpl implements CommodityService {
 		Commodity com = new Commodity();
 		List<Commodity> coms = comMapper.queryAllList(com);
 		return coms;
+	}
+	public PageInfo<Commodity> listCom(int pageNo,int pageSize){
+		PageHelper.startPage(pageNo,pageSize);
+		Commodity com = new Commodity();
+		List<Commodity> coms = comMapper.queryAllList(com);
+		PageInfo<Commodity> pageInfo = new PageInfo<Commodity>(coms);
+		return pageInfo;
 	}
 
 	@Override

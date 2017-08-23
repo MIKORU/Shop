@@ -2,8 +2,10 @@ package com.alice.shop.service;
 
 import java.util.List;
 
+import com.alice.shop.bean.Commodity;
 import com.alice.shop.bean.Order;
 import com.alice.shop.bean.User;
+import com.github.pagehelper.PageInfo;
 
 public interface UserService {
 	int reg(String name,String password,String defaultAddress,String defaultPhone,String mail);

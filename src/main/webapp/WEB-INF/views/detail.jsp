@@ -1,8 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <tags:template>
-<jsp:attribute name="header">
+	<jsp:attribute name="header">
 <style>
 .commodity {
 	margin: 10px;
@@ -15,21 +16,23 @@
 .commentBody {
 	max-heiht: 200px;
 }
-#com_panel{
+
+#com_panel {
 	width: 260px;
 }
 </style>
 </head>
 </jsp:attribute>
-<jsp:attribute name="footer">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/detail.js"></script>
+	<jsp:attribute name="footer">
+<script type="text/javascript"
+			src="${pageContext.request.contextPath}/static/js/detail.js"></script>
 </jsp:attribute>
-<jsp:body >
+	<jsp:body>
 	<div class="container content">
 		<div class="row">
 			<p>
 				<span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <input
-					class="form-control" id="keyword" placeholder="输入搜索关键词"><br>
+						class="form-control" id="keyword" placeholder="输入搜索关键词"><br>
 				<button id="search" class="btn btn-primary">搜索</button>
 			</p>
 		</div>
@@ -37,10 +40,10 @@
 			<div ng-repeat="coms in groups track by $index">
 				<h3>
 					<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <span
-						class="label label-default"> {{coms[0].type}} </span>
+							class="label label-default"> {{coms[0].type}} </span>
 				</h3>
 				<div class="panel panel-default pull-left commodity" id="com_panel"
-					ng-repeat="com in coms track by $index">
+						ng-repeat="com in coms track by $index">
 					<div class="panel-heading panel-primary">
 						<p>{{com.name}}</p>
 					</div>
@@ -57,8 +60,22 @@
 							查看详细</button>
 					</div>
 				</div>
+				
 				<div class="clearfix "></div>
+				<nav>
+				<ul class="pagination">
+					<li>
+						<a ng-click="Previous()"><span>上一页</span></a>
+					</li>
+					<li ng-repeat="page in pageList"
+								ng-class="{active: isActivePage(page)}">
+						<a ng-click="selectPage(page)">{{ page }}</a>
+					</li>
+					<li><a ng-click="Next()"><span>下一页</span></a></li>
+				</ul>
+			</nav>
 			</div>
+			
 		</div>
 		<div class="row">
 			<a href="./cart" class="btn btn-default" role="button">结账</a>
@@ -66,12 +83,12 @@
 	</div>
 
 	<div class="modal fade" id="detail" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" ng-controller="detail">
+			aria-labelledby="myModalLabel" ng-controller="detail">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+							aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">产品信息</h4>
@@ -93,10 +110,10 @@
 						</div>
 						<form>
 							<label for="text"></label>
-							<input type="text" name="text"
-								id="text" placehoder="评论内容" ng-model="comment" />
+							<input type="text" name="text" id="text" placehoder="评论内容"
+									ng-model="comment" />
 							<button id="submit" class="btn btn-success"
-								ng-click="appendComment('${name}',com.id)">评论</button>
+									ng-click="appendComment('${name}',com.id)">评论</button>
 						</form>
 					</div>
 				</div>

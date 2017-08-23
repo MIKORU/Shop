@@ -1,11 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <tags:template>
-<jsp:attribute name="header">
+	<jsp:attribute name="header">
 <style>
 .com {
-	margin: 20px;
+	margin: 10px;
 	overflow: hidden;
 }
 
@@ -16,28 +17,40 @@
 #index {
 	margin-top: 100px;
 }
-.caption{
-	width: 220px;
+
+.caption {
+	width: 230px;
+}
+
+nav {
+	position: relative;
+	width: 100%;
+	height: 50px;
+}
+
+nav li {
+	cursor: pointer;
 }
 </style>
 </jsp:attribute>
-<jsp:attribute name="footer">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/index.js"></script>
+	<jsp:attribute name="footer">
+<script type="text/javascript"
+			src="${pageContext.request.contextPath}/static/js/index.js"></script>
 </jsp:attribute>
-<jsp:body >
+	<jsp:body>
 	<div class="container">
 		<div id="index" class="row" ng-controller="index">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="thumbnail pull-left com"
-						ng-repeat="com in coms track by $index">
+							ng-repeat="com in coms track by $index">
 						<img ng-src="{{com.img}}" width="140" height="40">
-						<div class="caption" >
+						<div class="caption">
 							<h3>{{com.name}}</h3>
 							<p>{{com.depict}}</p>
 							<p>
 								<a href="#" class="btn btn-primary" role="button"
-									ng-click="addToCart(com.id)">添加商品</a>
+										ng-click="addToCart(com.id)">添加商品</a>
 							</p>
 							<p>
 								<button class="btn btn-default" ng-click="showDetail(com)">
@@ -45,20 +58,31 @@
 							</p>
 						</div>
 					</div>
+					
 				</div>
+				
 			</div>
-		</div>
-		<div class="row">
-			<a href="./cart" class="btn btn-default" role="button">购物车</a>
+			<nav>
+				<ul class="pagination">
+					<li>
+						<a ng-click="Previous()"><span>上一页</span></a>
+					</li>
+					<li ng-repeat="page in pageList"
+						ng-class="{active: isActivePage(page)}">
+						<a ng-click="selectPage(page)">{{ page }}</a>
+					</li>
+					<li><a ng-click="Next()"><span>下一页</span></a></li>
+				</ul>
+			</nav>
 		</div>
 	</div>
 	<div class="modal fade" id="detail" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" ng-controller="detail">
+			aria-labelledby="myModalLabel" ng-controller="detail">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+							aria-label="Close">
 						<span aria-hidden="true"> &times; </span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">产品信息</h4>
@@ -80,15 +104,16 @@
 						</div>
 						<form>
 							<label for="text"></label> 
-							<input type="text" name="text"
-								id="text" placehoder="评论内容" ng-model="comment" />
+							<input type="text" name="text" id="text" placehoder="评论内容"
+									ng-model="comment" />
 							<button id="submit" class="btn btn-success"
-								ng-click="appendComment('${name}',com.id)">评论</button>
+									ng-click="appendComment('${name}',com.id)">评论</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </jsp:body>
 </tags:template>
