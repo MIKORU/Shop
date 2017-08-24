@@ -13,7 +13,7 @@ import com.alice.shop.bean.Order;
 import com.alice.shop.dao.CartMapper;
 import com.alice.shop.dao.CommodityMapper;
 import com.alice.shop.service.CartService;
-import com.alice.shop.util.utilUUID;
+import com.alice.shop.util.UUIDUtil;
 
 import net.sf.json.JSONArray;
 @Service("cartService")
@@ -56,7 +56,7 @@ public class CartServiceImpl implements CartService {
 		List<Map<String ,Object> > list = cartMapper.queryforOrder(cart);
 		
 		if(list.size() == 0) {
-			String id = utilUUID.getUUID();
+			String id = UUIDUtil.getUUID();
 			cart.setId(id);
 			cart.setCommoditycount(commodityCount);
 			return 0!=cartMapper.insert(cart);

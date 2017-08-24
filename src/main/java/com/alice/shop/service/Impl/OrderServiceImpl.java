@@ -15,7 +15,7 @@ import com.alice.shop.dao.CommodityMapper;
 import com.alice.shop.dao.OrderMapper;
 import com.alice.shop.dao.UserMapper;
 import com.alice.shop.service.OrderService;
-import com.alice.shop.util.utilUUID;
+import com.alice.shop.util.UUIDUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 	public boolean addForm(String userId, String address, String phone, float totalPrice, String pay, String orderlist) {
 		// TODO Auto-generated method stub
 		Order order = new Order();
-		String id = utilUUID.getUUID();
+		String id = UUIDUtil.getUUID();
 		
 		User user = userMapper.selectByPrimaryKey(userId);
 		

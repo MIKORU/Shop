@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.alice.shop.bean.Commodity;
 import com.alice.shop.dao.CommodityMapper;
 import com.alice.shop.service.CommodityService;
-import com.alice.shop.util.utilUUID;
+import com.alice.shop.util.UUIDUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -24,7 +24,7 @@ public class CommodityServiceImpl implements CommodityService {
 			String type) {
 		// TODO Auto-generated method stub
 		Commodity com = new Commodity();
-		String id = utilUUID.getUUID();
+		String id = UUIDUtil.getUUID();
 		com.setId(id);
 		com.setAmount(amount);
 		com.setName(name);

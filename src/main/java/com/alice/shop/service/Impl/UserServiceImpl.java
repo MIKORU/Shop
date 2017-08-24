@@ -14,7 +14,7 @@ import com.alice.shop.dao.CartMapper;
 import com.alice.shop.dao.OrderMapper;
 import com.alice.shop.dao.UserMapper;
 import com.alice.shop.service.UserService;
-import com.alice.shop.util.utilUUID;
+import com.alice.shop.util.UUIDUtil;
 
 import net.sf.json.JSONArray;
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		User user = new User();
-		String id = utilUUID.getUUID();
+		String id = UUIDUtil.getUUID();
 		user.setId(id);
 		user.setName(name);
 		user.setAddress(defaultAddress);

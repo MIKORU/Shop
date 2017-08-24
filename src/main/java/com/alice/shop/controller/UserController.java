@@ -3,6 +3,7 @@ package com.alice.shop.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alice.shop.service.UserService;
-import com.alice.shop.util.CipherUtil;
 
 import net.sf.json.JSONObject;
 
@@ -58,7 +58,7 @@ public class UserController {
 	public boolean updateInfo( HttpServletRequest request ) {
 		String userId = (String) request.getSession().getAttribute("id");
 		String name = request.getParameter("name");
-		String password = CipherUtil.generatePassword(request.getParameter("password"));
+		String password = new Md5Hash(request.getParameter("password")).toString();
 		String defaultAddress = request.getParameter("defaultAddress");
 		String defaultPhone = request.getParameter("defaultPhone");
 		String mail = request.getParameter("mail");

@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alice.shop.bean.User;
 import com.alice.shop.service.UserService;
-import com.alice.shop.util.CipherUtil;
 
 public class ShiroUserRealm extends AuthorizingRealm{
 	

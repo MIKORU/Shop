@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.alice.shop.bean.Comment;
 import com.alice.shop.dao.CommentMapper;
 import com.alice.shop.service.CommentService;
-import com.alice.shop.util.utilUUID;
+import com.alice.shop.util.UUIDUtil;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService{
@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService{
 	public boolean addComment(String userId, String userName, String commodityID, String comment) {
 		// TODO Auto-generated method stub
 		Comment com = new Comment();
-		String id = utilUUID.getUUID();
+		String id = UUIDUtil.getUUID();
 		com.setId(id);
 		com.setComment(comment);
 		com.setCommodityid(commodityID);

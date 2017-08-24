@@ -1,5 +1,6 @@
 package com.alice.shop.test;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,14 @@ public class TestPage {
 	@Autowired
 	CommodityService comService;
 	
-	@Test
 	public void testPage() {
 		PageInfo<Commodity> info = comService.listCom(1, 3);
 		System.out.println("查找结果" + JSON.toJSON(info));  
+	}
+	
+	@Test
+	public void testMD5() {
+		System.out.println(new Md5Hash("123").toString());
 	}
 	
 }
