@@ -1,64 +1,43 @@
 /**
  * 
  */
-
-
-
 var app = angular.module("app", []);
 app.controller("index", function ($scope) {
 	$scope.coms = [];
 	
-	ajaxModule.getAllCom(function(res) {
-        // 数据源
-        $scope.datas = JSON.parse(res);
-        
-        // 分页总数
-        $scope.pageSize = 4;
-        $scope.pages = Math.ceil($scope.datas.length / $scope.pageSize); // 分页数
-        $scope.newPages = $scope.pages > 4 ? 4 : $scope.pages;
-        $scope.pageList = [];
-        $scope.selPage = 1;
-        // 设置表格数据源(分页)
-        $scope.setData = function () {
-            $scope.coms = $scope.datas.slice(($scope.pageSize * ($scope.selPage - 1)), ($scope.selPage * $scope.pageSize));// 通过当前页数筛选出表格当前显示数据
-        }
-        $scope.coms = $scope.datas.slice(0, $scope.pageSize);
-        // 分页要repeat的数组
-        for (var i = 0; i < $scope.newPages; i++) {
-            $scope.pageList.push(i + 1);
-        }
-        // 打印当前选中页索引
-        $scope.selectPage = function (page) {
-            // 不能小于1大于最大
-            if (page < 1 || page > $scope.pages) return;
-            // 最多显示分页数5
-            if (page > 2) {
-                // 因为只显示5个页数，大于2页开始分页转换
-                var newpageList = [];
-                for (var i = (page - 2) ; i < ((page + 2) > $scope.pages ? $scope.pages : (page + 2)) ; i++) {
-                    newpageList.push(i + 1);
-                }
-                $scope.pageList = newpageList;
-            }
-            $scope.selPage = page;
-            $scope.setData();
-            $scope.isActivePage(page);
-            console.log("选择的页：" + page);
-        };
-        // 设置当前选中页样式
-        $scope.isActivePage = function (page) {
-            return $scope.selPage == page;
-        };
-        // 上一页
-        $scope.Previous = function () {
-            $scope.selectPage($scope.selPage - 1);
-        }
-        // 下一页
-        $scope.Next = function () {
-            $scope.selectPage($scope.selPage + 1);
-        };
-        $scope.$apply();
-	});
+	var pageNo = 1;
+	var pageSize = 4;
+	$scope.selPage = pageNo;
+	
+	ajaxModule.getAllCom(pageNo,pageSize);
+	
+	$scope.selectPage = function (page) {
+		$scope.selPage = page;
+        $scope.isActivePage(page);
+        ajaxModule.getAllCom(page,pageSize);
+        console.log("选择的页：" + page);
+    };
+	
+	$scope.isActivePage = function (page) {
+        return $scope.selPage == page;
+    };
+	$scope.Previous = function () {
+		if($scope.selPage <= 1){
+			$scope.selectPage(1);
+		}
+		else{
+			$scope.selectPage($scope.selPage - 1);
+		}
+    }
+    $scope.Next = function () {
+    	if($scope.selPage >= $scope.pageList.length){
+			$scope.selectPage($scope.pageList.length);
+		}
+		else{
+			$scope.selectPage($scope.selPage + 1);
+		}
+    };
+    
 	$scope.addToCart = function(comId) {
 		ajaxModule.addOrder(comId);
 	}
@@ -108,8 +87,16 @@ function clear(){
 	$("#text").val("");
 }
 var ajaxModule = {
-	getAllCom : function(cb) {
-		$.post("./getAllCom", cb);
+	getAllCom : function(pageNo,pageSize) {
+		$.post("./getAllComByPage",{
+			pageNo:pageNo,
+			pageSize:pageSize
+		}, function(res) {
+			var json = JSON.parse(res);
+			$(".pagination").scope().pageList = json[0].navigatepageNums;
+			$(".pagination").scope().coms = json[0].list;
+			$(".pagination").scope().$apply();
+		});
 	},
 	addOrder : function(commodityIds, cb) {
 		$.post("./addOrder", {

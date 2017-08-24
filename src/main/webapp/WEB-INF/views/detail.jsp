@@ -39,7 +39,8 @@
 		<div id="groups" class="row" ng-controller="groups">
 			<div ng-repeat="coms in groups track by $index">
 				<h3>
-					<span class="glyphicon glyphicon-fire" aria-hidden="true"></span> <span
+					<span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+					<span
 							class="label label-default"> {{coms[0].type}} </span>
 				</h3>
 				<div class="panel panel-default pull-left commodity" id="com_panel"
@@ -60,25 +61,8 @@
 							查看详细</button>
 					</div>
 				</div>
-				
 				<div class="clearfix "></div>
-				<nav>
-				<ul class="pagination">
-					<li>
-						<a ng-click="Previous()"><span>上一页</span></a>
-					</li>
-					<li ng-repeat="page in pageList"
-								ng-class="{active: isActivePage(page)}">
-						<a ng-click="selectPage(page)">{{ page }}</a>
-					</li>
-					<li><a ng-click="Next()"><span>下一页</span></a></li>
-				</ul>
-			</nav>
 			</div>
-			
-		</div>
-		<div class="row">
-			<a href="./cart" class="btn btn-default" role="button">结账</a>
 		</div>
 	</div>
 

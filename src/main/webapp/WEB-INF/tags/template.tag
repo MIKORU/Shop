@@ -16,15 +16,22 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  
 	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
 <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/template.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/static/img/shop.ico">
+	
 <jsp:invoke fragment="header" />
+<style>
+.login-modal-dialog {
+	width: 300px;
+}
+</style>
 </head>
 <body ng-app="app">
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -50,7 +57,7 @@
 	</nav>
 	<div class="modal fade" id="loginlabel" tabindex="-1" role="dialog"
 		aria-labelledby="myLoginLabel">
-		<div class="modal-dialog" role="document">
+		<div class="login-modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"

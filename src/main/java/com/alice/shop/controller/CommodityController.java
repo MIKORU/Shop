@@ -19,6 +19,14 @@ public class CommodityController {
 	@Autowired
 	private CommodityService commodityService;
 	
+	@RequestMapping(value="getAllComByPage",method=RequestMethod.POST)
+	@ResponseBody
+	public JSONArray getAllComByPage(HttpServletRequest request,HttpServletResponse response) {
+		int PageNo = Integer.parseInt(request.getParameter("pageNo"));
+		int PageSize = Integer.parseInt(request.getParameter("pageSize"));
+		return JSONArray.fromObject(commodityService.listCom(PageNo, PageSize));
+	}
+	
 	@RequestMapping(value="getAllCom",method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getAllCom(HttpServletRequest request,HttpServletResponse response) {

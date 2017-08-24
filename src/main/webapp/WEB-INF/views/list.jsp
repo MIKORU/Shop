@@ -11,6 +11,9 @@
 .margin80 {
 	margin-top: 80px;
 }
+.list pull-left{
+	width:10px;
+}
 </style>
 </jsp:attribute>
 <jsp:attribute name="footer">

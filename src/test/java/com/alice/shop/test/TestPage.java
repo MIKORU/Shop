@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
 import com.alice.shop.bean.Commodity;
 import com.alice.shop.service.CommodityService;
 import com.github.pagehelper.PageInfo;
@@ -21,8 +22,8 @@ public class TestPage {
 	
 	@Test
 	public void testPage() {
-		PageInfo<Commodity> info = comService.listCom(0, 1);
-		System.out.println("查找结果" + info);  
+		PageInfo<Commodity> info = comService.listCom(1, 3);
+		System.out.println("查找结果" + JSON.toJSON(info));  
 	}
 	
 }

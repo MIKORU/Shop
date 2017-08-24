@@ -39,7 +39,6 @@ public class ShiroUserRealm extends AuthorizingRealm{
 		int roles = userService.getRole(currentUsername);
 		
 		simpleAuthorInfo.addRole(String.valueOf(roles));
-
 		
 		return simpleAuthorInfo;
 	}
