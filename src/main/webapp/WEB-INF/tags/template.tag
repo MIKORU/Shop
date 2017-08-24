@@ -28,8 +28,14 @@
 	
 <jsp:invoke fragment="header" />
 <style>
-.login-modal-dialog {
+#login-body {
+	margin:0 auto;
 	width: 300px;
+}
+#content-login {
+	margin:0 auto;
+	height: 300px;
+	width: 400px;
 }
 </style>
 </head>
@@ -57,8 +63,8 @@
 	</nav>
 	<div class="modal fade" id="loginlabel" tabindex="-1" role="dialog"
 		aria-labelledby="myLoginLabel">
-		<div class="login-modal-dialog" role="document">
-			<div class="modal-content">
+		<div class="modal-dialog" role="document" >
+			<div class="modal-content" id="content-login">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -66,7 +72,7 @@
 					</button>
 					<h4 class="modal-title" id="myLoginLabel">登录</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="login-body">
 					<form>
 						<div class="form-group">
 							<label for="tuser">用户名</label> <input type="text"
