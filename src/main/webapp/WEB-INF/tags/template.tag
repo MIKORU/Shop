@@ -44,19 +44,19 @@
 		<div class="container">
 			<div class="row">
 				<ul class="nav navbar-nav">
-					<li><c:if test="${name!=null }">
-							<a href="./user"> 欢迎 【${name}】 </a>
-						</c:if></li>
-					<li><c:if test="${name==null }">
-							<a href="###" id="login">登录 </a>
-						</c:if></li>
+					<li><shiro:user>
+							<a href="./user"> 欢迎 【<shiro:principal/>】 </a>
+						</shiro:user></li>
+					<li><shiro:guest>
+						<a href="###" id="login">登录 </a>
+					</shiro:guest></li>
 					<li><a href="./index">首页</a></li>
 					<li><a href="./detail">分类页</a></li>
 					<li><a href="./cart">购物车</a></li>
 					<li><a href="./list">订单页</a></li>
-					<li><c:if test="${name!=null }">
+					<li><shiro:user>
 							<a href="###" id="logouts">登出 </a>
-						</c:if></li>
+						</shiro:user></li>
 				</ul>
 			</div>
 		</div>

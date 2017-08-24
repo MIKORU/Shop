@@ -47,8 +47,8 @@ public class ShiroUserRealm extends AuthorizingRealm{
 			throws AuthenticationException {
 		// TODO Auto-generated method stub
 		UsernamePasswordToken usertoken = (UsernamePasswordToken) token;
-		
 		User user = userService.getUserbyName(usertoken.getUsername());
+		
 		if(user!=null) {
 			return new SimpleAuthenticationInfo(user.getName(),
 					user.getPassword(),

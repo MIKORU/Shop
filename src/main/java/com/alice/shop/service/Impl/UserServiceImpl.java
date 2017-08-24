@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService{
 		user.setId(id);
 		user.setName(name);
 		user.setAddress(defaultAddress);
-		user.setPassword(password);
+		user.setPassword(new Md5Hash(password).toString().toLowerCase());
 		user.setPhone(defaultPhone);
 		user.setMail(mail);
 		user.setRegtime(time);
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService{
 		List<Map<String,Object> > list = userMapper.queryforUser(name);
 		for(Map<String ,Object> k : list) {
 			if(name.equals(k.get("name"))) {
-				return password.equals(String.valueOf(k.get("password")));
+				return (new Md5Hash(password).toString().toLowerCase()).equals(String.valueOf(k.get("password")));
 			}
 		}
 		return false;
@@ -90,7 +91,7 @@ public class UserServiceImpl implements UserService{
 		user.setId(userId);
 		user.setName(name);
 		user.setAddress(defaultAddress);
-		user.setPassword(password);
+		user.setPassword(new Md5Hash(password).toString());
 		user.setPhone(defaultPhone);
 		user.setMail(mail);
 		return 0!=userMapper.updateByPrimaryKeySelective(user);
