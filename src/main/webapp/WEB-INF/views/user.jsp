@@ -48,7 +48,7 @@
 								class="form-control" name="address" id="address"
 								ng-model="user.address">
 						</div>
-						<div class="form-group">
+						<div class="form-group"> 
 							<label for="defaultPhone">默认手机</label> <input type="text"
 								class="form-control" name="phone" id="phone"
 								ng-model="user.phone">
