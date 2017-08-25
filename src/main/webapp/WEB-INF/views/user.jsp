@@ -16,10 +16,6 @@
 	<div class="container">
 		<div id="admin">
 			<div class="row">
-				<c:if test='${role==1}'>
-					<a class="btn btn-default" href="./admin">进入管理界面</a>
-				</c:if>
-
 			</div>
 		</div>
 		<br>
