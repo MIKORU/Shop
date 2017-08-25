@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(new Md5Hash(password).toString().toLowerCase());
 		user.setPhone(defaultPhone);
 		user.setMail(mail);
+		user.setRole(0);
 		user.setRegtime(time);
 		return userMapper.insertSelective(user);
 	}

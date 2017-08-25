@@ -39,7 +39,7 @@
 								ng-model="user.name">
 						</div>
 						<div class="form-group">
-							<label for="password">密码</label> <input type="text"
+							<label for="password">密码</label> <input type="password"
 								class="form-control" id="password" placeholder="Password"
 								ng-model="user.password">
 						</div>
@@ -57,8 +57,7 @@
 							<label for="mail">用户邮箱</label> <input type="text"
 								class="form-control" name="mail" id="mail" ng-model="user.mail">
 							<div>金额: {{user.money}}RMB</div>
-						</div>
-						<button id="submit" type="submit" class="btn btn-default">Submit</button>
+						<button id="submit" type="submit" class="btn btn-default">提交</button>
 					</form>
 				</div>
 			</div>

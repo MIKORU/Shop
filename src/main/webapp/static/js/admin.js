@@ -22,6 +22,7 @@ app.controller("orderform", function($scope) {
 	$scope.orderforms = [];
 	$scope.commoditys = [];
 	$scope.showInfo = function(info) {
+		$scope.edit = !$scope.edit;
 		$scope.commoditys = JSON.parse(info);
 	};
 

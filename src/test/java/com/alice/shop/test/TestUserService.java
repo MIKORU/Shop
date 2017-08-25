@@ -30,6 +30,10 @@ public class TestUserService {
 	private OrderService orderService;
 	
 	@Test
+	public void testReg() {
+		System.out.println(userService.reg("zz", "5656", "zz", "7788", "zz"));
+	}
+	
 	public void testQueryAllList() {
 		List<Order> orders = orderService.getFormAllList();
 		System.out.println(JSON.toJSON(orders));

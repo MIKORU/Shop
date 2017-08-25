@@ -24,4 +24,14 @@ function login(){
 			}
 		});
 	});
+	$("#register").on("click",function(){
+		$("#reglabel").modal("show");
+//		$.ajax({
+//			url:"/reg",
+//			type:"POST",
+//			data:{
+//				
+//			}
+//		})
+	});
 }

@@ -26,8 +26,7 @@ public class UserController {
 		String defaultAddress = request.getParameter("defaultAddress");
 		String defaultPhone = request.getParameter("defaultPhone");
 		String mail = request.getParameter("mail");
-		userService.reg(name, password, defaultAddress, defaultPhone, mail);
-		return false;
+		return 0!=userService.reg(name, password, defaultAddress, defaultPhone, mail);
 	}
 
 	@RequestMapping("/index")

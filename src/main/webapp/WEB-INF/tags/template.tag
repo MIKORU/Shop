@@ -40,7 +40,8 @@
 	height: 300px;
 	width: 400px;
 }
-#drop-down{
+
+#drop-down {
 	margin: 5px;
 }
 </style>
@@ -52,17 +53,19 @@
 				<ul class="nav navbar-nav">
 					<li><shiro:user>
 							<div class="btn-group" id="drop-down">
-								<button class="btn btn-defualt">
-									欢迎 
-									<shiro:principal /></button>
-								<button class="btn btn-defualt dropdown-toggle"
+								<button class="btn btn-info">
+									欢迎
+									<shiro:principal />
+								</button>
+								<button class="btn btn-info dropdown-toggle"
 									data-toggle="dropdown">
-									 <span class="caret"></span></button>
+									<span class="caret"></span>
+								</button>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="./user">个人中心</a></li>
 									<li><c:if test='${role==1}'>
-										<a href="./admin">管理界面</a>
-									</c:if></li>
+											<a href="./admin">管理界面</a>
+										</c:if></li>
 									<li class="divider"></li>
 									<li><a href="###" id="logouts">退出</a></li>
 								</ul>
@@ -79,32 +82,76 @@
 			</div>
 		</div>
 	</nav>
-	<div class="modal fade" id="loginlabel" tabindex="-1" role="dialog"
-		aria-labelledby="myLoginLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content" id="content-login">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true"> &times; </span>
-					</button>
-					<h4 class="modal-title" id="myLoginLabel">登录</h4>
-				</div>
-				<div class="modal-body" id="login-body">
-					<form>
-						<div class="form-group">
-							<label for="tuser">用户名</label> <input type="text"
-								class="form-control" id="tuser" placeholder="user">
-						</div>
-						<div class="form-group">
-							<label for="tpassword">密码</label> <input type="password"
-								class="form-control" id="tpassword" placeholder="password">
-						</div>
-						<a href="###" id="submits" class="btn btn-default">登录</a>
-					</form>
+	<div class="reg-login-table">
+		<div class="modal fade" id="loginlabel" tabindex="-1" role="dialog"
+			aria-labelledby="myLoginLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" id="content-login">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"> &times; </span>
+						</button>
+						<h4 class="modal-title" id="myLoginLabel">登录</h4>
+					</div>
+					<div class="modal-body" id="login-body">
+						<form>
+							<div class="form-group">
+								<label for="tuser">用户名</label> <input type="text"
+									class="form-control" id="tuser" placeholder="user">
+							</div>
+							<div class="form-group">
+								<label for="tpassword">密码</label> <input type="password"
+									class="form-control" id="tpassword" placeholder="password">
+							</div>
+							<a href="###" id="submits" class="btn btn-default">登录</a> <a
+								href="###" id="register" class="btn btn-success">注册</a>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="reglabel" tabindex="-1" role="dialog"
+			aria-labelledby="myRegLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" id="content-reg">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"> &times; </span>
+						</button>
+						<h4 class="modal-title" id="myRegLabel">注册</h4>
+					</div>
+					<div class="modal-body" id="Reg-body">
+						<form>
+							<div class="form-group">
+								<label for="name">用户名</label> <input type="text"
+									required="true" class="form-control" id="rname">
+							</div>
+							<div class="form-group">
+								<label for="password">密码</label> <input type="password"
+									class="form-control" id="rpassword" placeholder="Password">
+							</div>
+							<div class="form-group">
+								<label for="defaultAddress">默认收货地址</label> <input type="text"
+									class="form-control" name="address" id="raddress">
+							</div>
+							<div class="form-group">
+								<label for="defaultPhone">默认手机</label> <input type="text"
+									class="form-control" name="phone" id="rphone">
+							</div>
+							<div class="form-group">
+								<label for="mail">用户邮箱</label> <input type="text"
+									class="form-control" name="mail" id="rmail">
+							</div>
+							<a
+								href="###" id="toregister" class="btn btn-primary">注册</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<jsp:doBody />
 	<jsp:invoke fragment="footer" />

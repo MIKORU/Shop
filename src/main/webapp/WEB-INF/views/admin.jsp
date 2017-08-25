@@ -63,17 +63,18 @@
 									<td>{{item.address}}</td>
 									<td>{{item.totalprice}}</td>
 									<td>{{item.phone}}</td>
-									<th><a ng-click="showInfo(item.orderlist)" href="###">
-											查看订单详细信息 </a></th>
+									<th><button class="btn btn-success"
+												ng-click="showInfo(item.orderlist)" href="###">
+					{{edit?"关闭订单详细信息":"查看订单详细信息"}}</button></th>
 								</tr>
 								<tr>
-								
 								</tbody>
 						</table>
-						<div class="row">
+						<div ng-show="edit" ng-init="edit=false">
+							<div class="row">
 							<ul class="list-group">
 								<li class="list-group-item"
-										ng-repeat="com in commoditys track by $index">
+											ng-repeat="com in commoditys track by $index">
 									<p>第{{$index+1}}条：商品id为【{{com.commodityid}}】
 										的总数是【{{com.commoditycount}}】个</p>
 									<div commodity-directive id="{{com.commodityid}}">
@@ -87,6 +88,7 @@
 									</div>
 								</li>
 							</ul>
+							</div>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade types" id="types"
@@ -184,8 +186,7 @@
 												<input type="file" name="fileField" value="上传文件" id="upload">
 											</div>
 											<select id="select" ng-controller="select">
-												<option ng-repeat="type in types"
-														value="{{type.name}}">
+												<option ng-repeat="type in types" value="{{type.name}}">
 													{{type.name}}
 			  									</option>
 											</select>
@@ -269,7 +270,8 @@
 										</div>
 										<div class="form-group">
 											<label for="img">图片</label> <input type="text"
-										class="form-control" id="com_img" readonly=true placeholder="图片路径">
+										class="form-control" id="com_img" readonly=true
+										placeholder="图片路径">
 											<input type="file" name="fileField" value=上传文件 id="uploads">
 										</div>
 										<select id="selects" ng-controller="select">
