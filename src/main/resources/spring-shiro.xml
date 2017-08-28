@@ -17,14 +17,18 @@
 	<bean id="shiroUserRealm" class="com.alice.shop.realm.ShiroUserRealm">
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
-
+	
+	<!-- 项目自定义过滤器 -->
+	<bean id="loginfilter" class="com.alice.shop.filter.LoginFilter" />
+	
+	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/index" />
 		<property name="unauthorizedUrl" value="/403" />
-		<property name="filterChainDefinitions">
+		<property name="filterChainDefinitions"  >
 			<value>
 				/admin = authc
 				/cart = authc
@@ -34,8 +38,17 @@
 				/user = authc
 				/** = anon
 			</value>
+<!-- 		<property name="filters"> -->
+<!-- 			<util:map> -->
+<!-- 				<entrykey key="loghin" key-ref="loginfilter"></entrykey> -->
+<!-- 			</util:map> -->
 		</property>
 	</bean>
+	
+	<!-- 缓存管理器 使用Ehcache实现 -->
+    <bean id="cacheManagers" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml" />
+    </bean>
 
 	<!-- 用户授权信息Cache -->
 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />

@@ -56,11 +56,7 @@ public class LoginController {
             currentUser.login(token);
             session.setAttribute("name",name);
 			session.setAttribute("id",userService.getId(name));
-			if( 1 == userService.getRole(name)) {
-				session.setAttribute("role", 1);
-			}else {
-				session.setAttribute("role", 0);
-			}
+			session.setAttribute("role", userService.getRole(name));
 			return true;
         }
 		return false;

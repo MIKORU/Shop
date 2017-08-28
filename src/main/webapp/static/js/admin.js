@@ -21,8 +21,15 @@ app.controller("orderform", function($scope) {
 
 	$scope.orderforms = [];
 	$scope.commoditys = [];
-	$scope.showInfo = function(info) {
+	$scope.showInfo = function(info,index) {
+		$scope.indexs = index;
 		$scope.edit = !$scope.edit;
+		if($scope.edit == false){
+			$scope.indexs = $scope.indexs+1;
+		}else{
+			$scope.indexs = $scope.indexs-1;
+		}
+//		console.log($scope.indexs+" "+index+" "+$scope.edit);
 		$scope.commoditys = JSON.parse(info);
 	};
 

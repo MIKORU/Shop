@@ -76,8 +76,10 @@
 						</shiro:guest></li>
 					<li><a href="./index">首页</a></li>
 					<li><a href="./detail">分类页</a></li>
-					<li><a href="./cart">购物车</a></li>
-					<li><a href="./list">订单页</a></li>
+					<shiro:user>
+						<li><a href="./cart">购物车</a></li>
+						<li><a href="./list">订单页</a></li>
+					</shiro:user>
 				</ul>
 			</div>
 		</div>
@@ -98,11 +100,11 @@
 						<form>
 							<div class="form-group">
 								<label for="tuser">用户名</label> <input type="text"
-									class="form-control" id="tuser" placeholder="user">
+									class="form-control" id="tuser" placeholder="user" required="required">
 							</div>
 							<div class="form-group">
 								<label for="tpassword">密码</label> <input type="password"
-									class="form-control" id="tpassword" placeholder="password">
+									class="form-control" id="tpassword" placeholder="password" required="required">
 							</div>
 							<a href="###" id="submits" class="btn btn-default">登录</a> <a
 								href="###" id="register" class="btn btn-success">注册</a>
@@ -126,11 +128,11 @@
 						<form>
 							<div class="form-group">
 								<label for="name">用户名</label> <input type="text"
-									required="true" class="form-control" id="rname">
+									required="required" class="form-control" id="rname">
 							</div>
 							<div class="form-group">
 								<label for="password">密码</label> <input type="password"
-									class="form-control" id="rpassword" placeholder="Password">
+									class="form-control" id="rpassword" placeholder="Password" required="required">
 							</div>
 							<div class="form-group">
 								<label for="defaultAddress">默认收货地址</label> <input type="text"

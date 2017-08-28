@@ -64,8 +64,8 @@
 									<td>{{item.totalprice}}</td>
 									<td>{{item.phone}}</td>
 									<th><button class="btn btn-success"
-												ng-click="showInfo(item.orderlist)" href="###">
-					{{edit?"关闭订单详细信息":"查看订单详细信息"}}</button></th>
+												ng-click="showInfo(item.orderlist,$index)" href="###">
+					{{(indexs < $index)?"关闭订单详细信息":"查看订单详细信息"}}</button></th>
 								</tr>
 								<tr>
 								</tbody>
