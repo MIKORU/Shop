@@ -18,14 +18,23 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * 
+	 * @Title: reg   
+	 * @Description: 注册
+	 * @param: @param name
+	 * @param: @param password
+	 * @param: @param defaultAddress
+	 * @param: @param defaultPhone
+	 * @param: @param mail
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="reg",method=RequestMethod.POST)
 	@ResponseBody
-	public boolean reg(HttpServletRequest request,HttpServletResponse response) {
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
-		String defaultAddress = request.getParameter("defaultAddress");
-		String defaultPhone = request.getParameter("defaultPhone");
-		String mail = request.getParameter("mail");
+	public boolean reg(String name,String password ,String defaultAddress,
+			String defaultPhone,String mail) {
 		return 0!=userService.reg(name, password, defaultAddress, defaultPhone, mail);
 	}
 
@@ -43,14 +52,30 @@ public class UserController {
 	public String userAdmin() {
 		return "/admin";
 	}
-	
+	/**
+	 * 
+	 * @Title: getInfo   
+	 * @Description: 获取用户信息
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: JSONObject      
+	 * @throws
+	 */
 	@RequestMapping(value="getInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONObject getInfo(HttpServletRequest request) {
 		String userId = (String) request.getSession().getAttribute("id");
 		return JSONObject.fromObject( userService.getInfo( userId ) );
 	}
-	
+	/**
+	 * 
+	 * @Title: updateInfo   
+	 * @Description: 更新用户信息
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value = "updateInfo", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean updateInfo( HttpServletRequest request ) {

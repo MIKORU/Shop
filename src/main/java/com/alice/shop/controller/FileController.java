@@ -27,7 +27,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class FileController extends HttpServlet {
-
+	/**
+	 * 
+	 * @Title: upload   
+	 * @Description: 上传图片
+	 * @param: @param request
+	 * @param: @param response
+	 * @param: @throws ServletException
+	 * @param: @throws IOException      
+	 * @return: void      
+	 * @throws
+	 */
 	@RequestMapping(value="upload", method=RequestMethod.POST)
 	public void upload(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

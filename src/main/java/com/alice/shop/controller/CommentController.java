@@ -18,17 +18,31 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService comService;
-	
+	/**
+	 * 
+	 * @Title: getCommentById   
+	 * @Description: 根据id获取评论
+	 * @param: @param commodityId
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getCommentById",method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getCommentById(HttpServletRequest request, HttpServletResponse response) {
-		String commodityId = request.getParameter("commodityId");
+	public JSONArray getCommentById(String commodityId) {
 		return JSONArray.fromObject(comService.getCommentById(commodityId));
 	}
-	
+	/**
+	 * 
+	 * @Title: getComments   
+	 * @Description: 获取所有评论
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getComments", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getComments(HttpServletRequest request, HttpServletResponse response) {
+	public JSONArray getComments() {
 		return JSONArray.fromObject( comService.getComments( ) );
 	}
 	/**

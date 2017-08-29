@@ -26,15 +26,35 @@ public class OrderController {
 	
 	@Autowired
 	private CartService cartService;
-
 	
+	@RequestMapping("/list")
+	public String initPage() {
+		return "/list";
+	}
+	/**
+	 * 
+	 * @Title: getFormList   
+	 * @Description: 根据用户id获取订单（订单页）
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getFormList", method=RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getFormList(HttpServletRequest request) {
 		String userid = (String) request.getSession().getAttribute("id");
 		return JSONArray.fromObject( orderService.getFormList(userid )) ;
 	}
-	
+	/**
+	 * 
+	 * @Title: setPaying   
+	 * @Description: 支付（伪）
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="pay", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean setPaying(HttpServletRequest request) {
@@ -42,13 +62,28 @@ public class OrderController {
 		String orderId = request.getParameter("orderId");
 		return userService.setPaying(userId , orderId);
 	}
-	
+	/**
+	 * 
+	 * @Title: getFormAllList   
+	 * @Description: 获取所有订单（管理页）
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getFormAllList", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getFormAllList(HttpServletRequest request) {
+	public JSONArray getFormAllList() {
 		return JSONArray.fromObject( orderService.getFormAllList() );
 	}
-	
+	/**
+	 * 
+	 * @Title: addForm   
+	 * @Description: 增加订单
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="addForm",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean addForm(HttpServletRequest request) {
@@ -66,10 +101,18 @@ public class OrderController {
 			return false;
 		}
 	}
+	/**
+	 * 
+	 * @Title: delOrder   
+	 * @Description:根据id删除订单
+	 * @param: @param userId
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="delOrder",method=RequestMethod.POST)
 	@ResponseBody
-	public boolean delOrder(HttpServletRequest request) {
-		String userId = request.getParameter("userId");
+	public boolean delOrder(String userId) {
 		return orderService.delForm(userId);
 	}
 	

@@ -26,6 +26,15 @@ public class LoginController {
 	public String tologin() {
 		return "/login";
 	}
+	/**
+	 * 
+	 * @Title: logout   
+	 * @Description: 登出功能
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="logout",method=RequestMethod.POST)
 	@ResponseBody
 	public boolean logout(HttpServletRequest request) {
@@ -35,22 +44,26 @@ public class LoginController {
 		return true;
 	}
 	
-//	@Autowired  
-//	HttpServletRequest request;
+	/**
+	 * 
+	 * @Title: login   
+	 * @Description: 登录
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value = "checkin", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean login(
-//			@RequestParam(value="user",required=true)String name,
-//			@RequestParam(value="password",required=true)String password
-			HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter("username");
-		String password = request.getParameter("password");
+	public boolean login(HttpServletRequest request) {
+		String name = (String) request.getAttribute("username");
+		String password = (String) request.getAttribute("password");
 		
-		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(30*60);
 		String correctPassword = new Md5Hash(password).toString().toLowerCase();
 		UsernamePasswordToken token = new UsernamePasswordToken(name,correctPassword);
 		Subject currentUser = SecurityUtils.getSubject();
+		
+		HttpSession session = request.getSession();
 		
 		if (!currentUser.isAuthenticated()){
             currentUser.login(token);

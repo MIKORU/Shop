@@ -48,17 +48,34 @@ public class CartController {
 		int commodityCount = Integer.parseInt((String) request.getParameter("commodityCounts"));
 		return cartService.addOrder(userid, commodityId, commodityCount);
 	}
-	
+	/**
+	 * 
+	 * @Title: getOrderList   
+	 * @Description: 根据用户id获取订单
+	 * @param: @param request
+	 * @param: @param response
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getOrderList", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getOrderList( HttpServletRequest request, HttpServletResponse response) {
 		String userId = (String)request.getSession().getAttribute("id");
 		return JSONArray.fromObject(cartService.getOrderList(userId));
 	}
+	/**
+	 * 
+	 * @Title: delCart   
+	 * @Description: 删除根据商品id删除购物车内商品
+	 * @param: @param request
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="delCart", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean delCart(HttpServletRequest request) {
-		String commodityId = request.getParameter("commodityIds");
+	public boolean delCart(String commodityId) {
 		return cartService.delOrderbyComId(commodityId);
 	}
 	

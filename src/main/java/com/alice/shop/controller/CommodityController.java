@@ -19,72 +19,140 @@ public class CommodityController {
 	@Autowired
 	private CommodityService commodityService;
 	
+	@RequestMapping("/detail")
+	public String initPage() {
+		return "/detail";
+	}
+	
+	/**
+	 * 
+	 * @Title: getAllComByPage   
+	 * @Description: 分页展示所有商品
+	 * @param: @param pageNo
+	 * @param: @param pageSize
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getAllComByPage",method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getAllComByPage(HttpServletRequest request,HttpServletResponse response) {
-		int PageNo = Integer.parseInt(request.getParameter("pageNo"));
-		int PageSize = Integer.parseInt(request.getParameter("pageSize"));
-		return JSONArray.fromObject(commodityService.listCom(PageNo, PageSize));
+	public JSONArray getAllComByPage(Integer pageNo,Integer pageSize) {
+		return JSONArray.fromObject(commodityService.listCom(pageNo, pageSize));
 	}
-	
+	/**
+	 * 
+	 * @Title: getAllCom   
+	 * @Description: 获取所有商品
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getAllCom",method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getAllCom(HttpServletRequest request,HttpServletResponse response) {
+	public JSONArray getAllCom() {
 		return JSONArray.fromObject(commodityService.getAllCom());
 	}
+	
+	/**
+	 * 
+	 * @Title: search   
+	 * @Description: 根据关键字查询商品
+	 * @param: @param keyword
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="search", method=RequestMethod.POST) 
 	@ResponseBody
-	public JSONArray search(HttpServletRequest request, HttpServletResponse response){
-		String keyword = request.getParameter("keyword");
+	public JSONArray search(String keyword){
 		return JSONArray.fromObject( commodityService.search(keyword) );
 	}
-	
+	/**
+	 * 
+	 * @Title: getComById   
+	 * @Description: 根据id获取商品信息
+	 * @param: @param id
+	 * @param: @return      
+	 * @return: JSONArray      
+	 * @throws
+	 */
 	@RequestMapping(value="getComById", method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray getComById(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id") ;
+	public JSONArray getComById(String id) {
 		return JSONArray.fromObject( commodityService.getComById( id ) );
 	}
+	/**
+	 * 
+	 * @Title: addPro   
+	 * @Description: 增加商品
+	 * @param: @param name
+	 * @param: @param depict
+	 * @param: @param price
+	 * @param: @param amount
+	 * @param: @param manufacturer
+	 * @param: @param img
+	 * @param: @param type
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="addPro", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean addPro(HttpServletRequest request, HttpServletResponse response) {
-		//String name, String depict, int price, int amount, String manufacturer, String img, String type
-		String name = request.getParameter("name");
-		String depict = request.getParameter("depict");
-		float price = Float.parseFloat( request.getParameter("price") );
-		int amount = Integer.parseInt( request.getParameter("amount") );
-		String manufacturer= request.getParameter("manufacturer");
-		String img = request.getParameter("img");
-		String type = request.getParameter("type");
-		
+	public boolean addPro(String name,String depict,Float price,Integer amount,
+			String manufacturer,String img,String type) {
+		//String name, String depict, int price, int amount, String manufacturer, String img, String type		
 		return commodityService.addPro( name,  depict,  price,  amount,  manufacturer,  img,  type);
 	}
-	
+	/**
+	 * 
+	 * @Title: delPro   
+	 * @Description: 删除商品
+	 * @param: @param id
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="delPro", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean delPro(HttpServletRequest request, HttpServletResponse response) {
+	public boolean delPro(String id) {
 		//String name, String depict, int price, int amount, String manufacturer, String img, String type
-		String id = request.getParameter("id");
 		return commodityService.delPro( id );
 	}
+	
+	/**
+	 * 
+	 * @Title: getComCount   
+	 * @Description: 获取商品数量
+	 * @param: @param commodityId
+	 * @param: @return      
+	 * @return: int      
+	 * @throws
+	 */
 	@RequestMapping(value="getComCount", method=RequestMethod.POST)
 	@ResponseBody
-	public int getComCount(HttpServletRequest request) {
-		String commodityId = request.getParameter("commodityId");
+	public int getComCount(String commodityId) {
 		return commodityService.getComCount(commodityId);
 	}
+	/**
+	 * 
+	 * @Title: editPro   
+	 * @Description: 根据id编辑该商品
+	 * @param: @param id
+	 * @param: @param name
+	 * @param: @param depict
+	 * @param: @param price
+	 * @param: @param amount
+	 * @param: @param manufacturer
+	 * @param: @param img
+	 * @param: @param type
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
 	@RequestMapping(value="editPro", method=RequestMethod.POST)
 	@ResponseBody
-	public boolean editPro(HttpServletRequest request, HttpServletResponse response) {
-		//String name, String depict, int price, int amount, String manufacturer, String img, String type
-		String id = request.getParameter("commodityId");
-		String name = request.getParameter("name");
-		String depict = request.getParameter("depict");
-		float price = Float.parseFloat( request.getParameter("price") );
-		int amount = Integer.parseInt( request.getParameter("amount") );
-		String manufacturer = request.getParameter("manufacturer");
-		String img = request.getParameter("img");
-		String type = request.getParameter("type");
+	public boolean editPro(String id,String name,String depict,Float price,Integer amount,
+			String manufacturer,String img,String type) {
 		return commodityService.editPro(id, name, depict, price, amount, manufacturer, img, type);
 	}
 	
