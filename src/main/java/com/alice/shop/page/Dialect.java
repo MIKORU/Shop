@@ -1,4 +1,4 @@
-package com.alice.shop.page;
+package com.alice.shop.page ;
 
 public interface Dialect {
 
