@@ -6,17 +6,64 @@
 	default-lazy-init="true">
 
 	<description>Shiro Configuration</description>
-
+	
+	<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+	
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="Shop_sessionId" />
+		<property name="httpOnly" value="true"></property>
+		<property name="maxAge" value="-1"/>
+	</bean>
+	
+	<bean id="customSessionListener" class="com.alice.shop.shiro.listener.CustomSessionListener">
+		<property name="shiroSessionRepository" ref="jedisShiroSessionRepository" />
+	</bean>
+	
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie" >
+		<constructor-arg value="Shop_remeberCookie"/>
+		<property name="httpOnly" value="true"/>
+		<property name="maxAge" value="259200" /><!-- 30天 -->
+	</bean>
+	
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieReemeberMeManager" >
+		<property name="cipherKey"
+					value="#{T(org.apache.shiro.codec.Base64).decode('3AvVhmFLUs0KTA3Kprsdag==')}">
+		</property>
+		<property name="cookie" ref="remeberMeCookie" />
+	</bean>
+	
+	<bean id="customShiroSessionDAO" class="com.alice.shop.shiro.dao.CustomShiroSessionDAO">
+			<property name="shiroSessionRepository" ref="jedisShiroSessionRepository" ></property>
+			<property name="sessionIdGenerator" ref="sessionIdGenerator" />
+	</bean>
+	
+	<bean id="customSessionManager" class="com.alice.shop.shiro.session.CustomSessionManager">
+		<property name="shiroSessionRepository" ref="jedisShiroSessionRepository"/>
+		<property name="customShiroSessionDAO" ref="customShiroSessionDAO"/>
+	</bean>
+	
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExcutorServerValidationScheduler">
+		<property name="interval" value="18000000"/>
+		<property name="sessionManager" ref="sessionManager"/>
+	</bean>
+	
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="shiroUserRealm" />
-		<property name="cacheManager" ref="cacheManager" />
+		<property name="sessionManager" ref="sessionManager"/>
+		<property name="remeberMeManager" ref="rememberMeManager"/>
+		<property name="cacheManager" ref="customShiroCacheManager" />
 	</bean>
 
-	<!-- 項目自定义的Realm -->
 	<bean id="shiroUserRealm" class="com.alice.shop.realm.ShiroUserRealm">
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
+	
+	<bean id="customShiroCacheManager" class="com.alice.shop.shiro.cache.Impl.CustomShiroCacheManager">
+		<property name="shiroCacheManager" ref="jedisShiroCacheManager" />
+	</bean>
+	
+	
 	
 	<!-- 项目自定义过滤器 -->
 	<bean id="loginfilter" class="com.alice.shop.filter.LoginFilter" />

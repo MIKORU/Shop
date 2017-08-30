@@ -20,8 +20,25 @@ public class User {
     private Integer money;
 
     private Date regtime;
+    
+    
 
-    public String getId() {
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+    public User(User user) {
+    	this.id = user.getId();
+    	this.name = user.getName();
+    	this.mail = user.getMail();
+    	this.password = user.getPassword();
+    	this.phone = user.getPhone();
+    	this.address = user.getAddress();
+    	this.money = user.getMoney();
+    	this.role = user.getRole();
+    	this.regtime = user.getRegtime();
+    }
+
+	public String getId() {
         return id;
     }
 
@@ -92,4 +109,12 @@ public class User {
     public void setRegtime(Date regtime) {
         this.regtime = regtime;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address + ", phone="
+				+ phone + ", mail=" + mail + ", role=" + role + ", money=" + money + ", regtime=" + regtime + "]";
+	}
+    
+    
 }
