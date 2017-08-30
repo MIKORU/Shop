@@ -42,7 +42,7 @@
 		<property name="customShiroSessionDAO" ref="customShiroSessionDAO"/>
 	</bean>
 	
-	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExcutorServerValidationScheduler">
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
 		<property name="interval" value="18000000"/>
 		<property name="sessionManager" ref="sessionManager"/>
 	</bean>
@@ -55,15 +55,24 @@
 		<property name="cacheManager" ref="customShiroCacheManager" />
 	</bean>
 
-	<bean id="shiroUserRealm" class="com.alice.shop.realm.ShiroUserRealm">
-		<property name="cacheManager" ref="cacheManager" />
-	</bean>
+	<bean id="shiroUserRealm" class="com.alice.shop.realm.ShiroUserRealm"></bean>
 	
 	<bean id="customShiroCacheManager" class="com.alice.shop.shiro.cache.Impl.CustomShiroCacheManager">
 		<property name="shiroCacheManager" ref="jedisShiroCacheManager" />
 	</bean>
 	
+	<bean id="jedisShiroCacheManager" class="com.alice.shop.shiro.cache.Impl.JedisShiroCacheManager">
+		<property name="jedisManager" ref="jedisManager"/>
+	</bean>
 	
+	<bean id="jedisManager" class="com.alice.shop.shiro.cache.JedisManager">
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+		<property name="arguments" ref="securityManager"/>
+	</bean>
 	
 	<!-- 项目自定义过滤器 -->
 	<bean id="loginfilter" class="com.alice.shop.filter.LoginFilter" />
