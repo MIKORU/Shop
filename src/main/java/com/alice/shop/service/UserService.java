@@ -1,6 +1,7 @@
 package com.alice.shop.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.alice.shop.bean.Commodity;
 import com.alice.shop.bean.Order;
@@ -25,5 +26,7 @@ public interface UserService {
     public int getRole(String username);
     
     public User getUserbyName(String username);
+    
+    public Set<String> findRoleByUserId(String userId);
     
 }

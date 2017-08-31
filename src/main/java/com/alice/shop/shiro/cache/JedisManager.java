@@ -20,6 +20,7 @@ public class JedisManager {
 			jedis = getJedisPool().getResource();
 		}catch (JedisConnectionException e) {
 			// TODO: handle exception
+			System.out.println("redis开启失败！");
 			throw new JedisConnectionException(e);
 		}catch (Exception e) {
             throw new RuntimeException(e);

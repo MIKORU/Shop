@@ -30,6 +30,10 @@ public class TestUserService {
 	private OrderService orderService;
 	
 	@Test
+	public void testRole() {
+		System.out.println(userService.findRoleByUserId("4569b51234de41479c61131908acb5ee"));
+	}
+	
 	public void testReg() {
 		System.out.println(userService.reg("zz", "5656", "zz", "7788", "zz"));
 	}

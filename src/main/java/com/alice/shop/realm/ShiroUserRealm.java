@@ -2,6 +2,7 @@ package com.alice.shop.realm;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -35,9 +36,7 @@ public class ShiroUserRealm extends AuthorizingRealm{
 		
 		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
 		
-		int roles = userService.getRole(currentUsername);
-		
-		simpleAuthorInfo.addRole(String.valueOf(roles));
+		simpleAuthorInfo.setRoles(userService.findRoleByUserId(user.getId()));
 		
 		return simpleAuthorInfo;
 	}
@@ -62,14 +61,11 @@ public class ShiroUserRealm extends AuthorizingRealm{
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal,getName());
 		clearCachedAuthorizationInfo(principals);
 	}
-	
-	public void clearAllCachedAuthorizationInfo() {
-		Cache<Object,AuthorizationInfo> cache = getAuthorizationCache();
-		if(cache != null) {
-			for(Object key:cache.keys()) {
-				cache.remove(key);
-			}
-		}
+	public  void clearCachedAuthorizationInfo() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(
+				principalCollection, getName());
+		super.clearCachedAuthorizationInfo(principals);
 	}
 	
 }

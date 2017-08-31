@@ -3,6 +3,7 @@ package com.alice.shop.service.Impl;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,5 +145,11 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Set<String> findRoleByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return userMapper.findRoleByUserId(userId);
 	}
 }
