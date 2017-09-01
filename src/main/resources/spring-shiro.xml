@@ -109,7 +109,7 @@
 		<property name="loginUrl" value="/login" />
 		<property name="filters">
 			<util:map>
-				<entry key="loghin" value-ref="loginfilter" />
+				<entry key="login" value-ref="loginfilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions"  >
@@ -120,7 +120,7 @@
 				/addComment = authc
 				/addOrder = authc
 				/user = authc
-				/** = loghin
+				/** = anon
 			</value>
 		</property>
 	</bean>

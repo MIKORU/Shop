@@ -34,6 +34,4 @@ public class CustomSessionListener implements SessionListener {
 	public void setShiroSessionRepository(ShiroSessionRepository shiroSessionRepository) {
 		this.shiroSessionRepository = shiroSessionRepository;
 	}
-	
-
 }

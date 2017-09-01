@@ -16,8 +16,9 @@ $(function(){
 				contentType : "application/x-www-form-urlencoded"// !!!!
 				
 			}).done(function(res){
+				console.log(res+typeof(res));
 				if(res=="true"){
-					location.href="index"
+					location.href="index";
 				}else{
 					alert("登陆失败");
 				}
@@ -30,6 +31,7 @@ $(function(){
 			type:"POST",
 			data:{}
 		}).done(function(res){
+			console.log(res+typeof(res));
 			if(res=="true"){
 				alert("已经登出");
 				window.location.reload();

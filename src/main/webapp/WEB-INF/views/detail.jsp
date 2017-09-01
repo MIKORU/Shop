@@ -33,7 +33,7 @@
 			<p>
 				<span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <input
 						class="form-control" id="keyword" placeholder="输入搜索关键词"><br>
-				<button id="search" class="btn btn-primary">搜索</button>
+				<button id="search" class="button button-glow button-border button-rounded button-primary">搜索</button>
 			</p>
 		</div>
 		<div id="groups" class="row" ng-controller="groups">
@@ -55,7 +55,7 @@
 						<p>
 							产品图片：<img ng-src={{com.img}} width=50 height=50 />
 						</p>
-						<button class="btn btn-default" ng-click="addToCart(com.id)">
+						<button class="btn btn-primary" ng-click="addToCart(com.id)">
 							添加到购物车</button>
 						<button class="btn btn-default" ng-click="showDetail(com)">
 							查看详细</button>

@@ -44,16 +44,17 @@ nav li {
 				<div class="panel-body">
 					<div class="thumbnail pull-left com"
 							ng-repeat="com in coms track by $index">
+							
 						<img ng-src="{{com.img}}" width="140" height="40">
 						<div class="caption">
 							<h3>{{com.name}}</h3>
 							<p>{{com.depict}}</p>
 							<p>
-								<a href="#" class="btn btn-primary" role="button"
+								<a href="#" class="button button-3d button-action button-pill" role="button"
 										ng-click="addToCart(com.id)">添加商品</a>
 							</p>
 							<p>
-								<button class="btn btn-default" ng-click="showDetail(com)">
+								<button class="button button-3d button-primary button-pill" ng-click="showDetail(com)">
 									查看详细</button>
 							</p>
 						</div>
@@ -62,7 +63,7 @@ nav li {
 				</div>
 				
 			</div>
-			<nav>
+<!-- 			<nav> -->
 				<ul class="pagination">
 					<li>
 						<a ng-click="Previous()"><span>上一页</span></a>
@@ -73,7 +74,7 @@ nav li {
 					</li>
 					<li><a ng-click="Next()"><span>下一页</span></a></li>
 				</ul>
-			</nav>
+<!-- 			</nav> -->
 		</div>
 	</div>
 	<div class="modal fade" id="detail" tabindex="-1" role="dialog"

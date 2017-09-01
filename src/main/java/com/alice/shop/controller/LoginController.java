@@ -39,8 +39,8 @@ public class LoginController {
 	@ResponseBody
 	public boolean logout(HttpServletRequest request) {
 		SecurityUtils.getSubject().logout();
-		request.getSession().removeAttribute("id");
-		request.getSession().removeAttribute("name");
+//		request.getSession().removeAttribute("id");
+//		request.getSession().removeAttribute("name");
 		return true;
 	}
 	
@@ -56,8 +56,8 @@ public class LoginController {
 	@RequestMapping(value = "checkin", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean login(HttpServletRequest request) {
-		String name = (String) request.getAttribute("username");
-		String password = (String) request.getAttribute("password");
+		String name = (String) request.getParameter("username");
+		String password = (String) request.getParameter("password");
 		
 		String correctPassword = new Md5Hash(password).toString().toLowerCase();
 		UsernamePasswordToken token = new UsernamePasswordToken(name,correctPassword);

@@ -14,6 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Alice</title>
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -27,6 +28,10 @@
 	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/static/img/shop.ico">
+<link rel="stylesheet"
+	href="http://www.bootcss.com/p/buttons/css/buttons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/static/css/template.css">
 
 <jsp:invoke fragment="header" />
 <style>
@@ -100,11 +105,13 @@
 						<form>
 							<div class="form-group">
 								<label for="tuser">用户名</label> <input type="text"
-									class="form-control" id="tuser" placeholder="user" required="required">
+									class="form-control" id="tuser" placeholder="user"
+									required="required">
 							</div>
 							<div class="form-group">
 								<label for="tpassword">密码</label> <input type="password"
-									class="form-control" id="tpassword" placeholder="password" required="required">
+									class="form-control" id="tpassword" placeholder="password"
+									required="required">
 							</div>
 							<a href="###" id="submits" class="btn btn-default">登录</a> <a
 								href="###" id="register" class="btn btn-success">注册</a>
@@ -132,7 +139,8 @@
 							</div>
 							<div class="form-group">
 								<label for="password">密码</label> <input type="password"
-									class="form-control" id="rpassword" placeholder="Password" required="required">
+									class="form-control" id="rpassword" placeholder="Password"
+									required="required">
 							</div>
 							<div class="form-group">
 								<label for="defaultAddress">默认收货地址</label> <input type="text"
@@ -146,8 +154,7 @@
 								<label for="mail">用户邮箱</label> <input type="text"
 									class="form-control" name="mail" id="rmail">
 							</div>
-							<a
-								href="###" id="toregister" class="btn btn-primary">注册</a>
+							<a href="###" id="toregister" class="btn btn-primary">注册</a>
 						</form>
 					</div>
 				</div>
@@ -156,6 +163,18 @@
 
 	</div>
 	<jsp:doBody />
+
 	<jsp:invoke fragment="footer" />
+	<div class="row">
+		<footer class="blog-footer">
+			<p>
+				Cover for <a href="localhost:8080/Shop/index">Alice.Shop</a>, by <a
+					href="https://github.com/MIKORU/Shop/tree/master">@MIKORU</a>.
+			</p>
+			<p>
+				<a href="#">Back to top</a>
+			</p>
+		</footer>
+	</div>
 </body>
 </html>
