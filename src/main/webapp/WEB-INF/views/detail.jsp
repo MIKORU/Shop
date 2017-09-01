@@ -27,13 +27,13 @@
 <script type="text/javascript"
 			src="${pageContext.request.contextPath}/static/js/detail.js"></script>
 </jsp:attribute>
-	<jsp:body>
+<jsp:body>
 	<div class="container content">
 		<div class="row">
 			<p>
 				<span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <input
 						class="form-control" id="keyword" placeholder="输入搜索关键词"><br>
-				<button id="search" class="button button-glow button-border button-rounded button-primary">搜索</button>
+				<button id="search" class="btn btn-primary">搜索</button>
 			</p>
 		</div>
 		<div id="groups" class="row" ng-controller="groups">

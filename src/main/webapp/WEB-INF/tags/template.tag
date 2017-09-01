@@ -45,10 +45,6 @@
 	height: 300px;
 	width: 400px;
 }
-
-#drop-down {
-	margin: 5px;
-}
 </style>
 </head>
 <body ng-app="app">
@@ -58,14 +54,14 @@
 				<ul class="nav navbar-nav">
 					<li><shiro:user>
 							<div class="btn-group" id="drop-down">
-								<button class="btn btn-info">
+								<button class="button button-3d button-primary button-rounded" data-toggle="dropdown">
 									欢迎
 									<shiro:principal />
 								</button>
-								<button class="btn btn-info dropdown-toggle"
-									data-toggle="dropdown">
-									<span class="caret"></span>
-								</button>
+<!-- 								<button class="button button-glow button-border button-rounded button-primary " -->
+<!-- 									data-toggle="dropdown"> -->
+<!-- 									<span class="caret"></span> -->
+<!-- 								</button> -->
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="./user">个人中心</a></li>
 									<li><c:if test='${role==1}'>
@@ -165,16 +161,15 @@
 	<jsp:doBody />
 
 	<jsp:invoke fragment="footer" />
-	<div class="row">
-		<footer class="blog-footer">
+
+		<footer class="shop-footer">
 			<p>
-				Cover for <a href="localhost:8080/Shop/index">Alice.Shop</a>, by <a
+				Cover for <a href="./index">Alice.Shop</a>, by <a
 					href="https://github.com/MIKORU/Shop/tree/master">@MIKORU</a>.
 			</p>
 			<p>
 				<a href="#">Back to top</a>
 			</p>
 		</footer>
-	</div>
 </body>
 </html>

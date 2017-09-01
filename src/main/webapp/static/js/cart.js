@@ -53,7 +53,7 @@ var util = {
 				sum += (e.commoditycount * e.price);
 			}
 		});
-		return sum;
+		return sum.toFixed(2);
 	},
 	changeCart : function(commodityIds,count,cb) {
 			$.post("./addOrder", {
