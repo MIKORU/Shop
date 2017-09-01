@@ -8,12 +8,12 @@ import com.alice.shop.shiro.cache.ShiroCacheManager;
 
 public class JedisShiroCacheManager implements ShiroCacheManager {
 	
-	private JedisManager jdedisManager;
+	private JedisManager jedisManager;
 	
 	@Override
 	public <K, V> Cache<K, V> getCache(String name) {
 		// TODO Auto-generated method stub
-		return new JedisShiroCache<K,V>(name,getJdedisManager());
+		return new JedisShiroCache<K,V>(name,getJedisManager());
 	}
 
 	@Override
@@ -22,12 +22,12 @@ public class JedisShiroCacheManager implements ShiroCacheManager {
 
 	}
 
-	public JedisManager getJdedisManager() {
-		return jdedisManager;
+	public JedisManager getJedisManager() {
+		return jedisManager;
 	}
 
-	public void setJdedisManager(JedisManager jdedisManager) {
-		this.jdedisManager = jdedisManager;
+	public void setJedisManager(JedisManager jedisManager) {
+		this.jedisManager = jedisManager;
 	}
 	
 	

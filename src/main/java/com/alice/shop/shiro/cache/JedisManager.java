@@ -23,6 +23,7 @@ public class JedisManager {
 			System.out.println("redis开启失败！");
 			throw new JedisConnectionException(e);
 		}catch (Exception e) {
+			System.out.println("redis开启失败！");
             throw new RuntimeException(e);
         }
 		return jedis;

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
-	default-lazy-init="true">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<description>Shiro Configuration</description>
 	
@@ -25,11 +30,11 @@
 		<property name="maxAge" value="259200" /><!-- 30天 -->
 	</bean>
 	
-	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieReemeberMeManager" >
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager" >
 		<property name="cipherKey"
 					value="#{T(org.apache.shiro.codec.Base64).decode('3AvVhmFLUs0KTA3Kprsdag==')}">
 		</property>
-		<property name="cookie" ref="remeberMeCookie" />
+		<property name="cookie" ref="rememberMeCookie" />
 	</bean>
 	
 	<bean id="customShiroSessionDAO" class="com.alice.shop.shiro.dao.CustomShiroSessionDAO">
@@ -51,7 +56,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="shiroUserRealm" />
 		<property name="sessionManager" ref="sessionManager"/>
-		<property name="remeberMeManager" ref="rememberMeManager"/>
+		<property name="rememberMeManager" ref="rememberMeManager"/>
 		<property name="cacheManager" ref="customShiroCacheManager" />
 	</bean>
 
@@ -85,7 +90,7 @@
 		</property>
 		<property name="sessionValidationScheduler" ref="sessionValidationScheduler"></property>
 		<property name="sessionValidationSchedulerEnabled" value="true"></property>
-		<property name="deleteInvalidSession" value="true"></property>
+		<property name="deleteInvalidSessions" value="true"></property>
 		<property name="sessionIdCookie" ref="sessionIdCookie"></property>
 	</bean>
 	
@@ -102,11 +107,9 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
-<!-- 		<property name="successUrl" value="/index" /> -->
-<!-- 		<property name="unauthorizedUrl" value="/403" /> -->\
 		<property name="filters">
 			<util:map>
-				<entrykey key="loghin" value-ref="loginfilter">
+				<entry key="loghin" value-ref="loginfilter" />
 			</util:map>
 		</property>
 		<property name="filterChainDefinitions"  >
@@ -124,24 +127,4 @@
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-
-
-<!-- 	<!-- 缓存管理器 使用Ehcache实现 --> -->
-<!--     <bean id="cacheManagers" class="org.apache.shiro.cache.ehcache.EhCacheManager"> -->
-<!--         <property name="cacheManagerConfigFile" value="classpath:ehcache.xml" /> -->
-<!--     </bean> -->
-
-<!-- 	<!-- 用户授权信息Cache --> -->
-<!-- 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" /> -->
-
-
-<!-- 	<!-- AOP式方法级权限检查 --> -->
-<!-- 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" -->
-<!-- 		depends-on="lifecycleBeanPostProcessor"> -->
-<!-- 		<property name="proxyTargetClass" value="true" /> -->
-<!-- 	</bean> -->
-
-<!-- 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> -->
-<!-- 		<property name="securityManager" ref="securityManager" /> -->
-<!-- 	</bean> -->
 </beans>
