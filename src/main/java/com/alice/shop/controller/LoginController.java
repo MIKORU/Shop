@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,10 +38,13 @@ public class LoginController {
 	 */
 	@RequestMapping(value="logout",method=RequestMethod.POST)
 	@ResponseBody
-	public boolean logout(HttpServletRequest request) {
-		SecurityUtils.getSubject().logout();
-//		request.getSession().removeAttribute("id");
-//		request.getSession().removeAttribute("name");
+	public boolean logout() {
+		Subject user = SecurityUtils.getSubject();
+		user.logout();
+		Session userSession = user.getSession();
+		userSession.removeAttribute("id");
+		userSession.removeAttribute("name");
+		userSession.removeAttribute("role");
 		return true;
 	}
 	
@@ -63,7 +67,7 @@ public class LoginController {
 		UsernamePasswordToken token = new UsernamePasswordToken(name,correctPassword);
 		Subject currentUser = SecurityUtils.getSubject();
 		
-		HttpSession session = request.getSession();
+		Session session = currentUser.getSession();
 		
 		if (!currentUser.isAuthenticated()){
             currentUser.login(token);

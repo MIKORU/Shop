@@ -13,39 +13,23 @@
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Alice</title>
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/common/jquery-3.2.1.min.js"></script>
 
 <link rel="stylesheet"
-	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 <script
-	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="http://cdn.bootcss.com/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-<script
-	src="http://cdn.bootcss.com/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+	src="${pageContext.request.contextPath}/static/common/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/template.js"></script>
 <script
-	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	src="${pageContext.request.contextPath}/static/js/common/angular.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/static/img/shop.ico">
 <link rel="stylesheet"
-	href="http://www.bootcss.com/p/buttons/css/buttons.css">
+	href="${pageContext.request.contextPath}/static/css/buttons.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/template.css">
 
 <jsp:invoke fragment="header" />
-<style>
-#login-body {
-	margin: 0 auto;
-	width: 300px;
-}
-
-#content-login {
-	margin: 0 auto;
-	height: 300px;
-	width: 400px;
-}
-</style>
 </head>
 <body ng-app="app">
 	<nav class="navbar navbar-default navbar-fixed-top">

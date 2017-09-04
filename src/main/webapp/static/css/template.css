@@ -1,4 +1,14 @@
 @charset "UTF-8";
+#login-body {
+	margin: 0 auto;
+	width: 300px;
+}
+
+#content-login {
+	margin: 0 auto;
+	height: 300px;
+	width: 400px;
+}
 .shop-footer {
   padding: 40px 0;
   color: #999;
