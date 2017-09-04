@@ -8,7 +8,7 @@ app.directive("commodityDirective", function() {
 		scope : true,
 		link : function($scope, $el, $iattrs) {
 			ajaxModule.getComById($iattrs.id, function(res) {
-				$scope.res = JSON.parse(res)[0];
+				$scope.res = res[0];
 				$scope.$apply();
 			});
 		}
@@ -27,7 +27,7 @@ app.controller("form", function($scope) {
 	$scope.items = [];
 	$scope.pay = function(orderId) {
 		ajaxModule.pay(orderId, function(res) {
-			if (res == "true") {
+			if (res == true) {
 				alert("支付成功");
 				location.reload();
 			} else {
@@ -37,7 +37,7 @@ app.controller("form", function($scope) {
 	}
 	$scope.del = function(orderId){
 		ajaxModule.delOrder(orderId,function(res){
-			if(res == "true"){
+			if(res == true){
 				alert("取消订单成功");
 				window.location.reload();
 			}else{
@@ -68,7 +68,7 @@ var ajaxModule = {
 }
 function getformlist() {
 	ajaxModule.getFormList(function(res) {
-		$("#form").scope().items = JSON.parse(res);
+		$("#form").scope().items = res;
 		$("#form").scope().$apply();
 	});
 }

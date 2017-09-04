@@ -17,7 +17,7 @@
 </jsp:attribute>
 	<jsp:attribute name="footer">
 <script type="text/javascript"
-			src="${pageContext.request.contextPath}/static/js/cart.js"></script>
+			src="${pageContext.request.contextPath}/js/cart.js"></script>
 </jsp:attribute>
 	<jsp:body>
   	<div class="container content">

@@ -13,21 +13,21 @@
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Alice</title>
-<script src="${pageContext.request.contextPath}/static/js/common/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/common/jquery-3.2.1.min.js"></script>
 
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <script
-	src="${pageContext.request.contextPath}/static/common/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/static/js/template.js"></script>
+	src="${pageContext.request.contextPath}/common/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/template.js"></script>
 <script
-	src="${pageContext.request.contextPath}/static/js/common/angular.min.js"></script>
+	src="${pageContext.request.contextPath}/common/angular.min.js"></script>
 <link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/static/img/shop.ico">
+	href="${pageContext.request.contextPath}/img/shop.ico">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/css/buttons.css">
+	href="${pageContext.request.contextPath}/css/buttons.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/css/template.css">
+	href="${pageContext.request.contextPath}/css/template.css">
 
 <jsp:invoke fragment="header" />
 </head>

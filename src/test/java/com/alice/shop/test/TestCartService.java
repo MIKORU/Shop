@@ -23,6 +23,6 @@ public class TestCartService {
 	
 	@Test
 	public void testdelOrder() {
-		System.out.println(cartService.delOrder("23152"));
+		System.out.println(cartService.delOrderbyComId("fb8bd16a27774fd2b5087fa5176ac174"));
 	}
 }

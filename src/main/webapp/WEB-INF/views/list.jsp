@@ -17,7 +17,7 @@
 </style>
 </jsp:attribute>
 <jsp:attribute name="footer">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/list.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/list.js"></script>
 </jsp:attribute>
 <jsp:body >
 	<div id="form" class="container margin80" ng-controller="form">

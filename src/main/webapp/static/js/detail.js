@@ -12,7 +12,7 @@ app.controller("groups", function($scope) {
 		$("#detail").modal('show');
 		$("#detail").scope().com = com;
 		ajaxModule.getCommentById(com.id, function(res) {
-			$("#detail").scope().comments = JSON.parse(res);
+			$("#detail").scope().comments = res;
 			$("#detail").scope().$apply();
 		});
 
@@ -57,7 +57,7 @@ function bind() {
 }
 var util = {
 	groupByType : function(res) {
-		var jsons = JSON.parse(res);
+		var jsons = res;
 		var obj = {};
 		for (var i = 0; i < jsons.length; i++) {
 			obj[jsons[i].type] = obj[jsons[i].type] || [];
@@ -76,7 +76,7 @@ var ajaxModule = {
 			commodityCounts : "1"
 		}, function(res) {
 			console.log("addOrder response is " + res);
-			if (res == "true") {
+			if (res == true) {
 				alert("添加成功");
 			} else {
 				alert("添加失败QAQ");
@@ -99,7 +99,7 @@ var ajaxModule = {
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {
-			if (res == "true") {
+			if (res == true) {
 				cb && cb();
 			} else {
 				alert("添加评论失败");

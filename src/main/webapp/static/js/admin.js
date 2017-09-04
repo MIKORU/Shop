@@ -10,7 +10,7 @@ app.directive("commodityDirective", function() {
 			$.post("./getComById", {
 				id : $iattrs.id
 			}, function(res) {
-				$scope.res = JSON.parse(res)[0];
+				$scope.res = res[0];
 				$scope.$apply();
 			});
 		}
@@ -44,7 +44,7 @@ app.controller("types", function($scope) {
 	$scope.new_type = "";
 	$scope.delType = function(id) {
 		ajaxModule.delType(id, function(res) {
-			if (res === "true") {
+			if (res == true) {
 				$("#tab1").click();
 			} else {
 				alert("删除失败");
@@ -54,7 +54,7 @@ app.controller("types", function($scope) {
 	};
 	$scope.new_type_fn = function() {
 		ajaxModule.addType($scope.new_type, function(res) {
-			if (res === "true") {
+			if (res == true) {
 				$("#tab1").click();
 			} else {
 				alert("创建失败");
@@ -70,7 +70,7 @@ app.controller("pros", function($scope) {
 	$scope.coms = [];
 	$scope.removePro = function(id) {
 		ajaxModule.delPro(id, function(res) {
-			if (res == "true") {
+			if (res == true) {
 				$("#tab2").click();
 			} else {
 				alert("删除失败");
@@ -82,7 +82,7 @@ app.controller("pros", function($scope) {
 		$.post("./getComById", {
 			id : id
 		}, function(res) {
-			$scope.edit_commodity = JSON.parse(res)[0];
+			$scope.edit_commodity = res[0];
 			$scope.$apply();
 		});
 	}
@@ -111,7 +111,7 @@ $("#submit").click(function() {
 		img : $("#com_img").val(),
 		type : $("#selects").val()
 	}, function(res) {
-		if (res == "true") {
+		if (res == true) {
 			$('#myModal').modal('hide');
 			window.location.reload();
 			$("#tab2").click();
@@ -133,7 +133,7 @@ $("#edit").click(function() {
 		img : $("#img").val(),
 		type : $("#select").val()
 	}, function(res) {
-		if (res == "true") {
+		if (res == true) {
 			$('#editLabel').modal('hide');
 			window.location.reload();
 			$("#tab2").click();
@@ -150,7 +150,7 @@ app.controller("comments", function($scope) {
 $("#tab3").click(function() {
 	ajaxModule.getComments(function(res) {
 		$scope = $(".comments").scope();
-		$scope.datas = JSON.parse(res);
+		$scope.datas = res;
         
         // 分页总数
         $scope.pageSize = 5;
@@ -235,13 +235,13 @@ var ajaxModule = function() {
 	return {
 		getFormAllList : function(el) {
 			$.post("./getFormAllList", function(res) {
-				$(el).scope().orderforms = JSON.parse(res);
+				$(el).scope().orderforms = res;
 				$(el).scope().$apply();
 			})
 		},
 		getTypes : function(el) {
 			$.post("./getTypes", function(res) {
-				$(el).scope().types = JSON.parse(res);
+				$(el).scope().types = res;
 				$(el).scope().$apply();
 			})
 		},
@@ -261,7 +261,7 @@ var ajaxModule = function() {
 		},
 		getAllCom : function(el) {
 			$.post("./getAllCom", function(res) {
-				$(el).scope().coms = JSON.parse(res);
+				$(el).scope().coms = res;
 				$(el).scope().$apply();
 			});
 		},

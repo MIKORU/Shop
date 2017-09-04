@@ -17,7 +17,7 @@ $("#submit").click(
 		function(ev) {
 			$.post("./updateInfo", $.extend({}, $("#user").scope().user, {}),
 					function(res) {
-						if (res == "true") {
+						if (res == true) {
 							alert("更新成功");
 							window.location.reload();
 						} else {
@@ -27,7 +27,7 @@ $("#submit").click(
 		});
 $(function() {
 	$.post("./getInfo", {}, function(res) {
-		$("#user").scope().user = JSON.parse(res);
+		$("#user").scope().user = res;
 		$("#user").scope().$apply();
 	});
 

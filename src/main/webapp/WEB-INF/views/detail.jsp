@@ -25,7 +25,7 @@
 </jsp:attribute>
 	<jsp:attribute name="footer">
 <script type="text/javascript"
-			src="${pageContext.request.contextPath}/static/js/detail.js"></script>
+			src="${pageContext.request.contextPath}/js/detail.js"></script>
 </jsp:attribute>
 <jsp:body>
 	<div class="container content">

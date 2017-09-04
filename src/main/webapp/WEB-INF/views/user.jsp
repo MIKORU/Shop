@@ -10,7 +10,7 @@
 </style>
 </jsp:attribute>
 <jsp:attribute name="footer">
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/user.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/user.js"></script>
 </jsp:attribute>
 <jsp:body >
 	<div class="container">

@@ -45,7 +45,7 @@ app.controller("index", function ($scope) {
 		$("#detail").modal('show');
 		$("#detail").scope().com = com;
 		ajaxModule.getCommentById(com.id, function(res) {
-			$("#detail").scope().comments = JSON.parse(res);
+			$("#detail").scope().comments = res;
 			$("#detail").scope().$apply();
 			
 		});
@@ -92,7 +92,7 @@ var ajaxModule = {
 			pageNo:pageNo,
 			pageSize:pageSize
 		}, function(res) {
-			var json = JSON.parse(res);
+			var json = res;
 			$(".pagination").scope().pageList = json[0].navigatepageNums;
 			$(".pagination").scope().coms = json[0].list;
 			$(".pagination").scope().$apply();
@@ -104,7 +104,7 @@ var ajaxModule = {
 			commodityCounts : "1"
 		}, function(res) {
 			console.log("addOrder response is " + res);
-			if (res === "true") {
+			if (res == true) {
 				alert("添加商品成功！");
 			} else {
 				alert("添加商品失败QAQ");
@@ -121,7 +121,7 @@ var ajaxModule = {
 			commodityID : commodityID,
 			comment : comment
 		}, function(res) {
-			if (res == "true") {
+			if (res == true) {
 				cb && cb();
 			} else {
 				alert("评论添加失败");

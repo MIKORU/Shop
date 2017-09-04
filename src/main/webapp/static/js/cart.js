@@ -10,7 +10,7 @@ app.directive("commodityDirective", function() {
 			$.post("./getComById", {
 				id : $iattrs.id
 			}, function(res) {
-				$scope.res = JSON.parse(res)[0];
+				$scope.res = res[0];
 				$scope.$apply();
 			});
 		}
@@ -24,19 +24,17 @@ app.controller("cart", function($scope) {
 	$scope.comCount = function(constant, commodityId) {
 		$.each($scope.list, function(i, e) {
 			if (e.commodityid == commodityId) {
-				if (e.commoditycount <= 0) {
-					e.commoditycount = 0;
-					util.delCart(e.commodityid);
-				}else{
-					util.changeCart(e.commodityid,constant,function(res) {
-						console.log("addOrder response is " + res);
-						if(res == "true"){
-							$scope.list[i].commoditycount += constant;
-						}else{
-							alert("添加失败，商品数量不足！");
+				util.changeCart(e.commodityid, constant, function(res) {
+					console.log("addOrder response is " + res);
+					if (res == true) {
+						$scope.list[i].commoditycount += constant;
+						if (e.commoditycount <= 0) {
+							util.delCart(e.commodityid);
 						}
-					});
-				}
+					} else {
+						alert("添加失败，商品数量不足！");
+					}
+				});
 			}
 		});
 		$scope.upDateSum();
@@ -55,24 +53,24 @@ var util = {
 		});
 		return sum.toFixed(2);
 	},
-	changeCart : function(commodityIds,count,cb) {
-			$.post("./addOrder", {
-				commodityIds : commodityIds,
-				commodityCounts : count
-			}, cb);
+	changeCart : function(commodityIds, count, cb) {
+		$.post("./addOrder", {
+			commodityIds : commodityIds,
+			commodityCounts : count
+		}, cb);
 	},
-	delCart : function(commodityIds,cb){
+	delCart : function(commodityId) {
 		$.ajax({
-			url:"./delCart", 
-			type:"POST",
-			data:{
-				commodityIds : commodityIds
+			url : "./delCart",
+			type : "POST",
+			data : {
+				commodityId : commodityId
 			}
-		}).done(function(res){
+		}).done(function(res) {
 			console.log("delCart response is " + res);
-			if(res == "true"){
+			if (res == true) {
 				window.location.reload();
-			}else{
+			} else {
 				alert("出错了！");
 			}
 		});
@@ -83,7 +81,7 @@ function getlist() {
 	$.post("./getOrderList", {
 
 	}, function(res) {
-		$("#cart").scope().list = JSON.parse(res);
+		$("#cart").scope().list = res;
 		setInterval(function() {
 			$("#cart").scope().upDateSum();
 			$("#cart").scope().$apply();
@@ -96,7 +94,7 @@ function getlist() {
 			totalPrice : $("#cart").scope().sum,
 			orderList : JSON.stringify($("#cart").scope().list)
 		}, function(res) {
-			if (res == "true") {
+			if (res == true) {
 				location.href = "./list";
 			} else {
 				alert("购买失败");

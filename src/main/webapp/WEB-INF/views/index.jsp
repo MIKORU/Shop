@@ -35,7 +35,7 @@ nav li {
 </jsp:attribute>
 	<jsp:attribute name="footer">
 <script type="text/javascript"
-			src="${pageContext.request.contextPath}/static/js/index.js"></script>
+			src="${pageContext.request.contextPath}/js/index.js"></script>
 </jsp:attribute>
 	<jsp:body>
 	<div class="container">

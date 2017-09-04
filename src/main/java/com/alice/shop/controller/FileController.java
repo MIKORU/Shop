@@ -50,7 +50,7 @@ public class FileController extends HttpServlet {
 		+ contextpath + "/";
 
 		try {
-		String filePath = "uploadfiles";
+		String filePath = "image";
 		String realPath = realDir+"\\"+filePath;
 		//判断路径是否存在，不存在则创建
 		File dir = new File(realPath);

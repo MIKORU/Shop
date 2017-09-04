@@ -76,30 +76,30 @@
 		<servlet-name>rest</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.css</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.png</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.gif</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.ico</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.jpg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.css</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.png</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.gif</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.ico</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.jpg</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>default</servlet-name> -->
+<!-- 		<url-pattern>*.js</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
 	<!-- 配置session超时时间，单位分钟 -->
 	<session-config>

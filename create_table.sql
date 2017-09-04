@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-09-04 14:02:15
+Date: 2017-09-04 15:55:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,9 +34,6 @@ CREATE TABLE `cart` (
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('1c9de93b44764acc984964d2ff6cd897', 'b2f5d7ac4840426789614bfabf082b11', '1', '4569b51234de41479c61131908acb5ee');
-INSERT INTO `cart` VALUES ('2ce1651f85744a9ea03772b9c419dea1', '6053ac4d75534f8db0d832a54cc79ad1', '1', '4569b51234de41479c61131908acb5ee');
-INSERT INTO `cart` VALUES ('3a3f77994dfb48d7a41def7454599537', 'fb8bd16a27774fd2b5087fa5176ac174', '1', '4569b51234de41479c61131908acb5ee');
 
 -- ----------------------------
 -- Table structure for `comment`
@@ -62,6 +59,7 @@ INSERT INTO `comment` VALUES ('0bd12191db3540d4922ea61350506a9b', '4569b51234de4
 INSERT INTO `comment` VALUES ('17982d24b6794969bf1eefcd11af8436', '4569b51234de41479c61131908acb5ee', 'admin', '6053ac4d75534f8db0d832a54cc79ad1', '便宜的无法想象！！！！');
 INSERT INTO `comment` VALUES ('3402444284504168b61e2bc21817b0bf', '4569b51234de41479c61131908acb5ee', 'admin', 'e12e09dfeae94f1ba755fc9d1065cf43', '感觉别的手机都不够这个好用啊');
 INSERT INTO `comment` VALUES ('3898633b2ac14c1aad78b3a64daa2516', '4569b51234de41479c61131908acb5ee', 'admin', 'e12e09dfeae94f1ba755fc9d1065cf43', '手机好用');
+INSERT INTO `comment` VALUES ('7a7cc73634c84b47b77f51f59b26784f', '4569b51234de41479c61131908acb5ee', 'admin', '6053ac4d75534f8db0d832a54cc79ad1', '食尖美味');
 INSERT INTO `comment` VALUES ('b97b8b423daa4ae783604bc45161b677', '4569b51234de41479c61131908acb5ee', 'admin', 'e12e09dfeae94f1ba755fc9d1065cf43', '特别好用！！');
 INSERT INTO `comment` VALUES ('e90401e16efe4560a23f4b1719ebc54d', '4569b51234de41479c61131908acb5ee', 'admin', 'e12e09dfeae94f1ba755fc9d1065cf43', '别说太多！就是好！');
 
@@ -84,11 +82,11 @@ CREATE TABLE `commodity` (
 -- ----------------------------
 -- Records of commodity
 -- ----------------------------
-INSERT INTO `commodity` VALUES ('6053ac4d75534f8db0d832a54cc79ad1', '奶油雪糕冰淇淋', '甜味芬芳，一口顺滑', '2.2', '990', '广州冰淇淋', 'http://localhost:8080/Shop/uploadfiles/1503476944128.png', '食品');
-INSERT INTO `commodity` VALUES ('b2f5d7ac4840426789614bfabf082b11', '西瓜冰淇淋', '甜味芬芳，一口顺滑', '2.2', '998', '广州冰淇淋', 'http://localhost:8080/Shop/uploadfiles/1503477158520.png', '食品');
-INSERT INTO `commodity` VALUES ('cab13afc783b489d9c9b5a449cb449f6', '蓝莓冰淇淋', '酸爽甘甜', '3.5', '997', '广州冰淇淋', 'http://localhost:8080/Shop/uploadfiles/1503476631370.png', '食品');
-INSERT INTO `commodity` VALUES ('e12e09dfeae94f1ba755fc9d1065cf43', '华为荣耀9x', '华为荣耀9是华为荣耀旗下推下的一款智能手机，5.2英寸屏幕，大弧度3D玻璃机身，正面指纹识别的设计。', '2699', '1998', '华为技术有限公司', 'http://localhost:8080/Shop/uploadfiles/1502875345638.jpg', '手机');
-INSERT INTO `commodity` VALUES ('fb8bd16a27774fd2b5087fa5176ac174', '巧克力冰淇淋', '甜味芬芳，一口顺滑', '2.2', '998', '广州冰淇淋', 'http://localhost:8080/Shop/uploadfiles/1503477102503.png', '食品');
+INSERT INTO `commodity` VALUES ('6053ac4d75534f8db0d832a54cc79ad1', '奶油雪糕冰淇淋', '甜味芬芳，一口顺滑', '2.2', '991', '广州冰淇淋', 'http://localhost:8080/Shop/image/1503476944128.png', '食品');
+INSERT INTO `commodity` VALUES ('b2f5d7ac4840426789614bfabf082b11', '西瓜冰淇淋', '甜味芬芳，一口顺滑', '2.2', '1001', '广州冰淇淋', 'http://localhost:8080/Shop/image/1503477158520.png', '食品');
+INSERT INTO `commodity` VALUES ('cab13afc783b489d9c9b5a449cb449f6', '蓝莓冰淇淋', '酸爽甘甜', '3.5', '997', '广州冰淇淋', 'http://localhost:8080/Shop/image/1503476631370.png', '食品');
+INSERT INTO `commodity` VALUES ('e12e09dfeae94f1ba755fc9d1065cf43', '华为荣耀9x', '华为荣耀9是华为荣耀旗下推下的一款智能手机，5.2英寸屏幕，大弧度3D玻璃机身，正面指纹识别的设计。', '2699', '1998', '华为技术有限公司', 'http://localhost:8080/Shop/image/1502875345638.jpg', '手机');
+INSERT INTO `commodity` VALUES ('fb8bd16a27774fd2b5087fa5176ac174', '巧克力冰淇淋', '甜味芬芳，一口顺滑', '2.2', '999', '广州冰淇淋', 'http://localhost:8080/Shop/image/1503477102503.png', '食品');
 
 -- ----------------------------
 -- Table structure for `order`
